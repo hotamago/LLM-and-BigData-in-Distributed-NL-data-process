@@ -1,0 +1,1069 @@
+{
+    "id": "62afc92d-49b1-4ab7-807f-fe7da8223f0f",
+    "data": {
+        "nodes": [
+            {
+                "id": "TextInput-O9glu",
+                "type": "genericNode",
+                "position": {
+                    "x": -343.43125190119395,
+                    "y": 209.10622235741823
+                },
+                "data": {
+                    "node": {
+                        "template": {
+                            "_type": "Component",
+                            "code": {
+                                "type": "code",
+                                "required": true,
+                                "placeholder": "",
+                                "list": false,
+                                "show": true,
+                                "multiline": true,
+                                "value": "from langflow.base.io.text import TextComponent\nfrom langflow.io import MultilineInput, Output\nfrom langflow.schema.message import Message\n\n\nclass TextInputComponent(TextComponent):\n    display_name = \"Text Input\"\n    description = \"Get text inputs from the Playground.\"\n    icon = \"type\"\n    name = \"TextInput\"\n\n    inputs = [\n        MultilineInput(\n            name=\"input_value\",\n            display_name=\"Text\",\n            info=\"Text to be passed as input.\",\n        ),\n    ]\n    outputs = [\n        Output(display_name=\"Text\", name=\"text\", method=\"text_response\"),\n    ]\n\n    def text_response(self) -> Message:\n        return Message(\n            text=self.input_value,\n        )\n",
+                                "fileTypes": [],
+                                "file_path": "",
+                                "password": false,
+                                "name": "code",
+                                "advanced": true,
+                                "dynamic": true,
+                                "info": "",
+                                "load_from_db": false,
+                                "title_case": false
+                            },
+                            "input_value": {
+                                "tool_mode": false,
+                                "trace_as_input": true,
+                                "multiline": true,
+                                "trace_as_metadata": true,
+                                "load_from_db": false,
+                                "list": false,
+                                "required": false,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "input_value",
+                                "value": "",
+                                "display_name": "Text",
+                                "advanced": false,
+                                "input_types": [
+                                    "Message"
+                                ],
+                                "dynamic": false,
+                                "info": "Text to be passed as input.",
+                                "title_case": false,
+                                "type": "str",
+                                "_input_type": "MultilineInput"
+                            }
+                        },
+                        "description": "Get text inputs from the Playground.",
+                        "icon": "type",
+                        "base_classes": [
+                            "Message"
+                        ],
+                        "display_name": "Text Input",
+                        "documentation": "",
+                        "custom_fields": {},
+                        "output_types": [],
+                        "pinned": false,
+                        "conditional_paths": [],
+                        "frozen": false,
+                        "outputs": [
+                            {
+                                "types": [
+                                    "Message"
+                                ],
+                                "selected": "Message",
+                                "name": "text",
+                                "display_name": "Text",
+                                "method": "text_response",
+                                "value": "__UNDEFINED__",
+                                "cache": true
+                            }
+                        ],
+                        "field_order": [
+                            "input_value"
+                        ],
+                        "beta": false,
+                        "legacy": false,
+                        "edited": false,
+                        "metadata": {},
+                        "tool_mode": false,
+                        "lf_version": "1.1.0"
+                    },
+                    "type": "TextInput",
+                    "id": "TextInput-O9glu"
+                },
+                "selected": true,
+                "width": 320,
+                "height": 234,
+                "positionAbsolute": {
+                    "x": -343.43125190119395,
+                    "y": 209.10622235741823
+                },
+                "dragging": false
+            },
+            {
+                "id": "ParseData-htcyL",
+                "type": "genericNode",
+                "position": {
+                    "x": 917.7620190856803,
+                    "y": 537.4201743721101
+                },
+                "data": {
+                    "node": {
+                        "template": {
+                            "_type": "Component",
+                            "data": {
+                                "tool_mode": false,
+                                "trace_as_metadata": true,
+                                "list": false,
+                                "trace_as_input": true,
+                                "required": false,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "data",
+                                "value": "",
+                                "display_name": "Data",
+                                "advanced": false,
+                                "input_types": [
+                                    "Data"
+                                ],
+                                "dynamic": false,
+                                "info": "The data to convert to text.",
+                                "title_case": false,
+                                "type": "other",
+                                "_input_type": "DataInput"
+                            },
+                            "code": {
+                                "type": "code",
+                                "required": true,
+                                "placeholder": "",
+                                "list": false,
+                                "show": true,
+                                "multiline": true,
+                                "value": "from langflow.custom import Component\nfrom langflow.helpers.data import data_to_text\nfrom langflow.io import DataInput, MultilineInput, Output, StrInput\nfrom langflow.schema.message import Message\n\n\nclass ParseDataComponent(Component):\n    display_name = \"Parse Data\"\n    description = \"Convert Data into plain text following a specified template.\"\n    icon = \"braces\"\n    name = \"ParseData\"\n\n    inputs = [\n        DataInput(name=\"data\", display_name=\"Data\", info=\"The data to convert to text.\"),\n        MultilineInput(\n            name=\"template\",\n            display_name=\"Template\",\n            info=\"The template to use for formatting the data. \"\n            \"It can contain the keys {text}, {data} or any other key in the Data.\",\n            value=\"{text}\",\n        ),\n        StrInput(name=\"sep\", display_name=\"Separator\", advanced=True, value=\"\\n\"),\n    ]\n\n    outputs = [\n        Output(display_name=\"Text\", name=\"text\", method=\"parse_data\"),\n    ]\n\n    def parse_data(self) -> Message:\n        data = self.data if isinstance(self.data, list) else [self.data]\n        template = self.template\n\n        result_string = data_to_text(template, data, sep=self.sep)\n        self.status = result_string\n        return Message(text=result_string)\n",
+                                "fileTypes": [],
+                                "file_path": "",
+                                "password": false,
+                                "name": "code",
+                                "advanced": true,
+                                "dynamic": true,
+                                "info": "",
+                                "load_from_db": false,
+                                "title_case": false
+                            },
+                            "sep": {
+                                "trace_as_metadata": true,
+                                "load_from_db": false,
+                                "list": false,
+                                "required": false,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "sep",
+                                "value": "\n",
+                                "display_name": "Separator",
+                                "advanced": true,
+                                "dynamic": false,
+                                "info": "",
+                                "title_case": false,
+                                "type": "str",
+                                "_input_type": "StrInput"
+                            },
+                            "template": {
+                                "tool_mode": false,
+                                "trace_as_input": true,
+                                "multiline": true,
+                                "trace_as_metadata": true,
+                                "load_from_db": false,
+                                "list": false,
+                                "required": false,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "template",
+                                "value": "Base on columns information, process given data and return response must follow rules:\n- No explanation\n- Response must in JSON format\n- Response must and only have key name in columns information\n- Response is a columns data for a table data (pandas)\n- Format example:\n{{\n\"column name 1\": data processed,\n...\n}}\n\n## Columns information\n{columns_information}\n\n## Given data\n{given_data}",
+                                "display_name": "Template",
+                                "advanced": false,
+                                "input_types": [
+                                    "Message"
+                                ],
+                                "dynamic": false,
+                                "info": "The template to use for formatting the data. It can contain the keys {text}, {data} or any other key in the Data.",
+                                "title_case": false,
+                                "type": "str",
+                                "_input_type": "MultilineInput"
+                            }
+                        },
+                        "description": "Convert Data into plain text following a specified template.",
+                        "icon": "braces",
+                        "base_classes": [
+                            "Message"
+                        ],
+                        "display_name": "Parse Data",
+                        "documentation": "",
+                        "custom_fields": {},
+                        "output_types": [],
+                        "pinned": false,
+                        "conditional_paths": [],
+                        "frozen": false,
+                        "outputs": [
+                            {
+                                "types": [
+                                    "Message"
+                                ],
+                                "selected": "Message",
+                                "name": "text",
+                                "display_name": "Text",
+                                "method": "parse_data",
+                                "value": "__UNDEFINED__",
+                                "cache": true
+                            }
+                        ],
+                        "field_order": [
+                            "data",
+                            "template",
+                            "sep"
+                        ],
+                        "beta": false,
+                        "legacy": false,
+                        "edited": false,
+                        "metadata": {},
+                        "tool_mode": false,
+                        "category": "processing",
+                        "key": "ParseData"
+                    },
+                    "type": "ParseData",
+                    "id": "ParseData-htcyL"
+                },
+                "selected": false,
+                "width": 320,
+                "height": 302,
+                "positionAbsolute": {
+                    "x": 917.7620190856803,
+                    "y": 537.4201743721101
+                },
+                "dragging": false
+            },
+            {
+                "id": "JSONCleaner-99Lmi",
+                "type": "genericNode",
+                "position": {
+                    "x": 87.6147099220816,
+                    "y": 59.162005626804785
+                },
+                "data": {
+                    "node": {
+                        "template": {
+                            "_type": "Component",
+                            "code": {
+                                "type": "code",
+                                "required": true,
+                                "placeholder": "",
+                                "list": false,
+                                "show": true,
+                                "multiline": true,
+                                "value": "import json\nimport re\nimport unicodedata\n\nfrom langflow.custom import Component\nfrom langflow.inputs import BoolInput, MessageTextInput\nfrom langflow.schema.message import Message\nfrom langflow.template import Output\n\n\nclass JSONCleaner(Component):\n    icon = \"braces\"\n    display_name = \"JSON Cleaner\"\n    description = (\n        \"Cleans the messy and sometimes incorrect JSON strings produced by LLMs \"\n        \"so that they are fully compliant with the JSON spec.\"\n    )\n\n    inputs = [\n        MessageTextInput(\n            name=\"json_str\", display_name=\"JSON String\", info=\"The JSON string to be cleaned.\", required=True\n        ),\n        BoolInput(\n            name=\"remove_control_chars\",\n            display_name=\"Remove Control Characters\",\n            info=\"Remove control characters from the JSON string.\",\n            required=False,\n        ),\n        BoolInput(\n            name=\"normalize_unicode\",\n            display_name=\"Normalize Unicode\",\n            info=\"Normalize Unicode characters in the JSON string.\",\n            required=False,\n        ),\n        BoolInput(\n            name=\"validate_json\",\n            display_name=\"Validate JSON\",\n            info=\"Validate the JSON string to ensure it is well-formed.\",\n            required=False,\n        ),\n    ]\n\n    outputs = [\n        Output(display_name=\"Cleaned JSON String\", name=\"output\", method=\"clean_json\"),\n    ]\n\n    def clean_json(self) -> Message:\n        try:\n            from json_repair import repair_json\n        except ImportError as e:\n            msg = \"Could not import the json_repair package. Please install it with `pip install json_repair`.\"\n            raise ImportError(msg) from e\n\n        \"\"\"Clean the input JSON string based on provided options and return the cleaned JSON string.\"\"\"\n        json_str = self.json_str\n        remove_control_chars = self.remove_control_chars\n        normalize_unicode = self.normalize_unicode\n        validate_json = self.validate_json\n\n        start = json_str.find(\"{\")\n        end = json_str.rfind(\"}\")\n        if start == -1 or end == -1:\n            msg = \"Invalid JSON string: Missing '{' or '}'\"\n            raise ValueError(msg)\n        try:\n            json_str = json_str[start : end + 1]\n\n            if remove_control_chars:\n                json_str = self._remove_control_characters(json_str)\n            if normalize_unicode:\n                json_str = self._normalize_unicode(json_str)\n            if validate_json:\n                json_str = self._validate_json(json_str)\n\n            cleaned_json_str = repair_json(json_str)\n            result = str(cleaned_json_str)\n\n            self.status = result\n            return Message(text=result)\n        except Exception as e:\n            msg = f\"Error cleaning JSON string: {e}\"\n            raise ValueError(msg) from e\n\n    def _remove_control_characters(self, s: str) -> str:\n        \"\"\"Remove control characters from the string.\"\"\"\n        return re.sub(r\"[\\x00-\\x1F\\x7F]\", \"\", s)\n\n    def _normalize_unicode(self, s: str) -> str:\n        \"\"\"Normalize Unicode characters in the string.\"\"\"\n        return unicodedata.normalize(\"NFC\", s)\n\n    def _validate_json(self, s: str) -> str:\n        \"\"\"Validate the JSON string.\"\"\"\n        try:\n            json.loads(s)\n        except json.JSONDecodeError as e:\n            msg = f\"Invalid JSON string: {e}\"\n            raise ValueError(msg) from e\n        return s\n",
+                                "fileTypes": [],
+                                "file_path": "",
+                                "password": false,
+                                "name": "code",
+                                "advanced": true,
+                                "dynamic": true,
+                                "info": "",
+                                "load_from_db": false,
+                                "title_case": false
+                            },
+                            "json_str": {
+                                "tool_mode": false,
+                                "trace_as_input": true,
+                                "trace_as_metadata": true,
+                                "load_from_db": false,
+                                "list": false,
+                                "required": true,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "json_str",
+                                "value": "",
+                                "display_name": "JSON String",
+                                "advanced": false,
+                                "input_types": [
+                                    "Message"
+                                ],
+                                "dynamic": false,
+                                "info": "The JSON string to be cleaned.",
+                                "title_case": false,
+                                "type": "str",
+                                "_input_type": "MessageTextInput"
+                            },
+                            "normalize_unicode": {
+                                "trace_as_metadata": true,
+                                "list": false,
+                                "required": false,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "normalize_unicode",
+                                "value": false,
+                                "display_name": "Normalize Unicode",
+                                "advanced": false,
+                                "dynamic": false,
+                                "info": "Normalize Unicode characters in the JSON string.",
+                                "title_case": false,
+                                "type": "bool",
+                                "_input_type": "BoolInput"
+                            },
+                            "remove_control_chars": {
+                                "trace_as_metadata": true,
+                                "list": false,
+                                "required": false,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "remove_control_chars",
+                                "value": false,
+                                "display_name": "Remove Control Characters",
+                                "advanced": false,
+                                "dynamic": false,
+                                "info": "Remove control characters from the JSON string.",
+                                "title_case": false,
+                                "type": "bool",
+                                "_input_type": "BoolInput"
+                            },
+                            "validate_json": {
+                                "trace_as_metadata": true,
+                                "list": false,
+                                "required": false,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "validate_json",
+                                "value": true,
+                                "display_name": "Validate JSON",
+                                "advanced": false,
+                                "dynamic": false,
+                                "info": "Validate the JSON string to ensure it is well-formed.",
+                                "title_case": false,
+                                "type": "bool",
+                                "_input_type": "BoolInput"
+                            }
+                        },
+                        "description": "Cleans the messy and sometimes incorrect JSON strings produced by LLMs so that they are fully compliant with the JSON spec.",
+                        "icon": "braces",
+                        "base_classes": [
+                            "Message"
+                        ],
+                        "display_name": "JSON Cleaner",
+                        "documentation": "",
+                        "custom_fields": {},
+                        "output_types": [],
+                        "pinned": false,
+                        "conditional_paths": [],
+                        "frozen": false,
+                        "outputs": [
+                            {
+                                "types": [
+                                    "Message"
+                                ],
+                                "selected": "Message",
+                                "name": "output",
+                                "display_name": "Cleaned JSON String",
+                                "method": "clean_json",
+                                "value": "__UNDEFINED__",
+                                "cache": true
+                            }
+                        ],
+                        "field_order": [
+                            "json_str",
+                            "remove_control_chars",
+                            "normalize_unicode",
+                            "validate_json"
+                        ],
+                        "beta": false,
+                        "legacy": false,
+                        "edited": false,
+                        "metadata": {},
+                        "tool_mode": false,
+                        "category": "processing",
+                        "key": "JSONCleaner"
+                    },
+                    "type": "JSONCleaner",
+                    "id": "JSONCleaner-99Lmi"
+                },
+                "selected": false,
+                "width": 320,
+                "height": 406,
+                "dragging": false,
+                "positionAbsolute": {
+                    "x": 87.6147099220816,
+                    "y": 59.162005626804785
+                }
+            },
+            {
+                "id": "ParseJSONData-fLPKf",
+                "type": "genericNode",
+                "position": {
+                    "x": 493.9397394658571,
+                    "y": 94.15650577890025
+                },
+                "data": {
+                    "node": {
+                        "template": {
+                            "_type": "Component",
+                            "input_value": {
+                                "trace_as_metadata": true,
+                                "list": false,
+                                "required": true,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "input_value",
+                                "value": "",
+                                "display_name": "Input",
+                                "advanced": false,
+                                "input_types": [
+                                    "Message",
+                                    "Data"
+                                ],
+                                "dynamic": false,
+                                "info": "Data object to filter.",
+                                "title_case": false,
+                                "type": "other",
+                                "_input_type": "HandleInput"
+                            },
+                            "code": {
+                                "type": "code",
+                                "required": true,
+                                "placeholder": "",
+                                "list": false,
+                                "show": true,
+                                "multiline": true,
+                                "value": "import json\nfrom json import JSONDecodeError\n\nimport jq\nfrom json_repair import repair_json\nfrom loguru import logger\n\nfrom langflow.custom import Component\nfrom langflow.inputs import HandleInput, MessageTextInput\nfrom langflow.io import Output\nfrom langflow.schema import Data\nfrom langflow.schema.message import Message\n\n\nclass ParseJSONDataComponent(Component):\n    display_name = \"Parse JSON\"\n    description = \"Convert and extract JSON fields.\"\n    icon = \"braces\"\n    name = \"ParseJSONData\"\n    legacy: bool = True\n\n    inputs = [\n        HandleInput(\n            name=\"input_value\",\n            display_name=\"Input\",\n            info=\"Data object to filter.\",\n            required=True,\n            input_types=[\"Message\", \"Data\"],\n        ),\n        MessageTextInput(\n            name=\"query\",\n            display_name=\"JQ Query\",\n            info=\"JQ Query to filter the data. The input is always a JSON list.\",\n            required=True,\n        ),\n    ]\n\n    outputs = [\n        Output(display_name=\"Filtered Data\", name=\"filtered_data\", method=\"filter_data\"),\n    ]\n\n    def _parse_data(self, input_value) -> str:\n        if isinstance(input_value, Message) and isinstance(input_value.text, str):\n            return input_value.text\n        if isinstance(input_value, Data):\n            return json.dumps(input_value.data)\n        return str(input_value)\n\n    def filter_data(self) -> list[Data]:\n        to_filter = self.input_value\n        if not to_filter:\n            return []\n        # Check if input is a list\n        if isinstance(to_filter, list):\n            to_filter = [self._parse_data(f) for f in to_filter]\n        else:\n            to_filter = self._parse_data(to_filter)\n\n        # If input is not a list, don't wrap it in a list\n        if not isinstance(to_filter, list):\n            to_filter = repair_json(to_filter)\n            try:\n                to_filter_as_dict = json.loads(to_filter)\n            except JSONDecodeError:\n                try:\n                    to_filter_as_dict = json.loads(repair_json(to_filter))\n                except JSONDecodeError as e:\n                    msg = f\"Invalid JSON: {e}\"\n                    raise ValueError(msg) from e\n        else:\n            to_filter = [repair_json(f) for f in to_filter]\n            to_filter_as_dict = []\n            for f in to_filter:\n                try:\n                    to_filter_as_dict.append(json.loads(f))\n                except JSONDecodeError:\n                    try:\n                        to_filter_as_dict.append(json.loads(repair_json(f)))\n                    except JSONDecodeError as e:\n                        msg = f\"Invalid JSON: {e}\"\n                        raise ValueError(msg) from e\n            to_filter = to_filter_as_dict\n\n        full_filter_str = json.dumps(to_filter_as_dict)\n\n        logger.info(\"to_filter: \", to_filter)\n\n        results = jq.compile(self.query).input_text(full_filter_str).all()\n        logger.info(\"results: \", results)\n        return [Data(data=value) if isinstance(value, dict) else Data(text=str(value)) for value in results]\n",
+                                "fileTypes": [],
+                                "file_path": "",
+                                "password": false,
+                                "name": "code",
+                                "advanced": true,
+                                "dynamic": true,
+                                "info": "",
+                                "load_from_db": false,
+                                "title_case": false
+                            },
+                            "query": {
+                                "tool_mode": false,
+                                "trace_as_input": true,
+                                "trace_as_metadata": true,
+                                "load_from_db": false,
+                                "list": false,
+                                "required": true,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "query",
+                                "value": ".",
+                                "display_name": "JQ Query",
+                                "advanced": false,
+                                "input_types": [
+                                    "Message"
+                                ],
+                                "dynamic": false,
+                                "info": "JQ Query to filter the data. The input is always a JSON list.",
+                                "title_case": false,
+                                "type": "str",
+                                "_input_type": "MessageTextInput"
+                            }
+                        },
+                        "description": "Convert and extract JSON fields.",
+                        "icon": "braces",
+                        "base_classes": [
+                            "Data"
+                        ],
+                        "display_name": "Parse JSON",
+                        "documentation": "",
+                        "custom_fields": {},
+                        "output_types": [],
+                        "pinned": false,
+                        "conditional_paths": [],
+                        "frozen": false,
+                        "outputs": [
+                            {
+                                "types": [
+                                    "Data"
+                                ],
+                                "selected": "Data",
+                                "name": "filtered_data",
+                                "display_name": "Filtered Data",
+                                "method": "filter_data",
+                                "value": "__UNDEFINED__",
+                                "cache": true
+                            }
+                        ],
+                        "field_order": [
+                            "input_value",
+                            "query"
+                        ],
+                        "beta": false,
+                        "legacy": true,
+                        "edited": false,
+                        "metadata": {},
+                        "tool_mode": false,
+                        "category": "processing",
+                        "key": "ParseJSONData"
+                    },
+                    "type": "ParseJSONData",
+                    "id": "ParseJSONData-fLPKf"
+                },
+                "selected": false,
+                "width": 320,
+                "height": 282,
+                "positionAbsolute": {
+                    "x": 493.9397394658571,
+                    "y": 94.15650577890025
+                },
+                "dragging": false
+            },
+            {
+                "id": "GoogleGenerativeAIModel-WF3Qa",
+                "type": "genericNode",
+                "position": {
+                    "x": 1415.4615768043723,
+                    "y": 80.54753349752983
+                },
+                "data": {
+                    "node": {
+                        "template": {
+                            "_type": "Component",
+                            "output_parser": {
+                                "trace_as_metadata": true,
+                                "list": false,
+                                "required": false,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "output_parser",
+                                "value": "",
+                                "display_name": "Output Parser",
+                                "advanced": true,
+                                "input_types": [
+                                    "OutputParser"
+                                ],
+                                "dynamic": false,
+                                "info": "The parser to use to parse the output of the model",
+                                "title_case": false,
+                                "type": "other",
+                                "_input_type": "HandleInput"
+                            },
+                            "code": {
+                                "type": "code",
+                                "required": true,
+                                "placeholder": "",
+                                "list": false,
+                                "show": true,
+                                "multiline": true,
+                                "value": "from pydantic.v1 import SecretStr\n\nfrom langflow.base.models.model import LCModelComponent\nfrom langflow.field_typing import LanguageModel\nfrom langflow.inputs import DropdownInput, FloatInput, IntInput, SecretStrInput\nfrom langflow.inputs.inputs import HandleInput\n\n\nclass GoogleGenerativeAIComponent(LCModelComponent):\n    display_name = \"Google Generative AI\"\n    description = \"Generate text using Google Generative AI.\"\n    icon = \"GoogleGenerativeAI\"\n    name = \"GoogleGenerativeAIModel\"\n\n    inputs = [\n        *LCModelComponent._base_inputs,\n        IntInput(\n            name=\"max_output_tokens\", display_name=\"Max Output Tokens\", info=\"The maximum number of tokens to generate.\"\n        ),\n        DropdownInput(\n            name=\"model\",\n            display_name=\"Model\",\n            info=\"The name of the model to use.\",\n            options=[\"gemini-1.5-pro\", \"gemini-1.5-flash\", \"gemini-1.0-pro\", \"gemini-1.0-pro-vision\"],\n            value=\"gemini-1.5-pro\",\n        ),\n        SecretStrInput(\n            name=\"google_api_key\",\n            display_name=\"Google API Key\",\n            info=\"The Google API Key to use for the Google Generative AI.\",\n        ),\n        FloatInput(\n            name=\"top_p\",\n            display_name=\"Top P\",\n            info=\"The maximum cumulative probability of tokens to consider when sampling.\",\n            advanced=True,\n        ),\n        FloatInput(name=\"temperature\", display_name=\"Temperature\", value=0.1),\n        IntInput(\n            name=\"n\",\n            display_name=\"N\",\n            info=\"Number of chat completions to generate for each prompt. \"\n            \"Note that the API may not return the full n completions if duplicates are generated.\",\n            advanced=True,\n        ),\n        IntInput(\n            name=\"top_k\",\n            display_name=\"Top K\",\n            info=\"Decode using top-k sampling: consider the set of top_k most probable tokens. Must be positive.\",\n            advanced=True,\n        ),\n        HandleInput(\n            name=\"output_parser\",\n            display_name=\"Output Parser\",\n            info=\"The parser to use to parse the output of the model\",\n            advanced=True,\n            input_types=[\"OutputParser\"],\n        ),\n    ]\n\n    def build_model(self) -> LanguageModel:  # type: ignore[type-var]\n        try:\n            from langchain_google_genai import ChatGoogleGenerativeAI\n        except ImportError as e:\n            msg = \"The 'langchain_google_genai' package is required to use the Google Generative AI model.\"\n            raise ImportError(msg) from e\n\n        google_api_key = self.google_api_key\n        model = self.model\n        max_output_tokens = self.max_output_tokens\n        temperature = self.temperature\n        top_k = self.top_k\n        top_p = self.top_p\n        n = self.n\n\n        return ChatGoogleGenerativeAI(\n            model=model,\n            max_output_tokens=max_output_tokens or None,\n            temperature=temperature,\n            top_k=top_k or None,\n            top_p=top_p or None,\n            n=n or 1,\n            google_api_key=SecretStr(google_api_key).get_secret_value(),\n        )\n",
+                                "fileTypes": [],
+                                "file_path": "",
+                                "password": false,
+                                "name": "code",
+                                "advanced": true,
+                                "dynamic": true,
+                                "info": "",
+                                "load_from_db": false,
+                                "title_case": false
+                            },
+                            "google_api_key": {
+                                "load_from_db": true,
+                                "required": false,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "google_api_key",
+                                "value": "Gemini",
+                                "display_name": "Google API Key",
+                                "advanced": false,
+                                "input_types": [
+                                    "Message"
+                                ],
+                                "dynamic": false,
+                                "info": "The Google API Key to use for the Google Generative AI.",
+                                "title_case": false,
+                                "password": true,
+                                "type": "str",
+                                "_input_type": "SecretStrInput"
+                            },
+                            "input_value": {
+                                "trace_as_input": true,
+                                "trace_as_metadata": true,
+                                "load_from_db": false,
+                                "list": false,
+                                "required": false,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "input_value",
+                                "value": "",
+                                "display_name": "Input",
+                                "advanced": false,
+                                "input_types": [
+                                    "Message"
+                                ],
+                                "dynamic": false,
+                                "info": "",
+                                "title_case": false,
+                                "type": "str",
+                                "_input_type": "MessageInput"
+                            },
+                            "max_output_tokens": {
+                                "trace_as_metadata": true,
+                                "list": false,
+                                "required": false,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "max_output_tokens",
+                                "value": "",
+                                "display_name": "Max Output Tokens",
+                                "advanced": false,
+                                "dynamic": false,
+                                "info": "The maximum number of tokens to generate.",
+                                "title_case": false,
+                                "type": "int",
+                                "_input_type": "IntInput"
+                            },
+                            "model": {
+                                "tool_mode": false,
+                                "trace_as_metadata": true,
+                                "options": [
+                                    "gemini-1.5-pro",
+                                    "gemini-1.5-flash",
+                                    "gemini-1.0-pro",
+                                    "gemini-1.0-pro-vision"
+                                ],
+                                "combobox": false,
+                                "required": false,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "model",
+                                "value": "gemini-1.5-flash",
+                                "display_name": "Model",
+                                "advanced": false,
+                                "dynamic": false,
+                                "info": "The name of the model to use.",
+                                "title_case": false,
+                                "type": "str",
+                                "_input_type": "DropdownInput"
+                            },
+                            "n": {
+                                "trace_as_metadata": true,
+                                "list": false,
+                                "required": false,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "n",
+                                "value": "",
+                                "display_name": "N",
+                                "advanced": true,
+                                "dynamic": false,
+                                "info": "Number of chat completions to generate for each prompt. Note that the API may not return the full n completions if duplicates are generated.",
+                                "title_case": false,
+                                "type": "int",
+                                "_input_type": "IntInput"
+                            },
+                            "stream": {
+                                "trace_as_metadata": true,
+                                "list": false,
+                                "required": false,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "stream",
+                                "value": false,
+                                "display_name": "Stream",
+                                "advanced": false,
+                                "dynamic": false,
+                                "info": "Stream the response from the model. Streaming works only in Chat.",
+                                "title_case": false,
+                                "type": "bool",
+                                "_input_type": "BoolInput"
+                            },
+                            "system_message": {
+                                "tool_mode": false,
+                                "trace_as_input": true,
+                                "trace_as_metadata": true,
+                                "load_from_db": false,
+                                "list": false,
+                                "required": false,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "system_message",
+                                "value": "",
+                                "display_name": "System Message",
+                                "advanced": false,
+                                "input_types": [
+                                    "Message"
+                                ],
+                                "dynamic": false,
+                                "info": "System message to pass to the model.",
+                                "title_case": false,
+                                "type": "str",
+                                "_input_type": "MessageTextInput"
+                            },
+                            "temperature": {
+                                "trace_as_metadata": true,
+                                "list": false,
+                                "required": false,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "temperature",
+                                "value": 0.8,
+                                "display_name": "Temperature",
+                                "advanced": false,
+                                "dynamic": false,
+                                "info": "",
+                                "title_case": false,
+                                "type": "float",
+                                "_input_type": "FloatInput"
+                            },
+                            "top_k": {
+                                "trace_as_metadata": true,
+                                "list": false,
+                                "required": false,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "top_k",
+                                "value": "",
+                                "display_name": "Top K",
+                                "advanced": true,
+                                "dynamic": false,
+                                "info": "Decode using top-k sampling: consider the set of top_k most probable tokens. Must be positive.",
+                                "title_case": false,
+                                "type": "int",
+                                "_input_type": "IntInput"
+                            },
+                            "top_p": {
+                                "trace_as_metadata": true,
+                                "list": false,
+                                "required": false,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "top_p",
+                                "value": "",
+                                "display_name": "Top P",
+                                "advanced": true,
+                                "dynamic": false,
+                                "info": "The maximum cumulative probability of tokens to consider when sampling.",
+                                "title_case": false,
+                                "type": "float",
+                                "_input_type": "FloatInput"
+                            }
+                        },
+                        "description": "Generate text using Google Generative AI.",
+                        "icon": "GoogleGenerativeAI",
+                        "base_classes": [
+                            "LanguageModel",
+                            "Message"
+                        ],
+                        "display_name": "Google Generative AI",
+                        "documentation": "",
+                        "custom_fields": {},
+                        "output_types": [],
+                        "pinned": false,
+                        "conditional_paths": [],
+                        "frozen": false,
+                        "outputs": [
+                            {
+                                "types": [
+                                    "Message"
+                                ],
+                                "selected": "Message",
+                                "name": "text_output",
+                                "display_name": "Text",
+                                "method": "text_response",
+                                "value": "__UNDEFINED__",
+                                "cache": true,
+                                "required_inputs": []
+                            },
+                            {
+                                "types": [
+                                    "LanguageModel"
+                                ],
+                                "selected": "LanguageModel",
+                                "name": "model_output",
+                                "display_name": "Language Model",
+                                "method": "build_model",
+                                "value": "__UNDEFINED__",
+                                "cache": true,
+                                "required_inputs": []
+                            }
+                        ],
+                        "field_order": [
+                            "input_value",
+                            "system_message",
+                            "stream",
+                            "max_output_tokens",
+                            "model",
+                            "google_api_key",
+                            "top_p",
+                            "temperature",
+                            "n",
+                            "top_k",
+                            "output_parser"
+                        ],
+                        "beta": false,
+                        "legacy": false,
+                        "edited": false,
+                        "metadata": {},
+                        "tool_mode": false,
+                        "category": "models",
+                        "key": "GoogleGenerativeAIModel"
+                    },
+                    "type": "GoogleGenerativeAIModel",
+                    "id": "GoogleGenerativeAIModel-WF3Qa"
+                },
+                "selected": false,
+                "width": 320,
+                "height": 760,
+                "positionAbsolute": {
+                    "x": 1415.4615768043723,
+                    "y": 80.54753349752983
+                },
+                "dragging": false
+            },
+            {
+                "id": "TextOutput-JG4jm",
+                "type": "genericNode",
+                "position": {
+                    "x": 1833.45143973218,
+                    "y": 360.50353471429383
+                },
+                "data": {
+                    "node": {
+                        "template": {
+                            "_type": "Component",
+                            "code": {
+                                "type": "code",
+                                "required": true,
+                                "placeholder": "",
+                                "list": false,
+                                "show": true,
+                                "multiline": true,
+                                "value": "from langflow.base.io.text import TextComponent\nfrom langflow.io import MultilineInput, Output\nfrom langflow.schema.message import Message\n\n\nclass TextOutputComponent(TextComponent):\n    display_name = \"Text Output\"\n    description = \"Display a text output in the Playground.\"\n    icon = \"type\"\n    name = \"TextOutput\"\n\n    inputs = [\n        MultilineInput(\n            name=\"input_value\",\n            display_name=\"Text\",\n            info=\"Text to be passed as output.\",\n        ),\n    ]\n    outputs = [\n        Output(display_name=\"Text\", name=\"text\", method=\"text_response\"),\n    ]\n\n    def text_response(self) -> Message:\n        message = Message(\n            text=self.input_value,\n        )\n        self.status = self.input_value\n        return message\n",
+                                "fileTypes": [],
+                                "file_path": "",
+                                "password": false,
+                                "name": "code",
+                                "advanced": true,
+                                "dynamic": true,
+                                "info": "",
+                                "load_from_db": false,
+                                "title_case": false
+                            },
+                            "input_value": {
+                                "tool_mode": false,
+                                "trace_as_input": true,
+                                "multiline": true,
+                                "trace_as_metadata": true,
+                                "load_from_db": false,
+                                "list": false,
+                                "required": false,
+                                "placeholder": "",
+                                "show": true,
+                                "name": "input_value",
+                                "value": "",
+                                "display_name": "Text",
+                                "advanced": false,
+                                "input_types": [
+                                    "Message"
+                                ],
+                                "dynamic": false,
+                                "info": "Text to be passed as output.",
+                                "title_case": false,
+                                "type": "str",
+                                "_input_type": "MultilineInput"
+                            }
+                        },
+                        "description": "Display a text output in the Playground.",
+                        "icon": "type",
+                        "base_classes": [
+                            "Message"
+                        ],
+                        "display_name": "Text Output",
+                        "documentation": "",
+                        "custom_fields": {},
+                        "output_types": [],
+                        "pinned": false,
+                        "conditional_paths": [],
+                        "frozen": false,
+                        "outputs": [
+                            {
+                                "types": [
+                                    "Message"
+                                ],
+                                "selected": "Message",
+                                "name": "text",
+                                "display_name": "Text",
+                                "method": "text_response",
+                                "value": "__UNDEFINED__",
+                                "cache": true
+                            }
+                        ],
+                        "field_order": [
+                            "input_value"
+                        ],
+                        "beta": false,
+                        "legacy": false,
+                        "edited": false,
+                        "metadata": {},
+                        "tool_mode": false
+                    },
+                    "type": "TextOutput",
+                    "id": "TextOutput-JG4jm"
+                },
+                "selected": false,
+                "width": 320,
+                "height": 234,
+                "positionAbsolute": {
+                    "x": 1833.45143973218,
+                    "y": 360.50353471429383
+                },
+                "dragging": false
+            }
+        ],
+        "edges": [
+            {
+                "source": "TextInput-O9glu",
+                "sourceHandle": "{œdataTypeœ:œTextInputœ,œidœ:œTextInput-O9gluœ,œnameœ:œtextœ,œoutput_typesœ:[œMessageœ]}",
+                "target": "JSONCleaner-99Lmi",
+                "targetHandle": "{œfieldNameœ:œjson_strœ,œidœ:œJSONCleaner-99Lmiœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
+                "data": {
+                    "targetHandle": {
+                        "fieldName": "json_str",
+                        "id": "JSONCleaner-99Lmi",
+                        "inputTypes": [
+                            "Message"
+                        ],
+                        "type": "str"
+                    },
+                    "sourceHandle": {
+                        "dataType": "TextInput",
+                        "id": "TextInput-O9glu",
+                        "name": "text",
+                        "output_types": [
+                            "Message"
+                        ]
+                    }
+                },
+                "id": "reactflow__edge-TextInput-O9glu{œdataTypeœ:œTextInputœ,œidœ:œTextInput-O9gluœ,œnameœ:œtextœ,œoutput_typesœ:[œMessageœ]}-JSONCleaner-99Lmi{œfieldNameœ:œjson_strœ,œidœ:œJSONCleaner-99Lmiœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
+                "animated": false,
+                "className": ""
+            },
+            {
+                "source": "JSONCleaner-99Lmi",
+                "sourceHandle": "{œdataTypeœ:œJSONCleanerœ,œidœ:œJSONCleaner-99Lmiœ,œnameœ:œoutputœ,œoutput_typesœ:[œMessageœ]}",
+                "target": "ParseJSONData-fLPKf",
+                "targetHandle": "{œfieldNameœ:œinput_valueœ,œidœ:œParseJSONData-fLPKfœ,œinputTypesœ:[œMessageœ,œDataœ],œtypeœ:œotherœ}",
+                "data": {
+                    "targetHandle": {
+                        "fieldName": "input_value",
+                        "id": "ParseJSONData-fLPKf",
+                        "inputTypes": [
+                            "Message",
+                            "Data"
+                        ],
+                        "type": "other"
+                    },
+                    "sourceHandle": {
+                        "dataType": "JSONCleaner",
+                        "id": "JSONCleaner-99Lmi",
+                        "name": "output",
+                        "output_types": [
+                            "Message"
+                        ]
+                    }
+                },
+                "id": "reactflow__edge-JSONCleaner-99Lmi{œdataTypeœ:œJSONCleanerœ,œidœ:œJSONCleaner-99Lmiœ,œnameœ:œoutputœ,œoutput_typesœ:[œMessageœ]}-ParseJSONData-fLPKf{œfieldNameœ:œinput_valueœ,œidœ:œParseJSONData-fLPKfœ,œinputTypesœ:[œMessageœ,œDataœ],œtypeœ:œotherœ}",
+                "animated": false,
+                "className": ""
+            },
+            {
+                "source": "ParseJSONData-fLPKf",
+                "sourceHandle": "{œdataTypeœ:œParseJSONDataœ,œidœ:œParseJSONData-fLPKfœ,œnameœ:œfiltered_dataœ,œoutput_typesœ:[œDataœ]}",
+                "target": "ParseData-htcyL",
+                "targetHandle": "{œfieldNameœ:œdataœ,œidœ:œParseData-htcyLœ,œinputTypesœ:[œDataœ],œtypeœ:œotherœ}",
+                "data": {
+                    "targetHandle": {
+                        "fieldName": "data",
+                        "id": "ParseData-htcyL",
+                        "inputTypes": [
+                            "Data"
+                        ],
+                        "type": "other"
+                    },
+                    "sourceHandle": {
+                        "dataType": "ParseJSONData",
+                        "id": "ParseJSONData-fLPKf",
+                        "name": "filtered_data",
+                        "output_types": [
+                            "Data"
+                        ]
+                    }
+                },
+                "id": "reactflow__edge-ParseJSONData-fLPKf{œdataTypeœ:œParseJSONDataœ,œidœ:œParseJSONData-fLPKfœ,œnameœ:œfiltered_dataœ,œoutput_typesœ:[œDataœ]}-ParseData-htcyL{œfieldNameœ:œdataœ,œidœ:œParseData-htcyLœ,œinputTypesœ:[œDataœ],œtypeœ:œotherœ}",
+                "animated": false,
+                "className": ""
+            },
+            {
+                "source": "ParseData-htcyL",
+                "sourceHandle": "{œdataTypeœ:œParseDataœ,œidœ:œParseData-htcyLœ,œnameœ:œtextœ,œoutput_typesœ:[œMessageœ]}",
+                "target": "GoogleGenerativeAIModel-WF3Qa",
+                "targetHandle": "{œfieldNameœ:œinput_valueœ,œidœ:œGoogleGenerativeAIModel-WF3Qaœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
+                "data": {
+                    "targetHandle": {
+                        "fieldName": "input_value",
+                        "id": "GoogleGenerativeAIModel-WF3Qa",
+                        "inputTypes": [
+                            "Message"
+                        ],
+                        "type": "str"
+                    },
+                    "sourceHandle": {
+                        "dataType": "ParseData",
+                        "id": "ParseData-htcyL",
+                        "name": "text",
+                        "output_types": [
+                            "Message"
+                        ]
+                    }
+                },
+                "id": "reactflow__edge-ParseData-htcyL{œdataTypeœ:œParseDataœ,œidœ:œParseData-htcyLœ,œnameœ:œtextœ,œoutput_typesœ:[œMessageœ]}-GoogleGenerativeAIModel-WF3Qa{œfieldNameœ:œinput_valueœ,œidœ:œGoogleGenerativeAIModel-WF3Qaœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
+                "animated": false,
+                "className": ""
+            },
+            {
+                "source": "GoogleGenerativeAIModel-WF3Qa",
+                "sourceHandle": "{œdataTypeœ:œGoogleGenerativeAIModelœ,œidœ:œGoogleGenerativeAIModel-WF3Qaœ,œnameœ:œtext_outputœ,œoutput_typesœ:[œMessageœ]}",
+                "target": "TextOutput-JG4jm",
+                "targetHandle": "{œfieldNameœ:œinput_valueœ,œidœ:œTextOutput-JG4jmœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
+                "data": {
+                    "targetHandle": {
+                        "fieldName": "input_value",
+                        "id": "TextOutput-JG4jm",
+                        "inputTypes": [
+                            "Message"
+                        ],
+                        "type": "str"
+                    },
+                    "sourceHandle": {
+                        "dataType": "GoogleGenerativeAIModel",
+                        "id": "GoogleGenerativeAIModel-WF3Qa",
+                        "name": "text_output",
+                        "output_types": [
+                            "Message"
+                        ]
+                    }
+                },
+                "id": "reactflow__edge-GoogleGenerativeAIModel-WF3Qa{œdataTypeœ:œGoogleGenerativeAIModelœ,œidœ:œGoogleGenerativeAIModel-WF3Qaœ,œnameœ:œtext_outputœ,œoutput_typesœ:[œMessageœ]}-TextOutput-JG4jm{œfieldNameœ:œinput_valueœ,œidœ:œTextOutput-JG4jmœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
+                "animated": false,
+                "className": ""
+            }
+        ],
+        "viewport": {
+            "x": 474.9339247097937,
+            "y": 68.56904380248113,
+            "zoom": 0.514366541078374
+        }
+    },
+    "description": "Empowering Enterprises with Intelligent Interactions.",
+    "name": "SparkLLM",
+    "last_tested_version": "1.1.0",
+    "endpoint_name": null,
+    "is_component": false
+}

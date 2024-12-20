@@ -2,6 +2,8 @@ langflow:
   api_url: "http://192.168.50.90:7860"
   flow_id:
     gen_query: "a423e41e-9eeb-4a17-8de6-ce24e072ee81"
+    gen_columns_name: "fecbe0d5-02cc-4ae4-82ab-4c6c65a21933"
+    process_data: "62afc92d-49b1-4ab7-807f-fe7da8223f0f"
 serper:
   api_key:
     - "1c7595865eba921adf8566ff53ca4219a862977e"

@@ -10,7 +10,7 @@ import os
 # Spark imports
 from pyspark.sql import SparkSession
 import pyspark.pandas as ps
-from pyspark.sql.types import StructType, StructField, StringType, IntegerType
+import models
 
 # Page setup
 st.set_page_config(page_title='Project 3', page_icon=':mag:', layout='wide')
@@ -32,6 +32,16 @@ def gen_query(message: str) -> list:
         flow_id=cfg['langflow']['flow_id']['gen_query'],
     )
     return res.strip().split('\n')
+
+def gen_columns_info(message: str) -> list:
+    res = lf.run_flow(
+        api_url=cfg['langflow']['api_url'],
+        message=message,
+        flow_id=cfg['langflow']['flow_id']['gen_columns_info'],
+    )
+    columns_obj = res.strip().split('\n')
+    columns_obj = [list(map(lambda x: x.strip(), col.strip().split("\n"))) for col in columns_obj]
+    return columns_obj
 
 # Cache
 # Define the cached SparkSession function
@@ -183,13 +193,7 @@ if selection == 'Home':
             spark = get_spark_session()
 
             # Define the schema
-            schema = StructType([
-                StructField("url", StringType(), nullable=True),
-                StructField("title", StringType(), nullable=True),
-                StructField("snippet", StringType(), nullable=True),
-                StructField("status_code", IntegerType(), nullable=True),
-                StructField("content", StringType(), nullable=True)
-            ])
+            schema = models.url_content_collect
 
             # Button to confirm to get content
             if st.button('Get content', key='get_content'):
@@ -198,7 +202,7 @@ if selection == 'Home':
                 sc = spark.sparkContext
                 rdd = sc.parallelize(url_search)
 
-                from modules.spark import fetch_content
+                from client.modules.spark import fetch_content
 
                 # Map each record to include fetched content
                 rdd_content = rdd.map(fetch_content)
@@ -237,5 +241,9 @@ if selection == 'Home':
                     st.error(f"An error occurred while processing the data: {e}")
                     # Optionally, log the error
                     print(f"Error during Spark processing: {e}")
+        elif stage_process == list_stage_process[3]: # User input prompt requirements for data procession, spark worker get data from hadoop and process by LLM using that prompt (for example process then return struct)
+            pass
+        elif stage_process == list_stage_process[4]: # User input prompt final process, 1 LLM will genarator MapReduce code to process data in hadoop then send to hadoop to process. After that, LLM will get result and return to user and save to .cache
+            pass
         else:
             st.write('Stage not exited')
