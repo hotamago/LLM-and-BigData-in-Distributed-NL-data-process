@@ -1,0 +1,1 @@
+docker run --rm -it -v ${pwd}:/in wst24365888/compose-viz -m png -o docker-compose docker-compose.yml

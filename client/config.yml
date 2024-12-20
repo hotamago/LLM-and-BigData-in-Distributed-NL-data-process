@@ -1,0 +1,12 @@
+langflow:
+  api_url: "http://192.168.50.90:7860"
+  flow_id:
+    gen_query: "a423e41e-9eeb-4a17-8de6-ce24e072ee81"
+serper:
+  api_key:
+    - "1c7595865eba921adf8566ff53ca4219a862977e"
+spark:
+  master: "spark://spark-master:7077"
+  app_name: "spark-collect-data"
+hdfs:
+  output_path: "hdfs://hadoop-namenode/path/to/save/url_contents.parquet"

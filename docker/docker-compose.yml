@@ -1,0 +1,188 @@
+version: '3.8'
+
+services:
+  # Client Service
+  client:
+    image: hotamago/project-3/client:latest
+    build:
+      context: ../client
+      dockerfile: Dockerfile
+    container_name: client-container
+    ports:
+      - "3005:3005" # Streamlit UI port
+    networks:
+      - spark-hadoop-net
+    volumes:
+      - client_cache:/app/.cache
+      - hadoop_namenode_data:/opt/hadoop # Mount Hadoop binaries if available
+    environment:
+      - HADOOP_HOME=/opt/hadoop
+      - hadoop.home.dir=/opt/hadoop
+    depends_on:
+      - spark-master
+      - hadoop-namenode
+
+  # Spark Master Service
+  spark-master:
+    hostname: spark-master
+    image: hotamago/project-3/spark:3.5.3
+    build:
+      context: ../spark
+      dockerfile: Dockerfile
+    container_name: spark-master
+    env_file:
+      - ./spark-master.env
+    ports:
+      - "8080:8080"   # Spark Master UI
+      - "7077:7077"   # Spark Master port
+    volumes:
+      - spark_master_data:/masternode/
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: '2G'
+    networks:
+      - spark-hadoop-net
+
+  # Spark Worker 1
+  spark-worker-01:
+    image: hotamago/project-3/spark:3.5.3
+    build:
+      context: ../spark
+      dockerfile: Dockerfile
+    container_name: spark-worker-01
+    environment:
+      SPARK_WORKER_MEMORY: 1G
+      SPARK_WORKER_CORES: 1
+    env_file:
+      - ./spark-worker.env
+    volumes:
+      - spark_worker01_data:/workernode-01/
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '1G'
+    networks:
+      - spark-hadoop-net
+    depends_on:
+      - spark-master
+    # ports:
+    #   - "8081:8081"
+
+  # Spark Worker 2
+  spark-worker-02:
+    image: hotamago/project-3/spark:3.5.3
+    build:
+      context: ../spark
+      dockerfile: Dockerfile
+    container_name: spark-worker-02
+    environment:
+      SPARK_WORKER_MEMORY: 1G
+      SPARK_WORKER_CORES: 1
+    env_file:
+      - ./spark-worker.env
+    volumes:
+      - spark_worker02_data:/workernode-02/
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '1G'
+    networks:
+      - spark-hadoop-net
+    depends_on:
+      - spark-master
+    # ports:
+    #   - "8082:8081"
+
+  # Hadoop NameNode
+  hadoop-namenode:
+    image: apache/hadoop:3.4.1
+    container_name: hadoop-namenode
+    hostname: namenode
+    command: [ "hdfs", "namenode" ]
+    # command: [ "bash", "-c", "hdfs namenode -format -y && hdfs namenode" ]
+    ports:
+      - "9870:9870"  # NameNode UI
+      - "9000:9000"  # HDFS port
+    env_file:
+      - ./hadoop.env
+    volumes:
+      - hadoop_namenode_data:/opt/hadoop/data/dfs/name
+      - hadoop_namenode_data:/data
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: '4G'
+    networks:
+      - spark-hadoop-net
+
+  # Hadoop DataNode 1
+  hadoop-datanode-01:
+    image: apache/hadoop:3.4.1
+    container_name: hadoop-datanode-01
+    hostname: datanode-01
+    command: [ "hdfs", "datanode" ]
+    depends_on:
+      - hadoop-namenode
+    env_file:
+      - ./hadoop.env
+    volumes:
+      - hadoop_datanode01_data:/opt/hadoop/data/dfs/data
+      - hadoop_datanode01_data:/data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '2G'
+    networks:
+      - spark-hadoop-net
+
+  # Hadoop DataNode 02
+  hadoop-datanode-02:
+    image: apache/hadoop:3.4.1
+    container_name: hadoop-datanode-02
+    hostname: datanode-02
+    command: [ "hdfs", "datanode" ]
+    depends_on:
+      - hadoop-namenode
+    env_file:
+      - ./hadoop.env
+    volumes:
+      - hadoop_datanode02_data:/opt/hadoop/data/dfs/data
+      - hadoop_datanode02_data:/data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '2G'
+    networks:
+      - spark-hadoop-net
+
+volumes:
+  # Client Volumes
+  client_cache:
+    driver: local
+
+  # Spark Volumes
+  spark_master_data:
+    driver: local
+  spark_worker01_data:
+    driver: local
+  spark_worker02_data:
+    driver: local
+
+  # Hadoop Volumes
+  hadoop_namenode_data:
+    driver: local
+  hadoop_datanode01_data:
+    driver: local
+  hadoop_datanode02_data:
+    driver: local
+
+networks:
+  spark-hadoop-net:
+    driver: bridge
