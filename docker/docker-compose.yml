@@ -13,9 +13,11 @@ services:
     networks:
       - spark-hadoop-net
     volumes:
+      - ../client:/app # Mount the client directory to the container for development
       - client_cache:/app/.cache
-      - hadoop_namenode_data:/opt/hadoop # Mount Hadoop binaries if available
+      - hadoop_namenode_bin:/opt/hadoop/bin
     environment:
+      - mode=prod
       - HADOOP_HOME=/opt/hadoop
       - hadoop.home.dir=/opt/hadoop
     depends_on:
@@ -68,7 +70,7 @@ services:
       - spark-hadoop-net
     depends_on:
       - spark-master
-    # ports:
+    # ports: # for debugging
     #   - "8081:8081"
 
   # Spark Worker 2
@@ -94,7 +96,7 @@ services:
       - spark-hadoop-net
     depends_on:
       - spark-master
-    # ports:
+    # ports: # for debugging
     #   - "8082:8081"
 
   # Hadoop NameNode
@@ -112,6 +114,7 @@ services:
     volumes:
       - hadoop_namenode_data:/opt/hadoop/data/dfs/name
       - hadoop_namenode_data:/data
+      - hadoop_namenode_bin:/opt/hadoop/bin
     deploy:
       resources:
         limits:
@@ -177,6 +180,8 @@ volumes:
 
   # Hadoop Volumes
   hadoop_namenode_data:
+    driver: local
+  hadoop_namenode_bin:
     driver: local
   hadoop_datanode01_data:
     driver: local

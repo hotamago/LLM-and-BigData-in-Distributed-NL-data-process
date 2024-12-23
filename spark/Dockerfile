@@ -14,7 +14,7 @@ COPY requirements.txt /tmp/requirements.txt
 
 # Install Python dependencies
 RUN pip3 install --upgrade pip
-RUN pip3 install -r /tmp/requirements.txt
+RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
 
 # Set the working directory
 WORKDIR /opt/bitnami/spark

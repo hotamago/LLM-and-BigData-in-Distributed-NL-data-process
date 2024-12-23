@@ -4,11 +4,16 @@ langflow:
     gen_query: "a423e41e-9eeb-4a17-8de6-ce24e072ee81"
     gen_columns_name: "fecbe0d5-02cc-4ae4-82ab-4c6c65a21933"
     process_data: "62afc92d-49b1-4ab7-807f-fe7da8223f0f"
+    final_process: "00549525-3537-4203-b3ac-07dbbbc55ab6"
 serper:
   api_key:
     - "1c7595865eba921adf8566ff53ca4219a862977e"
 spark:
   master: "spark://spark-master:7077"
   app_name: "spark-collect-data"
+hdfs_base_path: "hdfs://hadoop-namenode:9000"
 hdfs:
-  output_path: "hdfs://hadoop-namenode/path/to/save/url_contents.parquet"
+  base_path: "/path/to/save"
+  url_contents: "/path/to/save/url_contents.parquet"
+  data_processed: "/path/to/save/data_processed.parquet"
+  final_data: "/path/to/save/final_data.parquet"

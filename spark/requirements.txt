@@ -1,2 +1,3 @@
 requests
 langflow==1.1.0
+html2text==2024.2.26
