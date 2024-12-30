@@ -2,19 +2,22 @@ import streamlit as st
 from streamlit import session_state as ss
 import pandas as pd
 
+from pyspark.sql.functions import udf
+from pyspark.sql.types import StringType
+
 # Hota
 from modules.cache import hcache
 from modules.helper import *
 
 # Spark imports
 import models
-from config import cfg
+from config import cfg, dict_flowjson
 
 # Spark plugin imports
 from modules.spark import *
+from modules.managerKey import ManagerKey
 
 def render():
-    st.write("Stage 5: Process data with Spark")
     spark = get_spark_session()
 
     if hcache.exists("columns_info"):
@@ -40,8 +43,17 @@ def render():
             try:
                 st.write("Running Spark flow to process data...")
 
+                # Initialize ManagerKey inside the UDF to prevent serialization of the lock
+                def get_key():
+                    apiKeyMan = ManagerKey(cfg["gemini"]["api_key"])
+                    return apiKeyMan.getKey()
+
+                get_key_udf = udf(get_key, StringType())
+                df_url_contents = df_url_contents.withColumn("apiKey", get_key_udf())
+
                 # Process data
-                rdd_processed = df_url_contents.rdd.map(lambda row: run_spark_flow(row.asDict(), columns_info, cfg)).cache()
+                temp_cfg = cfg['langflow']["flow_json"]["process_data"]
+                rdd_processed = df_url_contents.rdd.map(lambda row: run_spark_flow(row.asDict(), dict_flowjson[temp_cfg["name"]], columns_info, cfg)).cache()
                 df_processed = rdd_processed.toDF(schema)
 
                 # Show output sample

@@ -13,7 +13,7 @@ services:
     networks:
       - spark-hadoop-net
     volumes:
-      - ../client:/app # Mount the client directory to the container for development
+      # - ../client:/app # Mount the client directory to the container for development
       - client_cache:/app/.cache
       - hadoop_namenode_bin:/opt/hadoop/bin
     environment:

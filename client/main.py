@@ -7,7 +7,7 @@ from modules.helper import *
 
 # Page setup
 st.set_page_config(page_title='Project 3', page_icon=':mag:', layout='wide')
-st.title('Project 3 - Big Data Collection and Processing')
+st.title('Big Data Collection and Processing using LLM')
 
 # Init session_state
 if "stage_process" not in ss:
@@ -17,10 +17,10 @@ if "list_query_engine_search" not in ss:
 if "list_query_engine_search_gen" not in ss:
     ss.list_query_engine_search_gen = []
 
-# Improve UI by using tabs
-tab1, tab2 = st.tabs(["Home", "HDFS"])
+# Improve UI by using sidebar
+menu = st.sidebar.radio("Navigation", ["Home", "HDFS"])
 
-with tab1:
+if menu == "Home":
     # Global variables
     if hcache.exists('list_query_engine_search'):
         ss.list_query_engine_search = hcache.get('list_query_engine_search', default=[])
@@ -36,7 +36,9 @@ with tab1:
             'Stage 5: Process data',
             'Stage 6: Final process',
         ]
-        stage_process = st.selectbox('Select stage', list_stage_process, index=ss.stage_process)
+        stage_process = st.selectbox(
+            label='Select stage',
+            options=list_stage_process, index=ss["stage_process"])
 
         # Stage 1
         if stage_process == list_stage_process[0]:
@@ -51,21 +53,21 @@ with tab1:
             from compoments.stage3 import render
             render()
             
-        elif stage_process == list_stage_process[3]:  # Stage 4
+        elif stage_process == list_stage_process[3]:  # Stage 4 Gen columns info
             from compoments.stage4 import render
             render()
 
-        elif stage_process == list_stage_process[4]:  # Stage 5
+        elif stage_process == list_stage_process[4]:  # Stage 5 Process data
             from compoments.stage5 import render
             render()
 
-        elif stage_process == list_stage_process[5]:  # Stage 6
+        elif stage_process == list_stage_process[5]:  # Stage 6 Final process
             from compoments.stage6 import render
             render()
 
         else:
             st.write('Stage not exited')
 
-with tab2:
+elif menu == "HDFS":
     from compoments.hdfs_explorser import render
     render()

@@ -1,5 +1,8 @@
+import json
+import os
 import requests
 from typing import Optional
+from langflow.load import run_flow_from_json
 
 def run_flow(
         api_url: str,
@@ -39,3 +42,32 @@ def run_flow(
     
     # Return text response
     return response.json()['outputs'][0]["outputs"][0]["outputs"]["text"]["message"]
+
+def convert_hotaf_to_tweaks(hotaf: dict) -> dict:
+    """
+    Convert the HOTAF tweaks to the format expected by the LangFlow API.
+
+    :param hotaf: The HOTAF tweaks
+    :return: The tweaks in the LangFlow API format
+    """
+    tweaks = {}
+    for value in hotaf.values():
+        if value["id"] not in tweaks:
+            tweaks[value["id"]] = {}
+        tweaks[value["id"]][value["key"]] = value["value"]
+    return tweaks
+
+def run_flow_fj(cfg: dict, dict_flowjson: dict, api_key:str, message:str=""):
+    cfg["tweaks"]["api_key"]["value"] = api_key
+    tweaks = convert_hotaf_to_tweaks(cfg["tweaks"])
+    res = run_flow_from_json(
+                                flow=dict_flowjson,
+                                input_value=message,
+                                tweaks=tweaks,
+                                output_type="text",
+                                input_type="text",
+                                session_id="",
+                                fallback_to_env_vars=True,
+                            )
+    res = res[0].model_dump()
+    return res["outputs"][0]["outputs"]["text"]["message"]

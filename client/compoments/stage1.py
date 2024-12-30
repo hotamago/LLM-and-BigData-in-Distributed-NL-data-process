@@ -9,7 +9,7 @@ def render():
     # Get inputs type area
     user_input = st.text_area('Each line is a query document', height=200, value=hcache.get('user_input', default=''))
     # Get input type number
-    number_queries_gen = st.number_input('Number queries', min_value=1, max_value=100, value=hcache.get('number_queries_gen', default=10))
+    number_queries_gen = st.number_input('Number queries', min_value=1, max_value=100000, value=hcache.get('number_queries_gen', default=10))
 
     if st.button('Generate queries', key='gen_query'):
         ss.list_query_engine_search_gen = []
@@ -20,11 +20,16 @@ def render():
         list_user_input = user_input.strip().split('\n')
 
         # Generate queries
+        number_queries_gen = hcache.get('number_queries_gen', default=10)
+        max_batch = 50
+        batches = (number_queries_gen + max_batch - 1) // max_batch
+
         list_user_query = []
         for query in list_user_input:
-            list_user_query.append({
+            for _ in range(batches):
+                list_user_query.append({
                     "user_input": query,
-                    "num_queries": number_queries_gen,
+                    "num_queries": min(max_batch, number_queries_gen - (_ * max_batch)),
                 })
             
         with st.spinner('Generating queries...'):

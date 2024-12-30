@@ -1,3 +1,4 @@
+import json
 import yaml
 import os
 
@@ -23,4 +24,16 @@ else:
 # Auto load base path for hdfs
 # Loop all hdfs
 for key in cfg["hdfs"].keys():
-    cfg["hdfs"][key] = f"{cfg['hdfs_base_path']}{cfg['hdfs'][key]}"
+    if not cfg["hdfs_base_path"].endswith('/') and not cfg["hdfs"][key].startswith('/'):
+        separator = '/'
+    else:
+        separator = ''
+    cfg["hdfs"][key] = f"{cfg['hdfs_base_path']}{separator}{cfg['hdfs'][key]}"
+
+# Load json flow from .langflow
+dict_flowjson = {}
+for root, _, files in os.walk(".langflow"):
+    for file in files:
+        with open(os.path.join(root, file)) as f:
+            # key is file name (include .json)
+            dict_flowjson[file] = json.load(f)

@@ -15,7 +15,6 @@ from config import cfg
 from modules.spark import *
 
 def render():
-    st.write("Stage 6: Final data processing")
     user_input_stage_6 = st.text_area(
         "Enter final processing instructions",
         value=hcache.get("user_input_stage_6", default="")
@@ -25,15 +24,15 @@ def render():
 
     # Show columns info
     if hcache.exists("columns_info"):
-        st.write("Columns info:")
+        st.subheader("Columns Info")
         st.table(hcache.get("columns_info", default=[]))
 
-        if st.button("Generate final script"):
+        if st.button("Generate Final Script"):
             columns_info = hcache.get("columns_info", [])
             script_result = gen_python_script_process(
                 json.dumps(
                     {
-                        "columns_info": "\n".join([f"{col["name"]}: {col["description"]}" for col in columns_info]),
+                        "columns_info": "\n".join([f"{col['name']}: {col['description']}" for col in columns_info]),
                         "user_input": user_input_stage_6,
                         "read_parquet_path": 'cfg["hdfs"]["data_processed"]',
                         "write_parquet_path": 'cfg["hdfs"]["final_data"]',
@@ -42,11 +41,16 @@ def render():
             hcache.set("final_script", script_result)
 
     if hcache.exists("final_script"):
-        st.write("Final script (cached):")
-        st.code(hcache.get("final_script", default=""), language="python")
-        if st.button("Run final script"):
+        st.subheader("Final Script (Cached)")
+        final_script = hcache.get("final_script", default="")
+        edited_script = st.text_area("Edit Final Script", value=final_script, height=300)
+        hcache.set("final_script", edited_script)
+        st.code(edited_script, language="python")
+
+        if st.button("Run Final Script"):
             try:
+                spark = get_spark_session()
+                exec(edited_script)
                 st.success("Final script executed successfully.")
-                exec(hcache.get("final_script", default=""))
             except Exception as e:
                 st.error(f"Error running final script: {e}")

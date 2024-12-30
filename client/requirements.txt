@@ -2,7 +2,7 @@ streamlit
 pyspark==3.5.3
 pyyaml
 py4j==0.10.9.7
-pandas==2.2.3
+pandas==2.2.2
 pyarrow==18.1.0
 numpy==1.26.4
 grpcio==1.66.0
@@ -10,3 +10,4 @@ grpcio-status==1.66.0
 googleapis-common-protos==1.66.0
 findspark
 html2text==2024.2.26
+langflow==1.1.0

@@ -13,4 +13,5 @@ llm_process_content = StructType([
                 StructField("title", StringType(), nullable=True),
                 StructField("snippet", StringType(), nullable=True),
                 StructField("content", StringType(), nullable=True),
+                StructField("log", StringType(), nullable=False),
             ])

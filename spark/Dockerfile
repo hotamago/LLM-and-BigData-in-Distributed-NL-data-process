@@ -19,5 +19,9 @@ RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
 # Set the working directory
 WORKDIR /opt/bitnami/spark
 
+# Add cmod for langflow
+RUN mkdir /.cache/langflow
+RUN chmod -R 777 /.cache/langflow
+
 # Switch back to the Spark user if necessary
 USER 1001
