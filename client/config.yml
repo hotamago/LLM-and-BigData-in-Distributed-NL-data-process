@@ -1,55 +1,53 @@
-langflow:
-  api_url: "http://192.168.50.90:7860"
-  flow_id:
-    gen_query: "a423e41e-9eeb-4a17-8de6-ce24e072ee81"
-    gen_columns_name: "fecbe0d5-02cc-4ae4-82ab-4c6c65a21933"
-    process_data: "62afc92d-49b1-4ab7-807f-fe7da8223f0f"
-    final_process: "00549525-3537-4203-b3ac-07dbbbc55ab6"
-  flow_json:
-    gen_query:
-      name: "AutoGenQuery.json"
-      tweaks:
-        api_key:
-          id: "GoogleGenerativeAIModel-q1QJY"
-          key: "google_api_key"
-          value: ""
-    gen_columns_name:
-      name: "GenColumnsName.json"
-      tweaks:
-        api_key:
-          id: "GoogleGenerativeAIModel-STURG"
-          key: "google_api_key"
-          value: ""
-    process_data:
-      name: "SparkLLM.json"
-      tweaks:
-        api_key:
-          id: "GoogleGenerativeAIModel-WF3Qa"
-          key: "google_api_key"
-          value: ""
-    final_process:
-      name: "AutoGenPandasProcess.json"
-      tweaks:
-        api_key:
-          id: "GoogleGenerativeAIModel-18OHw"
-          key: "google_api_key"
-          value: ""
-serper:
-  api_key:
-    - "1c7595865eba921adf8566ff53ca4219a862977e"
-spark:
-  master: "spark://spark-master:7077"
-  app_name: "spark-collect-data"
-hdfs_base_path: "hdfs://hadoop-namenode:9000"
-hdfs:
-  url_contents: "/path/to/save/url_contents.parquet"
-  data_processed: "/path/to/save/data_processed.parquet"
-  final_data: "/path/to/save/final_data.parquet"
-
 gemini:
   api_key:
-    - "AIzaSyB_ksJ_2a2-Dg_rMtOTfa8h2SQwSXN4mbU"
-    - "AIzaSyD90yE03xARcwQrUwhE0mrQejbbSA4yjpc"
-    - "AIzaSyD-TMqGxvGUqYbkIwdy7G5SRx3mFuhR7gc"
-
-run_api_langflow: False
+  - AIzaSyB_ksJ_2a2-Dg_rMtOTfa8h2SQwSXN4mbU
+  - AIzaSyD90yE03xARcwQrUwhE0mrQejbbSA4yjpc
+  - AIzaSyD-TMqGxvGUqYbkIwdy7G5SRx3mFuhR7gc
+hdfs:
+  data_processed: /path/to/save/data_processed.parquet
+  final_data: /path/to/save/final_data.parquet
+  url_contents: /path/to/save/url_contents.parquet
+hdfs_base_path: hdfs://hadoop-namenode:9000
+langflow:
+  api_url: http://192.168.50.90:7860
+  flow_id:
+    final_process: 00549525-3537-4203-b3ac-07dbbbc55ab6
+    gen_columns_name: fecbe0d5-02cc-4ae4-82ab-4c6c65a21933
+    gen_query: a423e41e-9eeb-4a17-8de6-ce24e072ee81
+    process_data: 62afc92d-49b1-4ab7-807f-fe7da8223f0f
+  flow_json:
+    final_process:
+      name: AutoGenPandasProcess.json
+      tweaks:
+        api_key:
+          id: GoogleGenerativeAIModel-18OHw
+          key: google_api_key
+          value: ''
+    gen_columns_name:
+      name: GenColumnsName.json
+      tweaks:
+        api_key:
+          id: GoogleGenerativeAIModel-STURG
+          key: google_api_key
+          value: ''
+    gen_query:
+      name: AutoGenQuery.json
+      tweaks:
+        api_key:
+          id: GoogleGenerativeAIModel-q1QJY
+          key: google_api_key
+          value: ''
+    process_data:
+      name: SparkLLM.json
+      tweaks:
+        api_key:
+          id: GoogleGenerativeAIModel-WF3Qa
+          key: google_api_key
+          value: ''
+run_api_langflow: false
+serper:
+  api_key:
+  - 1c7595865eba921adf8566ff53ca4219a862977e
+spark:
+  app_name: spark-collect-data
+  master: spark://spark-master:7077

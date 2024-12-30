@@ -7,6 +7,11 @@ def load_config(config_path="config.yml"):
     with open(config_path) as f:
         return yaml.load(f, Loader=yaml.FullLoader)
 
+# Save config
+def save_config(config_data, config_path="config.yml"):
+    with open(config_path, 'w') as f:
+        yaml.dump(config_data, f)
+
 cfg = load_config()
 
 # Set env variables on windows

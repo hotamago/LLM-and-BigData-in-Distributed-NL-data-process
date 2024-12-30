@@ -45,6 +45,9 @@ RUN ln -s /usr/local/bin/python3.12 /usr/bin/python3 && \
     ln -s /usr/local/bin/pip3.12 /usr/bin/pip && \
     python3 --version && pip --version
 
+# Upgrade pip
+RUN pip install --no-cache-dir --upgrade pip
+
 # Install setuptools
 RUN pip install --no-cache-dir setuptools
 

@@ -28,6 +28,29 @@ def get_spark_session():
 
     return spark
 
+def get_databases(spark: SparkSession) -> list:
+    """
+    Retrieves a list of databases from the Spark session.
+    """
+    return [db.name for db in spark.catalog.listDatabases()]
+
+def get_tables(spark: SparkSession, database: str) -> list:
+    """
+    Retrieves a list of tables from the specified database.
+    """
+    spark.catalog.setCurrentDatabase(database)
+    return [table.name for table in spark.catalog.listTables()]
+
+def run_query(spark: SparkSession, query: str):
+    """
+    Executes a Spark SQL query and returns the result as a DataFrame.
+    """
+    try:
+        df = spark.sql(query)
+        return df.show(truncate=False)
+    except Exception as e:
+        return f"Error executing query: {e}"
+
 def gen_query(message: str) -> list:
     if cfg["run_api_langflow"]:
         res = run_flow(

@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit import session_state as ss
 import pandas as pd
+from streamlit_ace import st_ace
 
 # Hota
 from modules.get_block_code import convert_block_to_text
@@ -43,7 +44,13 @@ def render():
     if hcache.exists("final_script"):
         st.subheader("Final Script (Cached)")
         final_script = hcache.get("final_script", default="")
-        edited_script = st.text_area("Edit Final Script", value=final_script, height=300)
+        edited_script = st_ace(
+            value=final_script,
+            language='python',
+            theme='monokai',
+            keybinding='vscode',
+            height=300
+        )
         hcache.set("final_script", edited_script)
         st.code(edited_script, language="python")
 

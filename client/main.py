@@ -18,7 +18,7 @@ if "list_query_engine_search_gen" not in ss:
     ss.list_query_engine_search_gen = []
 
 # Improve UI by using sidebar
-menu = st.sidebar.radio("Navigation", ["Home", "HDFS"])
+menu = st.sidebar.radio("Navigation", ["Home", "HDFS", "Spark", "Config"])
 
 if menu == "Home":
     # Global variables
@@ -70,4 +70,12 @@ if menu == "Home":
 
 elif menu == "HDFS":
     from compoments.hdfs_explorser import render
+    render()
+
+elif menu == "Spark":
+    from compoments.spark_explorser import render
+    render()
+
+elif menu == "Config":
+    from compoments.config import render
     render()
