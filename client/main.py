@@ -41,7 +41,7 @@ if menu == "Home":
             options=list_stage_process, index=ss["stage_process"])
 
         # Stage 1
-        if stage_process == list_stage_process[0]:
+        if stage_process == list_stage_process[0]: # Stage 1: Generate queries for search engine api using one LLM
             from compoments.stage1 import render
             render()
 
@@ -49,19 +49,19 @@ if menu == "Home":
             from compoments.stage2 import render
             render()
             
-        elif stage_process == list_stage_process[2]: # Stage 3: From url send request to get content by spark then each spark send to hadoop to save\
+        elif stage_process == list_stage_process[2]: # Stage 3: From url send request to get content by multi spark node then each spark node send to hadoop to save
             from compoments.stage3 import render
             render()
             
-        elif stage_process == list_stage_process[3]:  # Stage 4 Gen columns info
+        elif stage_process == list_stage_process[3]:  # Stage 4 Gen columns info for multi node for unified data processing
             from compoments.stage4 import render
             render()
 
-        elif stage_process == list_stage_process[4]:  # Stage 5 Process data
+        elif stage_process == list_stage_process[4]:  # Stage 5 Process data to get final data for analysis using spark and hadoop with multi node
             from compoments.stage5 import render
             render()
 
-        elif stage_process == list_stage_process[5]:  # Stage 6 Final process
+        elif stage_process == list_stage_process[5]:  # Stage 6: Final process with python code generate from LLM to process data and get result for analysis using spark and hadoop with multi node
             from compoments.stage6 import render
             render()
 
