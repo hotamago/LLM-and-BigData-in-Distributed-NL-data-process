@@ -1,0 +1,235 @@
+digraph SparkHadoopWorkflow {
+    rankdir=LR;
+    fontname="Arial";
+    node [shape=box, style=rounded, fontname="Arial"];
+    edge [fontname="Arial"];
+
+    // -----------------------
+    // Stage 1: Generate Queries
+    // (Unchanged from previous)
+    // -----------------------
+    subgraph cluster_1 {
+        style=filled; 
+        color=lightblue;
+        label="Stage 1: Generate Queries";
+
+        Client1 [label="Client", style=filled, fillcolor="#ffffff"];
+        LLM1 [label="LLM", style=filled, fillcolor="#ffffff"];
+
+        Client1 -> LLM1 [label="Input Requirements"];
+        LLM1 -> Client1 [label="Generated Queries"];
+    }
+
+    // -----------------------
+    // Stage 2: Retrieve URLs
+    // (Unchanged from previous)
+    // -----------------------
+    subgraph cluster_2 {
+        style=filled; 
+        color=lightgreen; 
+        label="Stage 2: Retrieve URLs";
+
+        Client2 [label="Client", style=filled, fillcolor="#ffffff"];
+        SearchAPI [label="Search Engine API", style=filled, fillcolor="#ffffff"];
+
+        Client2 -> SearchAPI [label="Query Keywords"];
+        SearchAPI -> Client2 [label="URLs List"];
+    }
+
+    // -----------------------
+    // Stage 3: Extract Content
+    // (Unchanged from previous)
+    // -----------------------
+    subgraph cluster_3 {
+        style=filled; 
+        color=lightgoldenrod1; 
+        label="Stage 3: Extract Content";
+
+        subgraph cluster_3_control {
+            style=filled; 
+            color=gray90;
+            label="Control Plane";
+            SparkMaster3 [label="Spark Master"];
+            HadoopNameNode3 [label="Hadoop NameNode"];
+        }
+
+        subgraph cluster_3_workers {
+            style=filled; 
+            color=gray95;
+            label="Spark Workers";
+            SparkWorker3_1 [label="Spark Worker"];
+            SparkWorker3_2 [label="Spark Worker"];
+            SparkWorker3_n [label="Spark Worker ..."];
+        }
+
+        subgraph cluster_3_datanodes {
+            style=filled; 
+            color=white;
+            label="Hadoop DataNodes";
+            HadoopDataNode3_1 [label="Hadoop DataNode"];
+            HadoopDataNode3_2 [label="Hadoop DataNode"];
+            HadoopDataNode3_n [label="Hadoop DataNode ..."];
+        }
+
+        Client3 [label="Client", style=filled, fillcolor="#ffffff"];
+
+        Client3 -> SparkMaster3 [label="Distribute URLs"];
+        SparkMaster3 -> SparkWorker3_1 [label="Assign URLs"];
+        SparkMaster3 -> SparkWorker3_2;
+        SparkMaster3 -> SparkWorker3_n;
+
+        SparkWorker3_1 -> HadoopDataNode3_1 [label="Store Raw Text"];
+        SparkWorker3_2 -> HadoopDataNode3_2;
+        SparkWorker3_n -> HadoopDataNode3_n;
+
+        HadoopNameNode3 -> HadoopDataNode3_1 [label="HDFS Metadata"];
+        HadoopNameNode3 -> HadoopDataNode3_2;
+        HadoopNameNode3 -> HadoopDataNode3_n;
+    }
+
+    // -----------------------
+    // Stage 4: Generate Column Metadata
+    // (Unchanged from previous)
+    // -----------------------
+    subgraph cluster_4 {
+        style=filled; 
+        color=lightsalmon; 
+        label="Stage 4: Generate Column Metadata";
+
+        Client4 [label="Client", style=filled, fillcolor="#ffffff"];
+        LLM4 [label="LLM", style=filled, fillcolor="#ffffff"];
+
+        Client4 -> LLM4 [label="Input Requirements"];
+        LLM4 -> Client4 [label="Column Metadata"];
+    }
+
+    // -----------------------
+    // Stage 5: Process Data (UPDATED)
+    // -----------------------
+    subgraph cluster_5 {
+        style=filled; 
+        color=lightpink; 
+        label="Stage 5: Process Data";
+
+        // Control plane
+        subgraph cluster_5_control {
+            style=filled; 
+            color=gray90;
+            label="Control Plane";
+            SparkMaster5 [label="Spark Master"];
+            HadoopNameNode5 [label="Hadoop NameNode"];
+        }
+
+        // Workers + LLM
+        subgraph cluster_5_workers {
+            style=filled; 
+            color=gray95;
+            label="Spark Workers";
+
+            SparkWorker5_1 [label="Spark Worker"];
+            LLM5_1 [label="LLM on Worker"];
+
+            SparkWorker5_2 [label="Spark Worker"];
+            LLM5_2 [label="LLM on Worker"];
+
+            SparkWorker5_n [label="Spark Worker ..."];
+            LLM5_n [label="LLM on Worker ..."];
+        }
+
+        // DataNodes
+        subgraph cluster_5_datanodes {
+            style=filled; 
+            color=white;
+            label="Hadoop DataNodes";
+            HadoopDataNode5_1 [label="Hadoop DataNode"];
+            HadoopDataNode5_2 [label="Hadoop DataNode"];
+            HadoopDataNode5_n [label="Hadoop DataNode ..."];
+        }
+
+        // Client in Stage 5
+        Client5 [label="Client", style=filled, fillcolor="#ffffff"];
+
+        // Flows
+        Client5 -> SparkMaster5 [label="Trigger Processing"];
+
+        // Spark Master to Spark Workers
+        SparkMaster5 -> SparkWorker5_1 [label="Distribute Tasks"];
+        SparkMaster5 -> SparkWorker5_2;
+        SparkMaster5 -> SparkWorker5_n;
+
+        // LLM inside each worker
+        SparkWorker5_1 -> LLM5_1 [label="Send Raw Data"];
+        LLM5_1 -> SparkWorker5_1 [label="Return Processed Data"];
+
+        SparkWorker5_2 -> LLM5_2 [label="Send Raw Data"];
+        LLM5_2 -> SparkWorker5_2 [label="Return Processed Data"];
+
+        SparkWorker5_n -> LLM5_n [label="Send Raw Data"];
+        LLM5_n -> SparkWorker5_n [label="Return Processed Data"];
+
+        // Two-way data exchange between Spark Workers & DataNodes
+        SparkWorker5_1 -> HadoopDataNode5_1 [label="Read/Write Data", dir="both"];
+        SparkWorker5_2 -> HadoopDataNode5_2 [dir="both"];
+        SparkWorker5_n -> HadoopDataNode5_n [dir="both"];
+
+        // Control plane link
+        HadoopNameNode5 -> HadoopDataNode5_1 [label="HDFS Metadata"];
+        HadoopNameNode5 -> HadoopDataNode5_2;
+        HadoopNameNode5 -> HadoopDataNode5_n;
+    }
+
+    // -----------------------
+    // Stage 6: Final Processing
+    // (Unchanged from previous)
+    // -----------------------
+    subgraph cluster_6 {
+        style=filled; 
+        color=plum1; 
+        label="Stage 6: Final Processing";
+
+        Client6 [label="Client", style=filled, fillcolor="#ffffff"];
+        LLM6 [label="LLM", style=filled, fillcolor="#ffffff"];
+
+        subgraph cluster_6_control {
+            style=filled; 
+            color=gray90;
+            label="Control Plane";
+            SparkMaster6 [label="Spark Master"];
+            HadoopNameNode6 [label="Hadoop NameNode"];
+        }
+
+        subgraph cluster_6_workers {
+            style=filled; 
+            color=gray95;
+            label="Spark Workers";
+            SparkWorker6_1 [label="Spark Worker"];
+            SparkWorker6_2 [label="Spark Worker"];
+            SparkWorker6_n [label="Spark Worker ..."];
+        }
+
+        subgraph cluster_6_datanodes {
+            style=filled; 
+            color=white;
+            label="Hadoop DataNodes";
+            HadoopDataNode6_1 [label="Hadoop DataNode"];
+            HadoopDataNode6_2 [label="Hadoop DataNode"];
+            HadoopDataNode6_n [label="Hadoop DataNode ..."];
+        }
+
+        Client6 -> LLM6 [label="Data Processing Requirements"];
+        LLM6 -> Client6 [label="Python Scripts"];
+        Client6 -> SparkMaster6 [label="Distribute Scripts"];
+
+        SparkMaster6 -> SparkWorker6_1 [label="Execute Scripts"];
+        SparkMaster6 -> SparkWorker6_2;
+        SparkMaster6 -> SparkWorker6_n;
+
+        SparkWorker6_1 -> HadoopDataNode6_1 [label="Read/Save Final Output", dir="both"];
+        SparkWorker6_2 -> HadoopDataNode6_2 [dir="both"];
+        SparkWorker6_n -> HadoopDataNode6_n [dir="both"];
+
+        HadoopNameNode6 -> HadoopDataNode6_1 [label="HDFS Metadata"];
+        HadoopNameNode6 -> HadoopDataNode6_2;
+        HadoopNameNode6 -> HadoopDataNode6_n;
+    }
+}
