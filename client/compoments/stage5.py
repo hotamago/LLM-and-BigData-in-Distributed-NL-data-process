@@ -36,8 +36,11 @@ def render():
         st.write(schema)
 
         df_url_contents = spark.read.parquet(cfg["hdfs"]["url_contents"])
-        st.write("Loaded URL contents from HDFS. Sample:")
+        st.write("Loaded URL contents from HDFS. 5 Sample:")
         st.write(df_url_contents.limit(5).toPandas())
+        
+        # Show number of records in df_url_contents
+        st.write(f"Number of records in URL contents: {df_url_contents.count()}")
 
         if st.button("Process", key="process_data"):
             try:
@@ -57,7 +60,7 @@ def render():
                 df_processed = rdd_processed.toDF(schema)
 
                 # Show output sample
-                st.write("Processed data sample:")
+                st.write("Processed data 5 sample:")
                 st.write(df_processed.limit(5).toPandas())
 
                 # Save to HDFS
@@ -74,6 +77,19 @@ def render():
             df_hdfs = spark.read.parquet(cfg["hdfs"]["data_processed"])
             st.write("Showing top 10 rows of data:")
             st.write(df_hdfs.limit(10).toPandas())
+            
+            # Show number of records in df_hdfs
+            st.write(f"Number of records in processed data: {df_hdfs.count()}")
+            
+            # Add download button for full data as CSV
+            csv = df_hdfs.toPandas().to_csv(index=False)
+            st.download_button(
+                label="Download full data as CSV",
+                data=csv,
+                file_name='processed_data.csv',
+                mime='text/csv',
+            )
+            
             # Button to confirm the queries
             if st.button("Confirm processed data", key="confirm_processed_data"):
                 ss.stage_process = 5

@@ -48,6 +48,7 @@ run_api_langflow: false
 serper:
   api_key:
   - 1c7595865eba921adf8566ff53ca4219a862977e
+  - 796a7c50b3630db0d654622b969d96e31b4289b9
 spark:
   app_name: spark-collect-data
   master: spark://spark-master:7077

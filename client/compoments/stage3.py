@@ -61,7 +61,8 @@ def render():
                     "title": row["title"],
                     "snippet": row["snippet"],
                     "status_code": row["status_code"],
-                    "content_snippet": (row["content"][:200] if row["content"] else None)
+                    "content_snippet": (row["content"][:200] if row["content"] else None),
+                    "log": row["log_str"],
                 })
             temp_table = pd.DataFrame(temp_table)
             st.write(temp_table)
@@ -87,6 +88,20 @@ def render():
         df_hdfs = spark.read.parquet(hdfs_output_path)
         st.write("Showing top 10 rows of data:")
         st.write(df_hdfs.limit(10).toPandas())
+
+        # Add analytics feature
+        st.write("Analytics of HDFS Data")
+        st.write(f"Total Records: {df_hdfs.count()}")
+
+        # Add download button for full df_hdfs data as CSV
+        csv = df_hdfs.toPandas().to_csv(index=False).encode('utf-8')
+        st.download_button(
+            label="Download full HDFS data as CSV",
+            data=csv,
+            file_name='hdfs_data.csv',
+            mime='text/csv',
+        )
+
         # Button to confirm the queries
         if st.button("Confirm content data"):
             ss.stage_process = 3

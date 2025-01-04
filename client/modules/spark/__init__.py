@@ -13,16 +13,19 @@ def fetch_content(record):
     url = record.get('url')
     title = record.get('title')
     snippet = record.get('snippet')
+    log_str = ""
+    status_code = 0
+    content = ""
+
     try:
-        response = requests.get(url, timeout=10)
+        response = requests.get(url, timeout=30)
         status_code = response.status_code
         content = html2text.html2text(html=response.text)
     except Exception as e:
         # Log the exception for debugging
-        print(f"Error fetching {url}: {e}")
-        status_code = None
-        content = None
-    return (url, title, snippet, status_code, content)
+        log_str = f"Error fetching {url}: {e}"
+        
+    return [url, title, snippet, status_code, content, log_str]
 
 def run_spark_flow(record, dict_flowjson: dict, columns_info: list, cfg: dict):
     # Log Python version on worker

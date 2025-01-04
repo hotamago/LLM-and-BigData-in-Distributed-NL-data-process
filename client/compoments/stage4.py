@@ -1,6 +1,7 @@
 import streamlit as st
 from streamlit import session_state as ss
 import pandas as pd
+from streamlit_ace import st_ace
 
 # Hota
 from modules.cache import hcache
@@ -36,4 +37,16 @@ def render():
         st.json(hcache.get("columns_info", default=[]))
         if st.button("Confirm columns info", key="confirm_columns_info"):
             ss.stage_process = 4
+            st.rerun()
+        
+        # Edit columns info
+        edited_columns_info = st_ace(
+            value=json.dumps(list(hcache.get("columns_info", default=[])), indent=2),
+            placeholder="Edit columns info",
+            height=200,
+            language="json",
+            key="edited_columns_info"
+        )
+        if st.button("Update columns info", key="update_columns_info"):
+            hcache.set("columns_info", json.loads(edited_columns_info))
             st.rerun()

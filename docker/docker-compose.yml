@@ -99,6 +99,58 @@ services:
     # ports: # for debugging
     #   - "8082:8081"
 
+  # Spark Worker 3
+  spark-worker-03:
+    image: hotamago/project-3/spark:3.5.3
+    build:
+      context: ../spark
+      dockerfile: Dockerfile
+    container_name: spark-worker-03
+    environment:
+      SPARK_WORKER_MEMORY: 1G
+      SPARK_WORKER_CORES: 1
+    env_file:
+      - ./spark-worker.env
+    volumes:
+      - spark_worker03_data:/workernode-03/
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '1G'
+    networks:
+      - spark-hadoop-net
+    depends_on:
+      - spark-master
+    # ports: # for debugging
+    #   - "8083:8081"
+  
+  # Spark Worker 4
+  spark-worker-04:
+    image: hotamago/project-3/spark:3.5.3
+    build:
+      context: ../spark
+      dockerfile: Dockerfile
+    container_name: spark-worker-04
+    environment:
+      SPARK_WORKER_MEMORY: 1G
+      SPARK_WORKER_CORES: 1
+    env_file:
+      - ./spark-worker.env
+    volumes:
+      - spark_worker04_data:/workernode-04/
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '1G'
+    networks:
+      - spark-hadoop-net
+    depends_on:
+      - spark-master
+    # ports: # for debugging
+    #   - "8084:8081"
+
   # Hadoop NameNode
   hadoop-namenode:
     image: apache/hadoop:3.4.1
@@ -176,6 +228,10 @@ volumes:
   spark_worker01_data:
     driver: local
   spark_worker02_data:
+    driver: local
+  spark_worker03_data:
+    driver: local
+  spark_worker04_data:
     driver: local
 
   # Hadoop Volumes
