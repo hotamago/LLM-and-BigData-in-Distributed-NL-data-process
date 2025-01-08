@@ -1,4 +1,6 @@
 digraph {
+    ratio="compress";
+    fontsize=12;
 	rankdir=LR;
 	graph [background="#ffffff",
 		bb="0,0,2794.5,466.18",
