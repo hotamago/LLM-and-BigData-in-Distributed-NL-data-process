@@ -6,7 +6,7 @@ url_content_collect = StructType([
                 StructField("snippet", StringType(), nullable=True),
                 StructField("status_code", IntegerType(), nullable=False),
                 StructField("content", StringType(), nullable=True),
-                StructField("log", StringType(), nullable=False),
+                StructField("log", StringType(), nullable=True),
             ])
 
 llm_process_content = StructType([
@@ -14,5 +14,5 @@ llm_process_content = StructType([
                 StructField("title", StringType(), nullable=True),
                 StructField("snippet", StringType(), nullable=True),
                 StructField("content", StringType(), nullable=True),
-                StructField("log", StringType(), nullable=False),
+                StructField("log", StringType(), nullable=True),
             ])

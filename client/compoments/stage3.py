@@ -62,7 +62,7 @@ def render():
                     "snippet": row["snippet"],
                     "status_code": row["status_code"],
                     "content_snippet": (row["content"][:200] if row["content"] else None),
-                    "log": row["log_str"],
+                    "log": row["log"],
                 })
             temp_table = pd.DataFrame(temp_table)
             st.write(temp_table)
