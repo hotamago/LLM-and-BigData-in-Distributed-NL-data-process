@@ -32,7 +32,7 @@ def render():
     spark = get_spark_session()
 
     # Define the schema
-    schema = models.url_content_collect
+    schema = models.url_content_collect()
 
     # Button to confirm to get content
     if st.button('Get content', key='get_content'):

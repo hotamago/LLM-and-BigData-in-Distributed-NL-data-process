@@ -1,6 +1,7 @@
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType
 
-url_content_collect = StructType([
+def url_content_collect() -> StructType:
+    return StructType([
                 StructField("url", StringType(), nullable=False),
                 StructField("title", StringType(), nullable=True),
                 StructField("snippet", StringType(), nullable=True),
@@ -9,7 +10,8 @@ url_content_collect = StructType([
                 StructField("log", StringType(), nullable=True),
             ])
 
-llm_process_content = StructType([
+def llm_process_content() -> StructType:
+    return StructType([
                 StructField("url", StringType(), nullable=False),
                 StructField("title", StringType(), nullable=True),
                 StructField("snippet", StringType(), nullable=True),

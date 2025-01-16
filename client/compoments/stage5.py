@@ -22,7 +22,7 @@ def render():
 
     if hcache.exists("columns_info"):
         # Copy from models.llm_process_content
-        schema = models.llm_process_content
+        schema = models.llm_process_content()
         # Add fields to schema from columns_info
         columns_info = list(hcache.get("columns_info", default=[]))
         from pyspark.sql.types import StructField, StringType
