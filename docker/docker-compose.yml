@@ -153,7 +153,10 @@ services:
 
   # Hadoop NameNode
   hadoop-namenode:
-    image: apache/hadoop:3.4.1
+    image: hotamago/project-3/hadoop:3.4.1
+    build:
+      context: ../hadoop
+      dockerfile: Dockerfile
     container_name: hadoop-namenode
     hostname: namenode
     command: [ "hdfs", "namenode" ]
@@ -164,7 +167,7 @@ services:
     env_file:
       - ./hadoop.env
     volumes:
-      - hadoop_namenode_data:/opt/hadoop/data/dfs/name
+      - hadoop_namenode_data:/hadoop/name
       - hadoop_namenode_data:/data
       - hadoop_namenode_bin:/opt/hadoop/bin
     deploy:
@@ -177,7 +180,10 @@ services:
 
   # Hadoop DataNode 1
   hadoop-datanode-01:
-    image: apache/hadoop:3.4.1
+    image: hotamago/project-3/hadoop:3.4.1
+    build:
+      context: ../hadoop
+      dockerfile: Dockerfile
     container_name: hadoop-datanode-01
     hostname: datanode-01
     command: [ "hdfs", "datanode" ]
@@ -186,7 +192,7 @@ services:
     env_file:
       - ./hadoop.env
     volumes:
-      - hadoop_datanode01_data:/opt/hadoop/data/dfs/data
+      - hadoop_datanode01_data:/hadoop/data
       - hadoop_datanode01_data:/data
     deploy:
       resources:
@@ -198,7 +204,10 @@ services:
 
   # Hadoop DataNode 02
   hadoop-datanode-02:
-    image: apache/hadoop:3.4.1
+    image: hotamago/project-3/hadoop:3.4.1
+    build:
+      context: ../hadoop
+      dockerfile: Dockerfile
     container_name: hadoop-datanode-02
     hostname: datanode-02
     command: [ "hdfs", "datanode" ]
@@ -207,8 +216,32 @@ services:
     env_file:
       - ./hadoop.env
     volumes:
-      - hadoop_datanode02_data:/opt/hadoop/data/dfs/data
+      - hadoop_datanode02_data:/hadoop/data
       - hadoop_datanode02_data:/data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '2G'
+    networks:
+      - spark-hadoop-net
+
+  # Hadoop DataNode 03
+  hadoop-datanode-03:
+    image: hotamago/project-3/hadoop:3.4.1
+    build:
+      context: ../hadoop
+      dockerfile: Dockerfile
+    container_name: hadoop-datanode-03
+    hostname: datanode-03
+    command: [ "hdfs", "datanode" ]
+    depends_on:
+      - hadoop-namenode
+    env_file:
+      - ./hadoop.env
+    volumes:
+      - hadoop_datanode03_data:/hadoop/data
+      - hadoop_datanode03_data:/data
     deploy:
       resources:
         limits:
@@ -242,6 +275,8 @@ volumes:
   hadoop_datanode01_data:
     driver: local
   hadoop_datanode02_data:
+    driver: local
+  hadoop_datanode03_data:
     driver: local
 
 networks:
