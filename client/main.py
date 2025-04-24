@@ -4,9 +4,82 @@ from streamlit import session_state as ss
 # Hota
 from modules.cache import hcache
 from modules.helper import *
+import os
+from modules.auth import authenticate, set_current_user, get_current_user
+from modules.cache import Cache
+from models.engine import Base, engine
+
+# Create database tables (Account, etc.) if they do not exist
+Base.metadata.create_all(bind=engine)
 
 # Page setup
 st.set_page_config(page_title='Project 3', page_icon=':mag:', layout='wide')
+
+# Initialize auth and cache in session
+if "user" not in ss:
+    ss.user = None
+if "hcache" not in ss:
+    ss.hcache = None
+
+# First-run: if no users exist, prompt to create initial admin account
+import modules.auth as auth
+users = auth.load_users()
+if not users:
+    st.title("Setup Admin Account")
+    setup_username = st.text_input("Admin Username", key="setup_username")
+    setup_password = st.text_input("Password", type="password", key="setup_password")
+    setup_confirm = st.text_input("Confirm Password", type="password", key="setup_confirm")
+    if st.button("Create Admin Account", key="create_admin"):
+        if not setup_username or not setup_password:
+            st.error("Please enter username and password.")
+        elif setup_password != setup_confirm:
+            st.error("Passwords do not match.")
+        else:
+            try:
+                auth.create_user(setup_username, setup_password, is_admin=True)
+                st.success("Admin account created. Please login.")
+                st.rerun()
+            except Exception as e:
+                st.error(f"Error creating admin account: {e}")
+    st.stop()
+
+# Logout option
+if ss.user:
+    if st.sidebar.button("Logout"):
+        set_current_user(None)
+        ss.user = None
+        ss.hcache = None
+        st.rerun()
+
+# Login page
+if ss.user is None:
+    st.title("Login")
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+    if st.button("Login"):
+        user = authenticate(username, password)
+        if user:
+            set_current_user(user)
+            ss.user = user
+            ss.hcache = Cache(f".cache_{user['username']}")
+            # Monkey-patch global cache for modules
+            import modules.cache as cache_module
+            cache_module.hcache = ss.hcache
+            # Update HDFS paths per user
+            from config import cfg
+            for key, path in cfg['hdfs'].items():
+                if path.startswith(cfg['hdfs_base_path']):
+                    suffix = path[len(cfg['hdfs_base_path']):]
+                else:
+                    suffix = path
+                cfg['hdfs'][key] = f"{cfg['hdfs_base_path']}/users/{user['username']}{suffix}"
+            st.rerun()
+    st.stop()
+
+# Ensure cache instance is available in modules
+import modules.cache as cache_module
+cache_module.hcache = ss.hcache
+
 st.title('Big Data Collection and Processing using LLM')
 
 # Init session_state
@@ -17,8 +90,11 @@ if "list_query_engine_search" not in ss:
 if "list_query_engine_search_gen" not in ss:
     ss.list_query_engine_search_gen = []
 
-# Improve UI by using sidebar
-menu = st.sidebar.radio("Navigation", ["Home", "HDFS", "Spark", "Config"])
+# Dynamic navigation menu with admin option
+menu_options = ["Home", "HDFS", "Spark", "Config"]
+if ss.user.get("is_admin"):
+    menu_options.append("Admin Dashboard")
+menu = st.sidebar.radio("Navigation", menu_options)
 
 if menu == "Home":
     # Global variables
@@ -79,3 +155,7 @@ elif menu == "Spark":
 elif menu == "Config":
     from compoments.config import render
     render()
+
+elif menu == "Admin Dashboard":
+    from compoments.admin_dashboard import render as render_admin
+    render_admin()

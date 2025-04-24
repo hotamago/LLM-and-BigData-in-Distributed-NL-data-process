@@ -1,3 +1,9 @@
+# client/models/__init__.py
+# Import from engine.py
+from .engine import Base, get_db, engine, SessionLocal # Removed init_db (not defined)
+# Import models
+from .account import Account, RoleEnum
+
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType
 
 def url_content_collect() -> StructType:

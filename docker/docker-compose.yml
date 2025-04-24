@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Client Service
   client:
@@ -20,9 +18,17 @@ services:
       - mode=prod
       - HADOOP_HOME=/opt/hadoop
       - hadoop.home.dir=/opt/hadoop
+      # Pass Postgres credentials into client
+      - POSTGRES_USER=${POSTGRES_USER:-user}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-password}
+      - POSTGRES_DB=${POSTGRES_DB:-project3_db}
+      # Database URL must include password
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-user}:${POSTGRES_PASSWORD:-password}@postgres:5432/${POSTGRES_DB:-project3_db}
     depends_on:
       - spark-master
       - hadoop-namenode
+      - postgres # Add dependency on postgres
+      - migrate # Ensure migrations run before client starts
 
   # Spark Master Service
   spark-master:
@@ -99,58 +105,6 @@ services:
     # ports: # for debugging
     #   - "8082:8081"
 
-  # Spark Worker 3
-  spark-worker-03:
-    image: hotamago/project-3/spark:3.5.3
-    build:
-      context: ../spark
-      dockerfile: Dockerfile
-    container_name: spark-worker-03
-    environment:
-      SPARK_WORKER_MEMORY: 1G
-      SPARK_WORKER_CORES: 1
-    env_file:
-      - ./spark-worker.env
-    volumes:
-      - spark_worker03_data:/workernode-03/
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: '1G'
-    networks:
-      - spark-hadoop-net
-    depends_on:
-      - spark-master
-    # ports: # for debugging
-    #   - "8083:8081"
-  
-  # Spark Worker 4
-  spark-worker-04:
-    image: hotamago/project-3/spark:3.5.3
-    build:
-      context: ../spark
-      dockerfile: Dockerfile
-    container_name: spark-worker-04
-    environment:
-      SPARK_WORKER_MEMORY: 1G
-      SPARK_WORKER_CORES: 1
-    env_file:
-      - ./spark-worker.env
-    volumes:
-      - spark_worker04_data:/workernode-04/
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: '1G'
-    networks:
-      - spark-hadoop-net
-    depends_on:
-      - spark-master
-    # ports: # for debugging
-    #   - "8084:8081"
-
   # Hadoop NameNode
   hadoop-namenode:
     image: hotamago/project-3/hadoop:3.4.1
@@ -173,8 +127,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1.0'
-          memory: '4G'
+          cpus: '0.5'
+          memory: '2G'
     networks:
       - spark-hadoop-net
 
@@ -226,29 +180,48 @@ services:
     networks:
       - spark-hadoop-net
 
-  # Hadoop DataNode 03
-  hadoop-datanode-03:
-    image: hotamago/project-3/hadoop:3.4.1
-    build:
-      context: ../hadoop
-      dockerfile: Dockerfile
-    container_name: hadoop-datanode-03
-    hostname: datanode-03
-    command: [ "hdfs", "datanode" ]
-    depends_on:
-      - hadoop-namenode
-    env_file:
-      - ./hadoop.env
+  # PostgreSQL Database Service
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres-db
+    hostname: postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-project3_db}
+      POSTGRES_USER: ${POSTGRES_USER:-user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
     volumes:
-      - hadoop_datanode03_data:/hadoop/data
-      - hadoop_datanode03_data:/data
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - spark-hadoop-net
     deploy:
       resources:
         limits:
           cpus: '0.5'
           memory: '2G'
+
+  # Migration Service (using client image for simplicity, assumes Alembic is installed there)
+  migrate:
+    image: hotamago/project-3/client:latest # Reuse client image if it has necessary tools
+    build:
+      context: ../client
+      dockerfile: Dockerfile # Assumes client Dockerfile installs DB drivers & Alembic
+    container_name: migrate-container
+    working_dir: /app
+    entrypoint: /bin/sh # Override the entrypoint
+    command: -c "alembic upgrade head" # Command to run migrations
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-user}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-password}
+      - POSTGRES_DB=${POSTGRES_DB:-project3_db}
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-user}:${POSTGRES_PASSWORD:-password}@postgres:5432/${POSTGRES_DB:-project3_db}
+    volumes:
+      - ../client:/app # Mount client code to access migration scripts
     networks:
       - spark-hadoop-net
+    depends_on:
+      - postgres # Ensure postgres is ready before running migrations
 
 volumes:
   # Client Volumes
@@ -262,10 +235,6 @@ volumes:
     driver: local
   spark_worker02_data:
     driver: local
-  spark_worker03_data:
-    driver: local
-  spark_worker04_data:
-    driver: local
 
   # Hadoop Volumes
   hadoop_namenode_data:
@@ -276,7 +245,9 @@ volumes:
     driver: local
   hadoop_datanode02_data:
     driver: local
-  hadoop_datanode03_data:
+
+  # PostgreSQL Volume
+  postgres_data:
     driver: local
 
 networks:

@@ -35,4 +35,5 @@ class Cache:
             os.remove(os.path.join(self.cache_dir, filename))
 
 # Usage
+# Commented out default cache instance to allow per-user cache instantiation
 hcache = Cache('.cache')
