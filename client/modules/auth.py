@@ -8,7 +8,7 @@ def load_users():
     with SessionLocal() as db:
         accounts = db.query(Account).all()
         return [
-            {'username': a.username, 'is_admin': a.role == RoleEnum.admin}
+            {'id': a.id, 'username': a.username, 'is_admin': a.role == RoleEnum.admin}
             for a in accounts
         ]
 
