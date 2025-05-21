@@ -16,7 +16,7 @@ def render():
     spark = get_spark_session()
     
     # System health status (simplified)
-    system_status = "Online" if spark.sparkContext.isActive else "Offline"
+    system_status = "Online" if not spark.sparkContext._jsc.sc().isStopped() else "Offline"
     st.sidebar.metric("System Status", system_status)
     
     # Reset option in sidebar

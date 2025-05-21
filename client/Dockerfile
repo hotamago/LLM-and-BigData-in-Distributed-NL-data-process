@@ -46,14 +46,15 @@ RUN ln -s /usr/local/bin/python3.12 /usr/bin/python3 && \
     python3 --version && pip --version
 
 # Upgrade pip
-RUN pip install --no-cache-dir --upgrade pip
+RUN pip install uv
+RUN uv pip install --no-cache-dir --upgrade pip --system
 
 # Install setuptools
-RUN pip install --no-cache-dir setuptools
+RUN uv pip install --no-cache-dir setuptools --system
 
 # Copy requirements first (to leverage cache for dependencies)
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN uv pip install --no-cache-dir -r requirements.txt --system
 
 WORKDIR /app
 

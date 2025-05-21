@@ -1,6 +1,6 @@
 import streamlit as st
 import yaml
-from config import cfg, save_config
+from config import cfg, save_config, load_config
 from streamlit_ace import st_ace
 
 def render():
@@ -87,19 +87,23 @@ def render():
                 st.error(f"Error in YAML syntax: {e}")
                 new_cfg = None
         else:
-            # Create a new config from the form values
-            new_cfg = {
-                'serper': {
-                    'api_key': serper_api_key
-                },
-                'spark': {
-                    'master': spark_master,
-                    'app_name': spark_app_name
-                },
-                'hdfs': {
-                    'url_contents': hdfs_url_contents
-                }
-            }
+            # Create a new config from the form values but only update specific keys
+            # Start with a copy of the current configuration
+            new_cfg = load_config()
+            
+            # Update only the values that are handled in the form
+            if 'serper' not in new_cfg:
+                new_cfg['serper'] = {}
+            new_cfg['serper']['api_key'] = serper_api_key
+            
+            if 'spark' not in new_cfg:
+                new_cfg['spark'] = {}
+            new_cfg['spark']['master'] = spark_master
+            new_cfg['spark']['app_name'] = spark_app_name
+            
+            if 'hdfs' not in new_cfg:
+                new_cfg['hdfs'] = {}
+            new_cfg['hdfs']['url_contents'] = hdfs_url_contents
     
     # Save button
     if st.button("Save Settings"):

@@ -1,11 +1,13 @@
 import streamlit as st
 from streamlit import session_state as ss
+import datetime
+import time
 
 # Hota
 from modules.cache import hcache
 from modules.helper import *
 import os
-from modules.auth import authenticate, set_current_user, get_current_user
+from modules.auth import authenticate, set_current_user, get_current_user, authenticate_with_token, refresh_access_token
 from modules.cache import Cache
 from models.engine import Base, engine
 
@@ -20,6 +22,10 @@ if "user" not in ss:
     ss.user = None
 if "hcache" not in ss:
     ss.hcache = None
+if "token_expiry" not in ss:
+    ss.token_expiry = None
+if "last_token_refresh" not in ss:
+    ss.last_token_refresh = time.time()
 
 # First-run: if no users exist, prompt to create initial admin account
 import modules.auth as auth
@@ -43,12 +49,53 @@ if not users:
                 st.error(f"Error creating admin account: {e}")
     st.stop()
 
+# Check if token refresh is needed (every 30 minutes)
+current_time = time.time()
+if (ss.user is not None and 
+    "refresh_token" in st.session_state and 
+    (current_time - ss.last_token_refresh) > 1800):  # 30 minutes
+    
+    # Try to refresh the token
+    new_access_token = refresh_access_token(st.session_state.refresh_token)
+    if new_access_token:
+        st.session_state.access_token = new_access_token
+        ss.last_token_refresh = current_time
+    
+# Check for token in session and try to authenticate
+if ss.user is None and "access_token" in st.session_state:
+    user = authenticate_with_token(st.session_state.access_token)
+    if user:
+        ss.user = user
+        set_current_user(user)
+        if "hcache" not in ss or ss.hcache is None:
+            ss.hcache = Cache(f".cache_{user['username']}")
+            # Monkey-patch global cache for modules
+            import modules.cache as cache_module
+            cache_module.hcache = ss.hcache
+            # Update HDFS paths per user
+            from config import cfg
+            for key, path in cfg['hdfs_subpath'].items():
+                if path.startswith(cfg['hdfs_base_path']):
+                    suffix = path[len(cfg['hdfs_base_path']):]
+                else:
+                    suffix = path
+                cfg['hdfs'][key] = f"{cfg['hdfs_base_path']}/users/{user['id']}{suffix}"
+
 # Logout option
 if ss.user:
     if st.sidebar.button("Logout"):
         set_current_user(None)
         ss.user = None
         ss.hcache = None
+        # Clear tokens
+        if "access_token" in st.session_state:
+            del st.session_state.access_token
+        if "refresh_token" in st.session_state:
+            del st.session_state.refresh_token
+        if "token_expiry" in st.session_state:
+            del st.session_state.token_expiry
+        if "last_token_refresh" in st.session_state:
+            del st.session_state.last_token_refresh
         st.rerun()
 
 # Login page
@@ -56,9 +103,19 @@ if ss.user is None:
     st.title("Login")
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
+    remember_me = st.checkbox("Remember me", value=True)
     if st.button("Login"):
-        user = authenticate(username, password)
-        if user:
+        user_data = authenticate(username, password)
+        if user_data:
+            # Store tokens in session state
+            if "access_token" in user_data:
+                st.session_state.access_token = user_data["access_token"]
+                ss.last_token_refresh = time.time()
+            if "refresh_token" in user_data and remember_me:
+                st.session_state.refresh_token = user_data["refresh_token"]
+            
+            # Remove tokens from user object before setting
+            user = {k: v for k, v in user_data.items() if k not in ["access_token", "refresh_token"]}
             set_current_user(user)
             ss.user = user
             ss.hcache = Cache(f".cache_{user['username']}")
@@ -67,13 +124,15 @@ if ss.user is None:
             cache_module.hcache = ss.hcache
             # Update HDFS paths per user
             from config import cfg
-            for key, path in cfg['hdfs'].items():
+            for key, path in cfg['hdfs_subpath'].items():
                 if path.startswith(cfg['hdfs_base_path']):
                     suffix = path[len(cfg['hdfs_base_path']):]
                 else:
                     suffix = path
-                cfg['hdfs'][key] = f"{cfg['hdfs_base_path']}/users/{user['username']}{suffix}"
+                cfg['hdfs'][key] = f"{cfg['hdfs_base_path']}/users/{user['id']}{suffix}"
             st.rerun()
+        else:
+            st.error("Invalid username or password")
     st.stop()
 
 # Ensure cache instance is available in modules

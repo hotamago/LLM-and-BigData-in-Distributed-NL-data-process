@@ -12,8 +12,12 @@ RUN apt-get update && apt-get install -y python3-pip && rm -rf /var/lib/apt/list
 # Copy the requirements.txt into the image
 COPY requirements.txt /tmp/requirements.txt
 
-# Install uv and then Python dependencies using uv
+# Update pip
 RUN pip3 install uv
+RUN uv pip install --system --no-cache-dir --upgrade pip
+RUN uv pip install --system --no-cache-dir httpx
+
+# Install Python dependencies using uv
 RUN uv pip install --system --no-cache-dir -r /tmp/requirements.txt
 
 # Set the working directory

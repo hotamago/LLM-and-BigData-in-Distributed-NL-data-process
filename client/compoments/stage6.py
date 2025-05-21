@@ -3,6 +3,7 @@ from streamlit import session_state as ss
 import pandas as pd
 from streamlit_ace import st_ace
 import json
+import traceback
 
 # Hota
 from modules.get_block_code import convert_block_to_text
@@ -83,7 +84,17 @@ def render():
                         "user_input": user_input_stage_6,
                         "read_parquet_path": 'cfg["hdfs"]["data_processed"]',
                         "write_parquet_path": 'cfg["hdfs"]["final_data"]',
-                    }))
+                        "list_variables_available": "\n".join([f"{k}: {v}" for k, v in {
+                            "cfg": "config object",
+                            "st": "streamlit object",
+                            "hcache": "cache object",
+                            "ss": "session state object",
+                            "pd": "pandas object",
+                            "json": "json object",
+                        }.items()]),
+                    }
+                )
+            )
             
             script_result = convert_block_to_text(script_result, "python")
             hcache.set("final_script", script_result)
@@ -145,13 +156,12 @@ def render():
                     status.write("Initializing Spark...")
                     progress.progress(0.1)
                     
-                    # Get Spark session
-                    spark = get_spark_session()
-                    progress.progress(0.2)
-                    
-                    # Read initial data count
                     try:
-                        initial_df = spark.read.parquet(cfg["hdfs"]["data_processed"])
+                        # Get Spark session
+                        spark_no_access = get_spark_session()
+                        progress.progress(0.2)
+                        # Read initial data count
+                        initial_df = spark_no_access.read.parquet(cfg["hdfs"]["data_processed"])
                         initial_count = initial_df.count()
                         progress.progress(0.3)
                         status.write(f"Processing {initial_count} records...")
@@ -166,11 +176,15 @@ def render():
                     
                     # Run the script
                     exec(script_to_run)
-                    progress.progress(0.9)
+                    progress.progress(0.7)
                     
                     # Check results
                     try:
-                        final_df = spark.read.parquet(cfg["hdfs"]["final_data"])
+                        # Get Spark session
+                        spark_no_access = get_spark_session()
+                        progress.progress(0.8)
+                        # Read final data count
+                        final_df = spark_no_access.read.parquet(cfg["hdfs"]["final_data"])
                         final_count = final_df.count()
                         progress.progress(1.0)
                         status.success(f"Processing completed successfully! {final_count} records produced.")
@@ -210,7 +224,6 @@ def render():
                     st.error(f"Error running processing script: {str(e)}")
                     
                     # Show more detailed error explanation
-                    import traceback
                     with st.expander("Technical Error Details"):
                         st.code(traceback.format_exc())
                     

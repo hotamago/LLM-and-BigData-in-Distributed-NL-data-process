@@ -28,12 +28,12 @@ else:
 
 # Auto load base path for hdfs
 # Loop all hdfs
-for key in cfg["hdfs"].keys():
-    if not cfg["hdfs_base_path"].endswith('/') and not cfg["hdfs"][key].startswith('/'):
+for key in cfg["hdfs_subpath"].keys():
+    if not cfg["hdfs_base_path"].endswith('/') and not cfg["hdfs_subpath"][key].startswith('/'):
         separator = '/'
     else:
         separator = ''
-    cfg["hdfs"][key] = f"{cfg['hdfs_base_path']}{separator}{cfg['hdfs'][key]}"
+    cfg["hdfs"][key] = f"{cfg['hdfs_base_path']}{separator}{cfg['hdfs_subpath'][key]}"
 
 # Load json flow from .langflow
 dict_flowjson = {}
