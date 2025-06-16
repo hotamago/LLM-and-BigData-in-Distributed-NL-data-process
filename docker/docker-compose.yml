@@ -105,6 +105,162 @@ services:
     # ports: # for debugging
     #   - "8082:8081"
 
+  # Spark Worker 3
+  spark-worker-03:
+    image: hotamago/project-3/spark:3.5.3
+    build:
+      context: ../spark
+      dockerfile: Dockerfile
+    container_name: spark-worker-03
+    environment:
+      SPARK_WORKER_MEMORY: 1G
+      SPARK_WORKER_CORES: 1
+    env_file:
+      - ./spark-worker.env
+    volumes:
+      - spark_worker03_data:/workernode-03/
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '1G'
+    networks:
+      - spark-hadoop-net
+    depends_on:
+      - spark-master
+    # ports: # for debugging
+    #   - "8083:8081"
+
+  # Spark Worker 4
+  spark-worker-04:
+    image: hotamago/project-3/spark:3.5.3
+    build:
+      context: ../spark
+      dockerfile: Dockerfile
+    container_name: spark-worker-04
+    environment:
+      SPARK_WORKER_MEMORY: 1G
+      SPARK_WORKER_CORES: 1
+    env_file:
+      - ./spark-worker.env
+    volumes:
+      - spark_worker04_data:/workernode-04/
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '1G'
+    networks:
+      - spark-hadoop-net
+    depends_on:
+      - spark-master
+    # ports: # for debugging
+    #   - "8084:8081"
+
+  # Spark Worker 5
+  spark-worker-05:
+    image: hotamago/project-3/spark:3.5.3
+    build:
+      context: ../spark
+      dockerfile: Dockerfile
+    container_name: spark-worker-05
+    environment:
+      SPARK_WORKER_MEMORY: 1G
+      SPARK_WORKER_CORES: 1
+    env_file:
+      - ./spark-worker.env
+    volumes:
+      - spark_worker05_data:/workernode-05/
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '1G'
+    networks:
+      - spark-hadoop-net
+    depends_on:
+      - spark-master
+    # ports: # for debugging
+    #   - "8085:8081"
+
+  # Spark Worker 6
+  spark-worker-06:
+    image: hotamago/project-3/spark:3.5.3
+    build:
+      context: ../spark
+      dockerfile: Dockerfile
+    container_name: spark-worker-06
+    environment:
+      SPARK_WORKER_MEMORY: 1G
+      SPARK_WORKER_CORES: 1
+    env_file:
+      - ./spark-worker.env
+    volumes:
+      - spark_worker06_data:/workernode-06/
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '1G'
+    networks:
+      - spark-hadoop-net
+    depends_on:
+      - spark-master
+    # ports: # for debugging
+    #   - "8086:8081"
+
+  # Spark Worker 7
+  spark-worker-07:
+    image: hotamago/project-3/spark:3.5.3
+    build:
+      context: ../spark
+      dockerfile: Dockerfile
+    container_name: spark-worker-07
+    environment:
+      SPARK_WORKER_MEMORY: 1G
+      SPARK_WORKER_CORES: 1
+    env_file:
+      - ./spark-worker.env
+    volumes:
+      - spark_worker07_data:/workernode-07/
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '1G'
+    networks:
+      - spark-hadoop-net
+    depends_on:
+      - spark-master
+    # ports: # for debugging
+    #   - "8087:8081"
+
+  # Spark Worker 8
+  spark-worker-08:
+    image: hotamago/project-3/spark:3.5.3
+    build:
+      context: ../spark
+      dockerfile: Dockerfile
+    container_name: spark-worker-08
+    environment:
+      SPARK_WORKER_MEMORY: 1G
+      SPARK_WORKER_CORES: 1
+    env_file:
+      - ./spark-worker.env
+    volumes:
+      - spark_worker08_data:/workernode-08/
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '1G'
+    networks:
+      - spark-hadoop-net
+    depends_on:
+      - spark-master
+    # ports: # for debugging
+    #   - "8088:8081"
+
   # Hadoop NameNode
   hadoop-namenode:
     image: hotamago/project-3/hadoop:3.4.1
@@ -234,6 +390,18 @@ volumes:
   spark_worker01_data:
     driver: local
   spark_worker02_data:
+    driver: local
+  spark_worker03_data:
+    driver: local
+  spark_worker04_data:
+    driver: local
+  spark_worker05_data:
+    driver: local
+  spark_worker06_data:
+    driver: local
+  spark_worker07_data:
+    driver: local
+  spark_worker08_data:
     driver: local
 
   # Hadoop Volumes

@@ -155,6 +155,26 @@ if ss.user.get("is_admin"):
     menu_options.append("Admin Dashboard")
 menu = st.sidebar.radio("Navigation", menu_options)
 
+# Stage selector in sidebar (only show on Home page)
+if menu == "Home":
+    st.sidebar.markdown("---")
+    list_stage_process = [
+        'Stage 1: Generate queries',
+        'Stage 2: Get url',
+        'Stage 3: Get content',
+        'Stage 4: Gen columns info',
+        'Stage 5: Process data',
+        'Stage 6: Final process',
+    ]
+    stage_process = st.sidebar.selectbox(
+        label='Select Processing Stage',
+        options=list_stage_process, 
+        index=ss["stage_process"],
+        help="Choose which stage of the data processing pipeline to work on"
+    )
+    # Update session state with current stage index
+    ss["stage_process"] = list_stage_process.index(stage_process)
+
 if menu == "Home":
     # Global variables
     if hcache.exists('list_query_engine_search'):
@@ -162,7 +182,7 @@ if menu == "Home":
 
     # Stage process
     with st.container():
-        # Choice stage
+        # Get stage list (defined in sidebar section above)
         list_stage_process = [
             'Stage 1: Generate queries',
             'Stage 2: Get url',
@@ -171,9 +191,6 @@ if menu == "Home":
             'Stage 5: Process data',
             'Stage 6: Final process',
         ]
-        stage_process = st.selectbox(
-            label='Select stage',
-            options=list_stage_process, index=ss["stage_process"])
 
         # Stage 1
         if stage_process == list_stage_process[0]: # Stage 1: Generate queries for search engine api using one LLM

@@ -102,40 +102,56 @@ def render():
             progress.progress(1.0)
             status.success("Processing script ready!")
 
-    # Display and edit the generated script
+    # Display script information and provide advanced access
     if hcache.exists("final_script"):
-        st.subheader("Processing Script")
+        st.subheader("Processing Script Generated")
         
-        tab1, tab2 = st.tabs(["View Script", "Advanced Edit"])
+        # Basic explanation of what the script does
+        final_script = hcache.get("final_script", default="")
+        script_parts = final_script.split("\n") 
+        comment_lines = [line.strip("# ") for line in script_parts if line.strip().startswith("#") and len(line) > 2]
         
-        with tab1:
-            # Show script in read-only mode for regular users
-            final_script = hcache.get("final_script", default="")
-            st.code(final_script, language="python")
-            
-            # Basic explanation of what the script does
-            script_parts = final_script.split("\n")
-            comment_lines = [line.strip("# ") for line in script_parts if line.strip().startswith("#") and len(line) > 2]
-            
-            if comment_lines:
-                st.subheader("What This Script Does")
-                for line in comment_lines[:5]:  # Show just the first few comment lines
-                    if not line.startswith("import") and len(line) > 10:
-                        st.write(f"• {line}")
+        if comment_lines:
+            st.success("✅ Processing script has been generated successfully!")
+            st.write("**What this script will do:**")
+            for line in comment_lines[:5]:  # Show just the first few comment lines
+                if not line.startswith("import") and len(line) > 10:
+                    st.write(f"• {line}")
+        else:
+            st.success("✅ Processing script has been generated successfully!")
         
-        with tab2:
-            # Advanced editing for technical users
-            st.warning("Advanced: Edit the script only if you understand Python programming.")
+        # Advanced options in an expander (hidden by default)
+        with st.expander("🔧 Advanced: View & Edit Script", expanded=False):
+            st.warning("⚠️ Advanced users only: Edit the script only if you understand Python programming.")
             
-            final_script = hcache.get("final_script", default="")
-            edited_script = st_ace(
-                value=final_script,
-                language='python',
-                theme='monokai',
-                keybinding='vscode',
-                height=300
-            )
-            hcache.set("final_script", edited_script)
+            tab1, tab2 = st.tabs(["View Script", "Edit Script"])
+            
+            with tab1:
+                # Show script in read-only mode
+                st.code(final_script, language="python")
+                
+                # Show download option for the script
+                st.download_button(
+                    label="📥 Download Script",
+                    data=final_script.encode('utf-8'),
+                    file_name="processing_script.py",
+                    mime="text/plain"
+                )
+            
+            with tab2:
+                # Advanced editing for technical users
+                edited_script = st_ace(
+                    value=final_script,
+                    language='python',
+                    theme='monokai',
+                    keybinding='vscode',
+                    height=300,
+                    auto_update=True
+                )
+                
+                if st.button("💾 Save Script Changes"):
+                    hcache.set("final_script", edited_script)
+                    st.success("Script changes saved!")
         
         # Run script button
         st.subheader("Run Processing")
