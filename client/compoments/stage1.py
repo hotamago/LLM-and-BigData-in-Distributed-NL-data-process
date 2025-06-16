@@ -29,7 +29,6 @@ def render():
     # Get input type number
     number_queries_gen = st.number_input('Number of queries to generate per topic:', 
                                          min_value=1, 
-                                         max_value=100, 
                                          value=hcache.get('number_queries_gen', default=10),
                                          help="This determines how many different search queries will be created for each topic you enter above")
 

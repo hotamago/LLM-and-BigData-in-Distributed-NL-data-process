@@ -175,7 +175,7 @@ def render():
                         max_rows = st.slider(
                             "Maximum rows to download", 
                             min_value=100, 
-                            max_value=10000, 
+                            max_value=100000,
                             value=1000, 
                             step=100,
                             help="Larger datasets may take longer to prepare for download"

@@ -104,7 +104,6 @@ def render():
             max_download = st.number_input(
                 "Maximum rows to download", 
                 min_value=10, 
-                max_value=100000, 
                 value=1000,
                 help="Larger values may take longer to process"
             )
