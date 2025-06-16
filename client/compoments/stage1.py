@@ -1,3 +1,4 @@
+import time
 import streamlit as st
 import json
 from streamlit import session_state as ss
@@ -60,17 +61,24 @@ def render():
                 query = list_user_query[i]
                 process_display.write(f'Progress: {i+1}/{len(list_user_query)} topics')
                 progress_bar.progress((i+1)/len(list_user_query))
+                # st.write(query)
                 with st.spinner(f'Generating queries for: {query["user_input"]}'):
-                    ss.list_query_engine_search_gen.extend(gen_query(json.dumps(query)))
+                    while True:
+                        try:
+                            ss.list_query_engine_search_gen.extend(gen_query(json.dumps(query)))
+                            break
+                        except Exception as e:
+                            st.error(f"Error generating queries: {e}")
+                            time.sleep(1)
 
     # Show results - Replace raw JSON display with a more user-friendly format
     if 'list_query_engine_search' in ss and ss.list_query_engine_search:
         st.subheader('Previously Generated Queries')
         
-        # Show as a simple list in a scrollable container
-        with st.container():
-            for i, query in enumerate(ss.list_query_engine_search):
-                st.write(f"{i+1}. {query}")
+        # # Show as a simple list in a scrollable container
+        # with st.container():
+        #     for i, query in enumerate(ss.list_query_engine_search):
+        #         st.write(f"{i+1}. {query}")
                 
         if st.button('Edit Previous Queries', key='edit_old_queries'):
             # Convert to simple text for editing
@@ -90,10 +98,10 @@ def render():
     if 'list_query_engine_search_gen' in ss and ss.list_query_engine_search_gen:
         st.subheader('Newly Generated Queries')
         
-        # Show as a simple list in a scrollable container
-        with st.container():
-            for i, query in enumerate(ss.list_query_engine_search_gen):
-                st.write(f"{i+1}. {query}")
+        # # Show as a simple list in a scrollable container
+        # with st.container():
+        #     for i, query in enumerate(ss.list_query_engine_search_gen):
+        #         st.write(f"{i+1}. {query}")
         
         if st.button('Edit New Queries', key='edit_new_queries'):
             # Convert to simple text for editing

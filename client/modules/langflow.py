@@ -60,14 +60,17 @@ def convert_hotaf_to_tweaks(hotaf: dict) -> dict:
 def run_flow_fj(cfg: dict, dict_flowjson: dict, api_key:str, message:str=""):
     cfg["tweaks"]["api_key"]["value"] = api_key
     tweaks = convert_hotaf_to_tweaks(cfg["tweaks"])
-    res = run_flow_from_json(
-                                flow=dict_flowjson,
-                                input_value=message,
-                                tweaks=tweaks,
-                                output_type="text",
-                                input_type="text",
-                                session_id="",
-                                fallback_to_env_vars=True,
-                            )
+    try:
+        res = run_flow_from_json(
+                                    flow=dict_flowjson,
+                                    input_value=message,
+                                    tweaks=tweaks,
+                                    output_type="text",
+                                    input_type="text",
+                                    session_id="",
+                                    fallback_to_env_vars=True,
+                                )
+    except Exception as e:
+        raise Exception(f"Error running flow api: {api_key} \n error: {e}")
     res = res[0].model_dump()
     return res["outputs"][0]["outputs"]["text"]["message"]

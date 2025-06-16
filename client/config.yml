@@ -1,8 +1,8 @@
 gemini:
   api_key:
+  - AIzaSyBtICg_bcc6r24rmFCMmZbYsO3rp5h6RBc
+  - AIzaSyA-PF1FGGs3eudHXxbmRVk1c1GLa-vegJM
   - AIzaSyB_ksJ_2a2-Dg_rMtOTfa8h2SQwSXN4mbU
-  - AIzaSyD90yE03xARcwQrUwhE0mrQejbbSA4yjpc
-  - AIzaSyD-TMqGxvGUqYbkIwdy7G5SRx3mFuhR7gc
 hdfs_subpath:
   data_processed: /path/to/save/data_processed.parquet
   final_data: /path/to/save/final_data.parquet

@@ -117,16 +117,16 @@ class Engine(BaseSearchEngine):
             tempRes = []
             for i in range(len(res)):
                 # add element in res[i]["organic"] to tempRes
-                tempRes.extend(res[i]["organic"])
+                tempRes.extend(res[i]["organic"] if "organic" in res[i] else [])
             res = tempRes
         else:
-            res = res["organic"]
+            res = res["organic"] if "organic" in res else []
 
         res = [
             {
-                "url": item["link"],
-                "title": item["title"],
-                "snippet": item["snippet"],
+                "url": item["link"] if "link" in item else "",
+                "title": item["title"] if "title" in item else "",
+                "snippet": item["snippet"] if "snippet" in item else "",
             }
             for item in res
         ]
