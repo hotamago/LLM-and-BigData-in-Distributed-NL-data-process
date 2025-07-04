@@ -50,8 +50,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1.0'
-          memory: '2G'
+          cpus: '2.0'
+          memory: '4G'
     networks:
       - spark-hadoop-net
 
@@ -63,7 +63,7 @@ services:
       dockerfile: Dockerfile
     container_name: spark-worker-01
     environment:
-      SPARK_WORKER_MEMORY: 1G
+      SPARK_WORKER_MEMORY: 2G
       SPARK_WORKER_CORES: 1
     env_file:
       - ./spark-worker.env
@@ -72,8 +72,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: '1G'
+          cpus: '1.0'
+          memory: '3G'
     networks:
       - spark-hadoop-net
     depends_on:
@@ -89,7 +89,7 @@ services:
       dockerfile: Dockerfile
     container_name: spark-worker-02
     environment:
-      SPARK_WORKER_MEMORY: 1G
+      SPARK_WORKER_MEMORY: 2G
       SPARK_WORKER_CORES: 1
     env_file:
       - ./spark-worker.env
@@ -98,8 +98,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: '1G'
+          cpus: '1.0'
+          memory: '3G'
     networks:
       - spark-hadoop-net
     depends_on:
@@ -115,7 +115,7 @@ services:
       dockerfile: Dockerfile
     container_name: spark-worker-03
     environment:
-      SPARK_WORKER_MEMORY: 1G
+      SPARK_WORKER_MEMORY: 2G
       SPARK_WORKER_CORES: 1
     env_file:
       - ./spark-worker.env
@@ -124,8 +124,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: '1G'
+          cpus: '1.0'
+          memory: '3G'
     networks:
       - spark-hadoop-net
     depends_on:
@@ -141,7 +141,7 @@ services:
       dockerfile: Dockerfile
     container_name: spark-worker-04
     environment:
-      SPARK_WORKER_MEMORY: 1G
+      SPARK_WORKER_MEMORY: 2G
       SPARK_WORKER_CORES: 1
     env_file:
       - ./spark-worker.env
@@ -150,8 +150,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: '1G'
+          cpus: '1.0'
+          memory: '3G'
     networks:
       - spark-hadoop-net
     depends_on:

@@ -19,21 +19,31 @@ def get_spark_session():
     spark_master = cfg.get('spark', {}).get('master', 'spark://localhost:7077')
     spark_app_name = cfg.get('spark', {}).get('app_name', 'spark-collect-data')
 
-    # Initialize SparkSession with better memory configuration
+    # Initialize SparkSession with conservative memory configuration for 1GB workers
     spark = SparkSession.builder \
         .master(spark_master) \
         .appName(spark_app_name) \
         .config("spark.submit.pyFiles", "modules.zip") \
         .config("spark.sql.adaptive.enabled", "true") \
         .config("spark.sql.adaptive.coalescePartitions.enabled", "true") \
-        .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer") \
-        .config("spark.sql.execution.arrow.pyspark.enabled", "true") \
+        .config("spark.sql.adaptive.advisoryPartitionSizeInBytes", "32MB") \
+        .config("spark.sql.execution.arrow.pyspark.enabled", "false") \
         .config("spark.sql.adaptive.skewJoin.enabled", "true") \
         .config("spark.dynamicAllocation.enabled", "false") \
         .config("spark.task.maxFailures", "1") \
         .config("spark.stage.maxConsecutiveAttempts", "2") \
         .config("spark.blacklist.enabled", "false") \
-        .config("spark.sql.adaptive.advisory.partitionSizeInBytes", "128MB") \
+        .config("spark.sql.shuffle.partitions", "8") \
+        .config("spark.sql.files.maxPartitionBytes", "32MB") \
+        .config("spark.sql.files.openCostInBytes", "4MB") \
+        .config("spark.executor.memory", "700m") \
+        .config("spark.executor.memoryFraction", "0.6") \
+        .config("spark.executor.memoryStorageFraction", "0.3") \
+        .config("spark.python.worker.memory", "256m") \
+        .config("spark.worker.cleanup.enabled", "true") \
+        .config("spark.worker.cleanup.interval", "300") \
+        .config("spark.worker.cleanup.appDataTtl", "300") \
+        .config("spark.rpc.message.maxSize", "64") \
         .getOrCreate()
 
     return spark
