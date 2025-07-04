@@ -1,5 +1,6 @@
 .cache/
-.cache_admin/
+.cache_*/
+.cache_testuser*/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
