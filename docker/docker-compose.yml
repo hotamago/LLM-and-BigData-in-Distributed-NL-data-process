@@ -1,3 +1,5 @@
+name: hota-project-3
+
 services:
   # Client Service
   client:
@@ -158,108 +160,108 @@ services:
     #   - "8084:8081"
 
   # Spark Worker 5
-  spark-worker-05:
-    image: hotamago/project-3/spark:3.5.3
-    build:
-      context: ../spark
-      dockerfile: Dockerfile
-    container_name: spark-worker-05
-    environment:
-      SPARK_WORKER_MEMORY: 1G
-      SPARK_WORKER_CORES: 1
-    env_file:
-      - ./spark-worker.env
-    volumes:
-      - spark_worker05_data:/workernode-05/
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: '1G'
-    networks:
-      - spark-hadoop-net
-    depends_on:
-      - spark-master
-    # ports: # for debugging
-    #   - "8085:8081"
+  # spark-worker-05:
+  #   image: hotamago/project-3/spark:3.5.3
+  #   build:
+  #     context: ../spark
+  #     dockerfile: Dockerfile
+  #   container_name: spark-worker-05
+  #   environment:
+  #     SPARK_WORKER_MEMORY: 1G
+  #     SPARK_WORKER_CORES: 1
+  #   env_file:
+  #     - ./spark-worker.env
+  #   volumes:
+  #     - spark_worker05_data:/workernode-05/
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '0.5'
+  #         memory: '1G'
+  #   networks:
+  #     - spark-hadoop-net
+  #   depends_on:
+  #     - spark-master
+  #   # ports: # for debugging
+  #   #   - "8085:8081"
 
-  # Spark Worker 6
-  spark-worker-06:
-    image: hotamago/project-3/spark:3.5.3
-    build:
-      context: ../spark
-      dockerfile: Dockerfile
-    container_name: spark-worker-06
-    environment:
-      SPARK_WORKER_MEMORY: 1G
-      SPARK_WORKER_CORES: 1
-    env_file:
-      - ./spark-worker.env
-    volumes:
-      - spark_worker06_data:/workernode-06/
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: '1G'
-    networks:
-      - spark-hadoop-net
-    depends_on:
-      - spark-master
-    # ports: # for debugging
-    #   - "8086:8081"
+  # # Spark Worker 6
+  # spark-worker-06:
+  #   image: hotamago/project-3/spark:3.5.3
+  #   build:
+  #     context: ../spark
+  #     dockerfile: Dockerfile
+  #   container_name: spark-worker-06
+  #   environment:
+  #     SPARK_WORKER_MEMORY: 1G
+  #     SPARK_WORKER_CORES: 1
+  #   env_file:
+  #     - ./spark-worker.env
+  #   volumes:
+  #     - spark_worker06_data:/workernode-06/
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '0.5'
+  #         memory: '1G'
+  #   networks:
+  #     - spark-hadoop-net
+  #   depends_on:
+  #     - spark-master
+  #   # ports: # for debugging
+  #   #   - "8086:8081"
 
-  # Spark Worker 7
-  spark-worker-07:
-    image: hotamago/project-3/spark:3.5.3
-    build:
-      context: ../spark
-      dockerfile: Dockerfile
-    container_name: spark-worker-07
-    environment:
-      SPARK_WORKER_MEMORY: 1G
-      SPARK_WORKER_CORES: 1
-    env_file:
-      - ./spark-worker.env
-    volumes:
-      - spark_worker07_data:/workernode-07/
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: '1G'
-    networks:
-      - spark-hadoop-net
-    depends_on:
-      - spark-master
-    # ports: # for debugging
-    #   - "8087:8081"
+  # # Spark Worker 7
+  # spark-worker-07:
+  #   image: hotamago/project-3/spark:3.5.3
+  #   build:
+  #     context: ../spark
+  #     dockerfile: Dockerfile
+  #   container_name: spark-worker-07
+  #   environment:
+  #     SPARK_WORKER_MEMORY: 1G
+  #     SPARK_WORKER_CORES: 1
+  #   env_file:
+  #     - ./spark-worker.env
+  #   volumes:
+  #     - spark_worker07_data:/workernode-07/
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '0.5'
+  #         memory: '1G'
+  #   networks:
+  #     - spark-hadoop-net
+  #   depends_on:
+  #     - spark-master
+  #   # ports: # for debugging
+  #   #   - "8087:8081"
 
-  # Spark Worker 8
-  spark-worker-08:
-    image: hotamago/project-3/spark:3.5.3
-    build:
-      context: ../spark
-      dockerfile: Dockerfile
-    container_name: spark-worker-08
-    environment:
-      SPARK_WORKER_MEMORY: 1G
-      SPARK_WORKER_CORES: 1
-    env_file:
-      - ./spark-worker.env
-    volumes:
-      - spark_worker08_data:/workernode-08/
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: '1G'
-    networks:
-      - spark-hadoop-net
-    depends_on:
-      - spark-master
-    # ports: # for debugging
-    #   - "8088:8081"
+  # # Spark Worker 8
+  # spark-worker-08:
+  #   image: hotamago/project-3/spark:3.5.3
+  #   build:
+  #     context: ../spark
+  #     dockerfile: Dockerfile
+  #   container_name: spark-worker-08
+  #   environment:
+  #     SPARK_WORKER_MEMORY: 1G
+  #     SPARK_WORKER_CORES: 1
+  #   env_file:
+  #     - ./spark-worker.env
+  #   volumes:
+  #     - spark_worker08_data:/workernode-08/
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '0.5'
+  #         memory: '1G'
+  #   networks:
+  #     - spark-hadoop-net
+  #   depends_on:
+  #     - spark-master
+  #   # ports: # for debugging
+  #   #   - "8088:8081"
 
   # Hadoop NameNode
   hadoop-namenode:
@@ -336,6 +338,29 @@ services:
     networks:
       - spark-hadoop-net
 
+  hadoop-datanode-03:
+    image: hotamago/project-3/hadoop:3.4.1
+    build:
+      context: ../hadoop
+      dockerfile: Dockerfile
+    container_name: hadoop-datanode-03
+    hostname: datanode-03
+    command: [ "hdfs", "datanode" ]
+    depends_on:
+      - hadoop-namenode
+    env_file:
+      - ./hadoop.env
+    volumes:
+      - hadoop_datanode03_data:/hadoop/data
+      - hadoop_datanode03_data:/data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '2G'
+    networks:
+      - spark-hadoop-net
+      
   # PostgreSQL Database Service
   postgres:
     image: postgres:15-alpine
@@ -412,6 +437,10 @@ volumes:
   hadoop_datanode01_data:
     driver: local
   hadoop_datanode02_data:
+    driver: local
+  hadoop_datanode03_data:
+    driver: local
+  hadoop_datanode04_data:
     driver: local
 
   # PostgreSQL Volume
