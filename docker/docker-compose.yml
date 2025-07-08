@@ -43,15 +43,15 @@ services:
     env_file:
       - ./spark-master.env
     ports:
-      - "8080:8080"   # Spark Master UI
-      - "7077:7077"   # Spark Master port
+      - "8080:8080" # Spark Master UI
+      - "7077:7077" # Spark Master port
     volumes:
       - spark_master_data:/masternode/
     deploy:
       resources:
         limits:
-          cpus: '2.0'
-          memory: '4G'
+          cpus: "1.0"
+          memory: "2G"
     networks:
       - spark-hadoop-net
 
@@ -63,7 +63,7 @@ services:
       dockerfile: Dockerfile
     container_name: spark-worker-01
     environment:
-      SPARK_WORKER_MEMORY: 2G
+      SPARK_WORKER_MEMORY: 1G
       SPARK_WORKER_CORES: 1
     env_file:
       - ./spark-worker.env
@@ -72,8 +72,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1.0'
-          memory: '3G'
+          cpus: "0.5"
+          memory: "2G"
     networks:
       - spark-hadoop-net
     depends_on:
@@ -89,7 +89,7 @@ services:
       dockerfile: Dockerfile
     container_name: spark-worker-02
     environment:
-      SPARK_WORKER_MEMORY: 2G
+      SPARK_WORKER_MEMORY: 1G
       SPARK_WORKER_CORES: 1
     env_file:
       - ./spark-worker.env
@@ -98,8 +98,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1.0'
-          memory: '3G'
+          cpus: "0.5"
+          memory: "2G"
     networks:
       - spark-hadoop-net
     depends_on:
@@ -115,7 +115,7 @@ services:
       dockerfile: Dockerfile
     container_name: spark-worker-03
     environment:
-      SPARK_WORKER_MEMORY: 2G
+      SPARK_WORKER_MEMORY: 1G
       SPARK_WORKER_CORES: 1
     env_file:
       - ./spark-worker.env
@@ -124,8 +124,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1.0'
-          memory: '3G'
+          cpus: "0.5"
+          memory: "2G"
     networks:
       - spark-hadoop-net
     depends_on:
@@ -141,7 +141,7 @@ services:
       dockerfile: Dockerfile
     container_name: spark-worker-04
     environment:
-      SPARK_WORKER_MEMORY: 2G
+      SPARK_WORKER_MEMORY: 1G
       SPARK_WORKER_CORES: 1
     env_file:
       - ./spark-worker.env
@@ -150,8 +150,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1.0'
-          memory: '3G'
+          cpus: "0.5"
+          memory: "1G"
     networks:
       - spark-hadoop-net
     depends_on:
@@ -271,11 +271,11 @@ services:
       dockerfile: Dockerfile
     container_name: hadoop-namenode
     hostname: namenode
-    command: [ "hdfs", "namenode" ]
+    command: ["hdfs", "namenode"]
     # command: [ "bash", "-c", "hdfs namenode -format -y && hdfs namenode" ]
     ports:
-      - "9870:9870"  # NameNode UI
-      - "9000:9000"  # HDFS port
+      - "9870:9870" # NameNode UI
+      - "9000:9000" # HDFS port
     env_file:
       - ./hadoop.env
     volumes:
@@ -285,8 +285,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: '2G'
+          cpus: "0.5"
+          memory: "2G"
     networks:
       - spark-hadoop-net
 
@@ -298,7 +298,7 @@ services:
       dockerfile: Dockerfile
     container_name: hadoop-datanode-01
     hostname: datanode-01
-    command: [ "hdfs", "datanode" ]
+    command: ["hdfs", "datanode"]
     depends_on:
       - hadoop-namenode
     env_file:
@@ -309,8 +309,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: '2G'
+          cpus: "0.5"
+          memory: "2G"
     networks:
       - spark-hadoop-net
 
@@ -322,7 +322,7 @@ services:
       dockerfile: Dockerfile
     container_name: hadoop-datanode-02
     hostname: datanode-02
-    command: [ "hdfs", "datanode" ]
+    command: ["hdfs", "datanode"]
     depends_on:
       - hadoop-namenode
     env_file:
@@ -333,8 +333,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: '2G'
+          cpus: "0.5"
+          memory: "2G"
     networks:
       - spark-hadoop-net
 
@@ -345,7 +345,7 @@ services:
       dockerfile: Dockerfile
     container_name: hadoop-datanode-03
     hostname: datanode-03
-    command: [ "hdfs", "datanode" ]
+    command: ["hdfs", "datanode"]
     depends_on:
       - hadoop-namenode
     env_file:
@@ -356,11 +356,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: '2G'
+          cpus: "0.5"
+          memory: "2G"
     networks:
       - spark-hadoop-net
-      
+
   # PostgreSQL Database Service
   postgres:
     image: postgres:15-alpine
@@ -379,8 +379,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: '2G'
+          cpus: "0.5"
+          memory: "2G"
 
   # Migration Service (using client image for simplicity, assumes Alembic is installed there)
   migrate:

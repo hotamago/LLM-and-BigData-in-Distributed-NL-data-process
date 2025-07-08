@@ -1,1 +1,1340 @@
-{"id":"62afc92d-49b1-4ab7-807f-fe7da8223f0f","data":{"nodes":[{"id":"TextInput-O9glu","type":"genericNode","position":{"x":-338.26852453127543,"y":207.385313234112},"data":{"node":{"template":{"_type":"Component","code":{"type":"code","required":true,"placeholder":"","list":false,"show":true,"multiline":true,"value":"from langflow.base.io.text import TextComponent\nfrom langflow.io import MultilineInput, Output\nfrom langflow.schema.message import Message\n\n\nclass TextInputComponent(TextComponent):\n    display_name = \"Text Input\"\n    description = \"Get text inputs from the Playground.\"\n    icon = \"type\"\n    name = \"TextInput\"\n\n    inputs = [\n        MultilineInput(\n            name=\"input_value\",\n            display_name=\"Text\",\n            info=\"Text to be passed as input.\",\n        ),\n    ]\n    outputs = [\n        Output(display_name=\"Text\", name=\"text\", method=\"text_response\"),\n    ]\n\n    def text_response(self) -> Message:\n        return Message(\n            text=self.input_value,\n        )\n","fileTypes":[],"file_path":"","password":false,"name":"code","advanced":true,"dynamic":true,"info":"","load_from_db":false,"title_case":false},"input_value":{"tool_mode":false,"trace_as_input":true,"multiline":true,"trace_as_metadata":true,"load_from_db":false,"list":false,"required":false,"placeholder":"","show":true,"name":"input_value","value":"{\n  \"columns_information\": \"datetime: Date and time of the content, format: YYYY-MM-DD HH:MM:SS\\ncontent: Full text content scraped from the website, type: string\\nsummary: Summarized content focusing on crypto influence, type: string\\ncrypto_influence_score: Numerical score (0-10) representing the content's influence on crypto, type: float\\ninfluence_description: Explanation of how the content influences crypto, type: string\",\n  \"given_data\": \"Press Releases\\nContact us\\nADVERTISE\\nBITCOIN\\nALTCOINS\\nTECH\\nINDUSTRY\\nHOW TO\\nEVENTS\\nPLAY GAMES\\nCASINOS\\nSTAKE: 200% BONUS\\nBreaking News: Craig Wright Sentenced To 1 Year In Prison: The Self-Proclaimed Bitcoin Creator Faces Justice\\nBitcoin Price Prediction: BTC Breaks $100K, Is This The Year Of Crypto? New Viral Altcoin Sensation Raises $1M In Record Time\\n by Bitcoinist\\n 2 weeks ago\\nin Press releases\\n\\nDecember has been a good month for most cryptocurrencies, especially Bitcoin. Just a few days to days into December BTC price broke the most anticipated point, breaking the $100,000 mark, for the first time ever. Aside from Bitcoin asserting dominance this month, a new altcoin Yeti Ouro (YETIO) has been going viral after raising over $1 million in its presale.\\n\\nBitcoin Price News – The Journey To $100K\\n\\nFor a very long time, investors and enthusiasts have been looking forward to Bitcoin hitting the $100k mark. It all seemed like it would be achieved right after the last bitcoin halving this year but that was not the case until recently.\\n\\nOn December 3rd BTC price hit $100,000 for the first time and with the momentum still alive Bitcoins ascended past $100K to hit an all-time high of $103,900 2 days later. Despite the momentum, Bitcoin has since then faced a few setbacks dipping to $97,820.66 today. With a market cap of $1.93 trillion, the coin’s dominance remains unmatched.\\n\\nWhat Propelled BTC to $100K?\\n\\nSince the start of the year after the SEC approved bitcoin ETFs including BlackRock Bitcoin ETF, Bitcoin has seen an increased institutional adoption.  Major institutional players continue to view Bitcoin as a hedge against inflation and an alternative store of value.\\n\\nThe recent win by a pro-crypto Government has also boosted the confidence of investors\\n\\n\\nYeti Ouro: The New Viral Altcoin Raises $1M In Record Time\\n\\nEmerging as a utility-driven meme coin, Yeti Ouro has raised an impressive $1,004,241 so far in its presale phase, getting the attention of the crypto community. The project is looking to complete stage 1 of presale having completed about 84% already.\\n\\nWhat Makes Yeti Ouro Special?\\n\\nWith a capped supply of 1 billion tokens, the project is designed to appreciate. 50% of these tokens have been allocated to early investors with the current price of Yeti Ouro standing at $0.012. \\n\\nYeti Ouro is not just a token, it has integrated a Play-to-Earn (P2E) racing game built on Unreal Engine, Yeti Go. This integration offers players the chance to earn and use Yeti Ouro tokens in-game for purchases, race entry fees, and staking.\\n\\nHaving raised over $1 million in presale which launched recently, Yeti Ouro’s success reflects strong community backing and a growing belief in its potential as a 100X meme coin. Early investors have a rare chance to enjoy such RIO. \\n\\nWhile Bitcoin aims for $150K next, Yeti Ouro is looking to launch stage 2 of presale. Yeti Ouro’s strong presale performance demonstrates the appetite for fresh, and with the community growing by the day, gaining by 100x or more is a realistic target for utility-driven projects\\n\\nJoin The Yeti Ouro Community \\n\\nWebsite: https://yetiouro.io/\\n\\nX (Formally Twitter): https://x.com/yetiouro\\n\\nTelegram: https://t.me/yetiouroofficial\\n\\nDiscord: https://discord.gg/YtUsEZ2Zr\\n\\nDisclaimer: This is a paid release. The statements, views and opinions expressed in this column are solely those of the content provider and do not necessarily represent those of Bitcoinist. Bitcoinist does not guarantee the accuracy or timeliness of information available in such content. Do your research and invest at your own risk.\\n\\nSign Up for Our Newsletter!\\n\\nFor updates and exclusive offers enter your email.\\n\\n Sign Up\\n I consent to my submitted data being collected and stored.\\nBitcoinist\\n\\nBitcoinist is the ultimate news and review site for the crypto currency community!\\n\\nRelated Posts\\nBreaking Down Qubetics’ Wallet Secrets, Binance’s Licensing Strategies, and Litecoin’s Network Growth in Today’s Crypto News\\n19 hours ago\\nSolana Price Prediction: 2025 Could be The Year SOL Joins the $1000 Club, But This Must Happen First\\n2 days ago\\nWill Monsta Mash ($MASH) Outpace Tron (TRX) & Solana (SOL) in the next Bull Run?\\n3 days ago\\nDon’t Get Left Behind: New Meme Coins to Invest in for Short Term That Are Making Waves!\\n3 days ago\\nRipple (XRP): Is Another Leg Up Imminent, or Will Investors Be Left Holding Their Bags for Another 7 Years?\\n3 days ago\\nBNB (BNB) Inches Closer To $800, Sui (SUI) Makes New ATH Again—Lunex Network (LNEX) Raises Over $5 Million\\n3 days ago\\nPress Releases\\nBreaking Down Qubetics’ Wallet Secrets, Binance’s...\\n19 hours ago\\nSolana Price Prediction: 2025 Could be The Year SOL Joins...\\n2 days ago\\nWill Monsta Mash ($MASH) Outpace Tron (TRX) & Solana...\\n3 days ago\\nDon’t Get Left Behind: New Meme Coins to Invest in for...\\n3 days ago\\nRipple (XRP): Is Another Leg Up Imminent, or Will Investors...\\n3 days ago\\n\\nBitcoin news portal providing breaking news, guides, price analysis about decentralized digital money & blockchain technology.\\n\\nBITCOIN\\nNews\\nPrice\\nBusinesses\\nAcceptance\\nTechnology\\nInvestment\\nRegulation\\nReviews\\nALTCOINS\\nNews\\nPrice\\nEthereum\\nRipple\\nLitecoin\\nEOS\\nCATEGORIES\\nBlockchain\\nSecurity\\nFinTech\\nTechnology\\nTrending\\nBreaking News\\nPress Releases\\nHow to\\nABOUT US\\nAdvertise\\nContact us\\nEditorial Policy\\nPrivacy Policy\\n© 2024 Bitcoinist.com. All Rights Reserved.\\nBitcoin\\nAltcoins\\nTech\\nIndustry\\nHow to\\nEvents\\nPlay Games\\nCasinos\\nStake: 200% Bonus\\nADVERTISE\\n\\n© 2023 Bitcoinist. All Rights Reserved.\\n\\nThis website uses cookies. By continuing to use this website you are giving consent to cookies being used. Visit our Privacy Center or Cookie Policy. I Agree\"\n}","display_name":"Text","advanced":false,"input_types":["Message"],"dynamic":false,"info":"Text to be passed as input.","title_case":false,"type":"str","_input_type":"MultilineInput"}},"description":"Get text inputs from the Playground.","icon":"type","base_classes":["Message"],"display_name":"Text Input","documentation":"","custom_fields":{},"output_types":[],"pinned":false,"conditional_paths":[],"frozen":false,"outputs":[{"types":["Message"],"selected":"Message","name":"text","display_name":"Text","method":"text_response","value":"__UNDEFINED__","cache":true}],"field_order":["input_value"],"beta":false,"legacy":false,"edited":false,"metadata":{},"tool_mode":false,"lf_version":"1.1.0"},"type":"TextInput","id":"TextInput-O9glu"},"selected":false,"width":320,"height":231,"positionAbsolute":{"x":-338.26852453127543,"y":207.385313234112},"dragging":false},{"id":"ParseData-htcyL","type":"genericNode","position":{"x":917.7620190856803,"y":537.4201743721101},"data":{"node":{"template":{"_type":"Component","data":{"tool_mode":false,"trace_as_metadata":true,"list":false,"trace_as_input":true,"required":false,"placeholder":"","show":true,"name":"data","value":"","display_name":"Data","advanced":false,"input_types":["Data"],"dynamic":false,"info":"The data to convert to text.","title_case":false,"type":"other","_input_type":"DataInput"},"code":{"type":"code","required":true,"placeholder":"","list":false,"show":true,"multiline":true,"value":"from langflow.custom import Component\nfrom langflow.helpers.data import data_to_text\nfrom langflow.io import DataInput, MultilineInput, Output, StrInput\nfrom langflow.schema.message import Message\n\n\nclass ParseDataComponent(Component):\n    display_name = \"Parse Data\"\n    description = \"Convert Data into plain text following a specified template.\"\n    icon = \"braces\"\n    name = \"ParseData\"\n\n    inputs = [\n        DataInput(name=\"data\", display_name=\"Data\", info=\"The data to convert to text.\"),\n        MultilineInput(\n            name=\"template\",\n            display_name=\"Template\",\n            info=\"The template to use for formatting the data. \"\n            \"It can contain the keys {text}, {data} or any other key in the Data.\",\n            value=\"{text}\",\n        ),\n        StrInput(name=\"sep\", display_name=\"Separator\", advanced=True, value=\"\\n\"),\n    ]\n\n    outputs = [\n        Output(display_name=\"Text\", name=\"text\", method=\"parse_data\"),\n    ]\n\n    def parse_data(self) -> Message:\n        data = self.data if isinstance(self.data, list) else [self.data]\n        template = self.template\n\n        result_string = data_to_text(template, data, sep=self.sep)\n        self.status = result_string\n        return Message(text=result_string)\n","fileTypes":[],"file_path":"","password":false,"name":"code","advanced":true,"dynamic":true,"info":"","load_from_db":false,"title_case":false},"sep":{"trace_as_metadata":true,"load_from_db":false,"list":false,"required":false,"placeholder":"","show":true,"name":"sep","value":"\n","display_name":"Separator","advanced":true,"dynamic":false,"info":"","title_case":false,"type":"str","_input_type":"StrInput"},"template":{"tool_mode":false,"trace_as_input":true,"multiline":true,"trace_as_metadata":true,"load_from_db":false,"list":false,"required":false,"placeholder":"","show":true,"name":"template","value":"Base on columns information, process given data and return response must follow rules:\n- No explanation\n- Response must in JSON format\n- Response must and only have key name in columns information\n- Response is a columns data for a table data (pandas)\n- Response format example:\n{{\n\"column name 1\": data processed,\n...\n}}\n\n## Columns information\n```\n{columns_information}\n```\n\n## Given data\n```\n{given_data}\n```","display_name":"Template","advanced":false,"input_types":["Message"],"dynamic":false,"info":"The template to use for formatting the data. It can contain the keys {text}, {data} or any other key in the Data.","title_case":false,"type":"str","_input_type":"MultilineInput"}},"description":"Convert Data into plain text following a specified template.","icon":"braces","base_classes":["Message"],"display_name":"Parse Data","documentation":"","custom_fields":{},"output_types":[],"pinned":false,"conditional_paths":[],"frozen":false,"outputs":[{"types":["Message"],"selected":"Message","name":"text","display_name":"Text","method":"parse_data","value":"__UNDEFINED__","cache":true}],"field_order":["data","template","sep"],"beta":false,"legacy":false,"edited":false,"metadata":{},"tool_mode":false,"category":"processing","key":"ParseData","lf_version":"1.1.0"},"type":"ParseData","id":"ParseData-htcyL"},"selected":false,"width":320,"height":299,"positionAbsolute":{"x":917.7620190856803,"y":537.4201743721101},"dragging":false},{"id":"ParseJSONData-fLPKf","type":"genericNode","position":{"x":349.2598573544815,"y":110.8853941035513},"data":{"node":{"template":{"_type":"Component","input_value":{"trace_as_metadata":true,"list":false,"required":true,"placeholder":"","show":true,"name":"input_value","value":"","display_name":"Input","advanced":false,"input_types":["Message","Data"],"dynamic":false,"info":"Data object to filter.","title_case":false,"type":"other","_input_type":"HandleInput"},"code":{"type":"code","required":true,"placeholder":"","list":false,"show":true,"multiline":true,"value":"import json\nfrom json import JSONDecodeError\n\nimport jq\nfrom json_repair import repair_json\nfrom loguru import logger\n\nfrom langflow.custom import Component\nfrom langflow.inputs import HandleInput, MessageTextInput\nfrom langflow.io import Output\nfrom langflow.schema import Data\nfrom langflow.schema.message import Message\n\n\nclass ParseJSONDataComponent(Component):\n    display_name = \"Parse JSON\"\n    description = \"Convert and extract JSON fields.\"\n    icon = \"braces\"\n    name = \"ParseJSONData\"\n    legacy: bool = True\n\n    inputs = [\n        HandleInput(\n            name=\"input_value\",\n            display_name=\"Input\",\n            info=\"Data object to filter.\",\n            required=True,\n            input_types=[\"Message\", \"Data\"],\n        ),\n        MessageTextInput(\n            name=\"query\",\n            display_name=\"JQ Query\",\n            info=\"JQ Query to filter the data. The input is always a JSON list.\",\n            required=True,\n        ),\n    ]\n\n    outputs = [\n        Output(display_name=\"Filtered Data\", name=\"filtered_data\", method=\"filter_data\"),\n    ]\n\n    def _parse_data(self, input_value) -> str:\n        if isinstance(input_value, Message) and isinstance(input_value.text, str):\n            return input_value.text\n        if isinstance(input_value, Data):\n            return json.dumps(input_value.data)\n        return str(input_value)\n\n    def filter_data(self) -> list[Data]:\n        to_filter = self.input_value\n        if not to_filter:\n            return []\n        # Check if input is a list\n        if isinstance(to_filter, list):\n            to_filter = [self._parse_data(f) for f in to_filter]\n        else:\n            to_filter = self._parse_data(to_filter)\n\n        # If input is not a list, don't wrap it in a list\n        if not isinstance(to_filter, list):\n            to_filter = repair_json(to_filter)\n            try:\n                to_filter_as_dict = json.loads(to_filter)\n            except JSONDecodeError:\n                try:\n                    to_filter_as_dict = json.loads(repair_json(to_filter))\n                except JSONDecodeError as e:\n                    msg = f\"Invalid JSON: {e}\"\n                    raise ValueError(msg) from e\n        else:\n            to_filter = [repair_json(f) for f in to_filter]\n            to_filter_as_dict = []\n            for f in to_filter:\n                try:\n                    to_filter_as_dict.append(json.loads(f))\n                except JSONDecodeError:\n                    try:\n                        to_filter_as_dict.append(json.loads(repair_json(f)))\n                    except JSONDecodeError as e:\n                        msg = f\"Invalid JSON: {e}\"\n                        raise ValueError(msg) from e\n            to_filter = to_filter_as_dict\n\n        full_filter_str = json.dumps(to_filter_as_dict)\n\n        logger.info(\"to_filter: \", to_filter)\n\n        results = jq.compile(self.query).input_text(full_filter_str).all()\n        logger.info(\"results: \", results)\n        return [Data(data=value) if isinstance(value, dict) else Data(text=str(value)) for value in results]\n","fileTypes":[],"file_path":"","password":false,"name":"code","advanced":true,"dynamic":true,"info":"","load_from_db":false,"title_case":false},"query":{"tool_mode":false,"trace_as_input":true,"trace_as_metadata":true,"load_from_db":false,"list":false,"required":true,"placeholder":"","show":true,"name":"query","value":".","display_name":"JQ Query","advanced":false,"input_types":["Message"],"dynamic":false,"info":"JQ Query to filter the data. The input is always a JSON list.","title_case":false,"type":"str","_input_type":"MessageTextInput"}},"description":"Convert and extract JSON fields.","icon":"braces","base_classes":["Data"],"display_name":"Parse JSON","documentation":"","custom_fields":{},"output_types":[],"pinned":false,"conditional_paths":[],"frozen":false,"outputs":[{"types":["Data"],"selected":"Data","name":"filtered_data","display_name":"Filtered Data","method":"filter_data","value":"__UNDEFINED__","cache":true}],"field_order":["input_value","query"],"beta":false,"legacy":true,"edited":false,"metadata":{},"tool_mode":false,"category":"processing","key":"ParseJSONData","lf_version":"1.1.0"},"type":"ParseJSONData","id":"ParseJSONData-fLPKf"},"selected":false,"width":320,"height":280,"positionAbsolute":{"x":349.2598573544815,"y":110.8853941035513},"dragging":false},{"id":"GoogleGenerativeAIModel-WF3Qa","type":"genericNode","position":{"x":1368.9854733326504,"y":75.78075365427628},"data":{"node":{"template":{"_type":"Component","output_parser":{"trace_as_metadata":true,"list":false,"required":false,"placeholder":"","show":true,"name":"output_parser","value":"","display_name":"Output Parser","advanced":true,"input_types":["OutputParser"],"dynamic":false,"info":"The parser to use to parse the output of the model","title_case":false,"type":"other","_input_type":"HandleInput"},"code":{"type":"code","required":true,"placeholder":"","list":false,"show":true,"multiline":true,"value":"from pydantic.v1 import SecretStr\n\nfrom langflow.base.models.model import LCModelComponent\nfrom langflow.field_typing import LanguageModel\nfrom langflow.inputs import DropdownInput, FloatInput, IntInput, SecretStrInput\nfrom langflow.inputs.inputs import HandleInput\n\n\nclass GoogleGenerativeAIComponent(LCModelComponent):\n    display_name = \"Google Generative AI\"\n    description = \"Generate text using Google Generative AI.\"\n    icon = \"GoogleGenerativeAI\"\n    name = \"GoogleGenerativeAIModel\"\n\n    inputs = [\n        *LCModelComponent._base_inputs,\n        IntInput(\n            name=\"max_output_tokens\", display_name=\"Max Output Tokens\", info=\"The maximum number of tokens to generate.\"\n        ),\n        StrInput(\n            name=\"model\",\n            display_name=\"Model\",\n            info=\"The name of the model to use.\",\n            value=\"gemini-1.5-pro\",\n        ),\n        SecretStrInput(\n            name=\"google_api_key\",\n            display_name=\"Google API Key\",\n            info=\"The Google API Key to use for the Google Generative AI.\",\n        ),\n        FloatInput(\n            name=\"top_p\",\n            display_name=\"Top P\",\n            info=\"The maximum cumulative probability of tokens to consider when sampling.\",\n            advanced=True,\n        ),\n        FloatInput(name=\"temperature\", display_name=\"Temperature\", value=0.1),\n        IntInput(\n            name=\"n\",\n            display_name=\"N\",\n            info=\"Number of chat completions to generate for each prompt. \"\n            \"Note that the API may not return the full n completions if duplicates are generated.\",\n            advanced=True,\n        ),\n        IntInput(\n            name=\"top_k\",\n            display_name=\"Top K\",\n            info=\"Decode using top-k sampling: consider the set of top_k most probable tokens. Must be positive.\",\n            advanced=True,\n        ),\n        HandleInput(\n            name=\"output_parser\",\n            display_name=\"Output Parser\",\n            info=\"The parser to use to parse the output of the model\",\n            advanced=True,\n            input_types=[\"OutputParser\"],\n        ),\n    ]\n\n    def build_model(self) -> LanguageModel:  # type: ignore[type-var]\n        try:\n            from langchain_google_genai import ChatGoogleGenerativeAI\n        except ImportError as e:\n            msg = \"The 'langchain_google_genai' package is required to use the Google Generative AI model.\"\n            raise ImportError(msg) from e\n\n        google_api_key = self.google_api_key\n        model = self.model\n        max_output_tokens = self.max_output_tokens\n        temperature = self.temperature\n        top_k = self.top_k\n        top_p = self.top_p\n        n = self.n\n\n        return ChatGoogleGenerativeAI(\n            model=model,\n            max_output_tokens=max_output_tokens or None,\n            temperature=temperature,\n            top_k=top_k or None,\n            top_p=top_p or None,\n            n=n or 1,\n            google_api_key=SecretStr(google_api_key).get_secret_value(),\n        )\n","fileTypes":[],"file_path":"","password":false,"name":"code","advanced":true,"dynamic":true,"info":"","load_from_db":false,"title_case":false},"google_api_key":{"load_from_db":false,"required":false,"placeholder":"","show":true,"name":"google_api_key","value":"","display_name":"Google API Key","advanced":false,"input_types":["Message"],"dynamic":false,"info":"The Google API Key to use for the Google Generative AI.","title_case":false,"password":true,"type":"str","_input_type":"SecretStrInput"},"input_value":{"trace_as_input":true,"trace_as_metadata":true,"load_from_db":false,"list":false,"required":false,"placeholder":"","show":true,"name":"input_value","value":"","display_name":"Input","advanced":false,"input_types":["Message"],"dynamic":false,"info":"","title_case":false,"type":"str","_input_type":"MessageInput"},"max_output_tokens":{"trace_as_metadata":true,"list":false,"required":false,"placeholder":"","show":true,"name":"max_output_tokens","value":"","display_name":"Max Output Tokens","advanced":false,"dynamic":false,"info":"The maximum number of tokens to generate.","title_case":false,"type":"int","_input_type":"IntInput"},"model":{"trace_as_metadata":true,"load_from_db":false,"list":false,"required":false,"placeholder":"","show":true,"name":"model","value":"gemini-2.0-flash-lite","display_name":"Model","advanced":false,"dynamic":false,"info":"The name of the model to use.","title_case":false,"type":"str","_input_type":"StrInput"},"n":{"trace_as_metadata":true,"list":false,"required":false,"placeholder":"","show":true,"name":"n","value":"","display_name":"N","advanced":true,"dynamic":false,"info":"Number of chat completions to generate for each prompt. Note that the API may not return the full n completions if duplicates are generated.","title_case":false,"type":"int","_input_type":"IntInput"},"stream":{"trace_as_metadata":true,"list":false,"required":false,"placeholder":"","show":true,"name":"stream","value":false,"display_name":"Stream","advanced":false,"dynamic":false,"info":"Stream the response from the model. Streaming works only in Chat.","title_case":false,"type":"bool","_input_type":"BoolInput"},"system_message":{"tool_mode":false,"trace_as_input":true,"trace_as_metadata":true,"load_from_db":false,"list":false,"required":false,"placeholder":"","show":true,"name":"system_message","value":"","display_name":"System Message","advanced":false,"input_types":["Message"],"dynamic":false,"info":"System message to pass to the model.","title_case":false,"type":"str","_input_type":"MessageTextInput"},"temperature":{"trace_as_metadata":true,"list":false,"required":false,"placeholder":"","show":true,"name":"temperature","value":0.6,"display_name":"Temperature","advanced":false,"dynamic":false,"info":"","title_case":false,"type":"float","_input_type":"FloatInput","load_from_db":false},"top_k":{"trace_as_metadata":true,"list":false,"required":false,"placeholder":"","show":true,"name":"top_k","value":"","display_name":"Top K","advanced":true,"dynamic":false,"info":"Decode using top-k sampling: consider the set of top_k most probable tokens. Must be positive.","title_case":false,"type":"int","_input_type":"IntInput"},"top_p":{"trace_as_metadata":true,"list":false,"required":false,"placeholder":"","show":true,"name":"top_p","value":"","display_name":"Top P","advanced":true,"dynamic":false,"info":"The maximum cumulative probability of tokens to consider when sampling.","title_case":false,"type":"float","_input_type":"FloatInput"}},"description":"Generate text using Google Generative AI.","icon":"GoogleGenerativeAI","base_classes":["LanguageModel","Message"],"display_name":"Google Generative AI","documentation":"","custom_fields":{},"output_types":[],"pinned":false,"conditional_paths":[],"frozen":false,"outputs":[{"types":["Message"],"selected":"Message","name":"text_output","display_name":"Text","method":"text_response","value":"__UNDEFINED__","cache":true,"required_inputs":[]},{"types":["LanguageModel"],"selected":"LanguageModel","name":"model_output","display_name":"Language Model","method":"build_model","value":"__UNDEFINED__","cache":true,"required_inputs":[]}],"field_order":["input_value","system_message","stream","max_output_tokens","model","google_api_key","top_p","temperature","n","top_k","output_parser"],"beta":false,"legacy":false,"edited":true,"metadata":{},"tool_mode":false,"lf_version":"1.1.0"},"type":"GoogleGenerativeAIModel","id":"GoogleGenerativeAIModel-WF3Qa"},"selected":false,"width":320,"height":752,"positionAbsolute":{"x":1368.9854733326504,"y":75.78075365427628},"dragging":false},{"id":"TextOutput-JG4jm","type":"genericNode","position":{"x":1833.45143973218,"y":360.50353471429383},"data":{"node":{"template":{"_type":"Component","code":{"type":"code","required":true,"placeholder":"","list":false,"show":true,"multiline":true,"value":"from langflow.base.io.text import TextComponent\nfrom langflow.io import MultilineInput, Output\nfrom langflow.schema.message import Message\n\n\nclass TextOutputComponent(TextComponent):\n    display_name = \"Text Output\"\n    description = \"Display a text output in the Playground.\"\n    icon = \"type\"\n    name = \"TextOutput\"\n\n    inputs = [\n        MultilineInput(\n            name=\"input_value\",\n            display_name=\"Text\",\n            info=\"Text to be passed as output.\",\n        ),\n    ]\n    outputs = [\n        Output(display_name=\"Text\", name=\"text\", method=\"text_response\"),\n    ]\n\n    def text_response(self) -> Message:\n        message = Message(\n            text=self.input_value,\n        )\n        self.status = self.input_value\n        return message\n","fileTypes":[],"file_path":"","password":false,"name":"code","advanced":true,"dynamic":true,"info":"","load_from_db":false,"title_case":false},"input_value":{"tool_mode":false,"trace_as_input":true,"multiline":true,"trace_as_metadata":true,"load_from_db":false,"list":false,"required":false,"placeholder":"","show":true,"name":"input_value","value":"","display_name":"Text","advanced":false,"input_types":["Message"],"dynamic":false,"info":"Text to be passed as output.","title_case":false,"type":"str","_input_type":"MultilineInput"}},"description":"Display a text output in the Playground.","icon":"type","base_classes":["Message"],"display_name":"Text Output","documentation":"","custom_fields":{},"output_types":[],"pinned":false,"conditional_paths":[],"frozen":false,"outputs":[{"types":["Message"],"selected":"Message","name":"text","display_name":"Text","method":"text_response","value":"__UNDEFINED__","cache":true}],"field_order":["input_value"],"beta":false,"legacy":false,"edited":false,"metadata":{},"tool_mode":false,"lf_version":"1.1.0"},"type":"TextOutput","id":"TextOutput-JG4jm"},"selected":true,"width":320,"height":231,"positionAbsolute":{"x":1833.45143973218,"y":360.50353471429383},"dragging":false}],"edges":[{"source":"ParseJSONData-fLPKf","sourceHandle":"{œdataTypeœ:œParseJSONDataœ,œidœ:œParseJSONData-fLPKfœ,œnameœ:œfiltered_dataœ,œoutput_typesœ:[œDataœ]}","target":"ParseData-htcyL","targetHandle":"{œfieldNameœ:œdataœ,œidœ:œParseData-htcyLœ,œinputTypesœ:[œDataœ],œtypeœ:œotherœ}","data":{"targetHandle":{"fieldName":"data","id":"ParseData-htcyL","inputTypes":["Data"],"type":"other"},"sourceHandle":{"dataType":"ParseJSONData","id":"ParseJSONData-fLPKf","name":"filtered_data","output_types":["Data"]}},"id":"reactflow__edge-ParseJSONData-fLPKf{œdataTypeœ:œParseJSONDataœ,œidœ:œParseJSONData-fLPKfœ,œnameœ:œfiltered_dataœ,œoutput_typesœ:[œDataœ]}-ParseData-htcyL{œfieldNameœ:œdataœ,œidœ:œParseData-htcyLœ,œinputTypesœ:[œDataœ],œtypeœ:œotherœ}","animated":false,"className":""},{"source":"ParseData-htcyL","sourceHandle":"{œdataTypeœ:œParseDataœ,œidœ:œParseData-htcyLœ,œnameœ:œtextœ,œoutput_typesœ:[œMessageœ]}","target":"GoogleGenerativeAIModel-WF3Qa","targetHandle":"{œfieldNameœ:œinput_valueœ,œidœ:œGoogleGenerativeAIModel-WF3Qaœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}","data":{"targetHandle":{"fieldName":"input_value","id":"GoogleGenerativeAIModel-WF3Qa","inputTypes":["Message"],"type":"str"},"sourceHandle":{"dataType":"ParseData","id":"ParseData-htcyL","name":"text","output_types":["Message"]}},"id":"reactflow__edge-ParseData-htcyL{œdataTypeœ:œParseDataœ,œidœ:œParseData-htcyLœ,œnameœ:œtextœ,œoutput_typesœ:[œMessageœ]}-GoogleGenerativeAIModel-WF3Qa{œfieldNameœ:œinput_valueœ,œidœ:œGoogleGenerativeAIModel-WF3Qaœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}","animated":false,"className":""},{"source":"GoogleGenerativeAIModel-WF3Qa","sourceHandle":"{œdataTypeœ:œGoogleGenerativeAIModelœ,œidœ:œGoogleGenerativeAIModel-WF3Qaœ,œnameœ:œtext_outputœ,œoutput_typesœ:[œMessageœ]}","target":"TextOutput-JG4jm","targetHandle":"{œfieldNameœ:œinput_valueœ,œidœ:œTextOutput-JG4jmœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}","data":{"targetHandle":{"fieldName":"input_value","id":"TextOutput-JG4jm","inputTypes":["Message"],"type":"str"},"sourceHandle":{"dataType":"GoogleGenerativeAIModel","id":"GoogleGenerativeAIModel-WF3Qa","name":"text_output","output_types":["Message"]}},"id":"reactflow__edge-GoogleGenerativeAIModel-WF3Qa{œdataTypeœ:œGoogleGenerativeAIModelœ,œidœ:œGoogleGenerativeAIModel-WF3Qaœ,œnameœ:œtext_outputœ,œoutput_typesœ:[œMessageœ]}-TextOutput-JG4jm{œfieldNameœ:œinput_valueœ,œidœ:œTextOutput-JG4jmœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}","animated":false,"className":""},{"source":"TextInput-O9glu","sourceHandle":"{œdataTypeœ:œTextInputœ,œidœ:œTextInput-O9gluœ,œnameœ:œtextœ,œoutput_typesœ:[œMessageœ]}","target":"ParseJSONData-fLPKf","targetHandle":"{œfieldNameœ:œinput_valueœ,œidœ:œParseJSONData-fLPKfœ,œinputTypesœ:[œMessageœ,œDataœ],œtypeœ:œotherœ}","data":{"targetHandle":{"fieldName":"input_value","id":"ParseJSONData-fLPKf","inputTypes":["Message","Data"],"type":"other"},"sourceHandle":{"dataType":"TextInput","id":"TextInput-O9glu","name":"text","output_types":["Message"]}},"id":"reactflow__edge-TextInput-O9glu{œdataTypeœ:œTextInputœ,œidœ:œTextInput-O9gluœ,œnameœ:œtextœ,œoutput_typesœ:[œMessageœ]}-ParseJSONData-fLPKf{œfieldNameœ:œinput_valueœ,œidœ:œParseJSONData-fLPKfœ,œinputTypesœ:[œMessageœ,œDataœ],œtypeœ:œotherœ}","animated":false,"className":""}],"viewport":{"x":-1472.1656735166666,"y":-205.1222616122543,"zoom":1.1072530757974086}},"description":"Empowering Enterprises with Intelligent Interactions.","name":"SparkLLM","last_tested_version":"1.1.0","endpoint_name":null,"is_component":false}
+{
+  "data": {
+    "edges": [
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "ParseJSONData",
+            "id": "ParseJSONData-o1WRJ",
+            "name": "filtered_data",
+            "output_types": [
+              "Data"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "data",
+            "id": "ParseData-lawLy",
+            "inputTypes": [
+              "Data"
+            ],
+            "type": "other"
+          }
+        },
+        "id": "reactflow__edge-ParseJSONData-o1WRJ{œdataTypeœ:œParseJSONDataœ,œidœ:œParseJSONData-o1WRJœ,œnameœ:œfiltered_dataœ,œoutput_typesœ:[œDataœ]}-ParseData-lawLy{œfieldNameœ:œdataœ,œidœ:œParseData-lawLyœ,œinputTypesœ:[œDataœ],œtypeœ:œotherœ}",
+        "selected": false,
+        "source": "ParseJSONData-o1WRJ",
+        "sourceHandle": "{œdataTypeœ:œParseJSONDataœ,œidœ:œParseJSONData-o1WRJœ,œnameœ:œfiltered_dataœ,œoutput_typesœ:[œDataœ]}",
+        "target": "ParseData-lawLy",
+        "targetHandle": "{œfieldNameœ:œdataœ,œidœ:œParseData-lawLyœ,œinputTypesœ:[œDataœ],œtypeœ:œotherœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "TextInput",
+            "id": "TextInput-92Q9p",
+            "name": "text",
+            "output_types": [
+              "Message"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "input_value",
+            "id": "ParseJSONData-o1WRJ",
+            "inputTypes": [
+              "Message",
+              "Data"
+            ],
+            "type": "other"
+          }
+        },
+        "id": "reactflow__edge-TextInput-92Q9p{œdataTypeœ:œTextInputœ,œidœ:œTextInput-92Q9pœ,œnameœ:œtextœ,œoutput_typesœ:[œMessageœ]}-ParseJSONData-o1WRJ{œfieldNameœ:œinput_valueœ,œidœ:œParseJSONData-o1WRJœ,œinputTypesœ:[œMessageœ,œDataœ],œtypeœ:œotherœ}",
+        "selected": false,
+        "source": "TextInput-92Q9p",
+        "sourceHandle": "{œdataTypeœ:œTextInputœ,œidœ:œTextInput-92Q9pœ,œnameœ:œtextœ,œoutput_typesœ:[œMessageœ]}",
+        "target": "ParseJSONData-o1WRJ",
+        "targetHandle": "{œfieldNameœ:œinput_valueœ,œidœ:œParseJSONData-o1WRJœ,œinputTypesœ:[œMessageœ,œDataœ],œtypeœ:œotherœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "ParseJSONData",
+            "id": "ParseJSONData-o1WRJ",
+            "name": "filtered_data",
+            "output_types": [
+              "Data"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "data",
+            "id": "ParseData-soZFO",
+            "inputTypes": [
+              "Data"
+            ],
+            "type": "other"
+          }
+        },
+        "id": "xy-edge__ParseJSONData-o1WRJ{œdataTypeœ:œParseJSONDataœ,œidœ:œParseJSONData-o1WRJœ,œnameœ:œfiltered_dataœ,œoutput_typesœ:[œDataœ]}-ParseData-soZFO{œfieldNameœ:œdataœ,œidœ:œParseData-soZFOœ,œinputTypesœ:[œDataœ],œtypeœ:œotherœ}",
+        "selected": false,
+        "source": "ParseJSONData-o1WRJ",
+        "sourceHandle": "{œdataTypeœ:œParseJSONDataœ,œidœ:œParseJSONData-o1WRJœ,œnameœ:œfiltered_dataœ,œoutput_typesœ:[œDataœ]}",
+        "target": "ParseData-soZFO",
+        "targetHandle": "{œfieldNameœ:œdataœ,œidœ:œParseData-soZFOœ,œinputTypesœ:[œDataœ],œtypeœ:œotherœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "OpenRouterComponent",
+            "id": "OpenRouterComponent-0mvLJ",
+            "name": "text_output",
+            "output_types": [
+              "Message"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "input_value",
+            "id": "TextOutput-8g1pS",
+            "inputTypes": [
+              "Message"
+            ],
+            "type": "str"
+          }
+        },
+        "id": "xy-edge__OpenRouterComponent-0mvLJ{œdataTypeœ:œOpenRouterComponentœ,œidœ:œOpenRouterComponent-0mvLJœ,œnameœ:œtext_outputœ,œoutput_typesœ:[œMessageœ]}-TextOutput-8g1pS{œfieldNameœ:œinput_valueœ,œidœ:œTextOutput-8g1pSœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
+        "selected": false,
+        "source": "OpenRouterComponent-0mvLJ",
+        "sourceHandle": "{œdataTypeœ:œOpenRouterComponentœ,œidœ:œOpenRouterComponent-0mvLJœ,œnameœ:œtext_outputœ,œoutput_typesœ:[œMessageœ]}",
+        "target": "TextOutput-8g1pS",
+        "targetHandle": "{œfieldNameœ:œinput_valueœ,œidœ:œTextOutput-8g1pSœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "ParseData",
+            "id": "ParseData-lawLy",
+            "name": "text",
+            "output_types": [
+              "Message"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "input_value",
+            "id": "OpenRouterComponent-0mvLJ",
+            "inputTypes": [
+              "Message"
+            ],
+            "type": "str"
+          }
+        },
+        "id": "xy-edge__ParseData-lawLy{œdataTypeœ:œParseDataœ,œidœ:œParseData-lawLyœ,œnameœ:œtextœ,œoutput_typesœ:[œMessageœ]}-OpenRouterComponent-0mvLJ{œfieldNameœ:œinput_valueœ,œidœ:œOpenRouterComponent-0mvLJœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
+        "selected": false,
+        "source": "ParseData-lawLy",
+        "sourceHandle": "{œdataTypeœ:œParseDataœ,œidœ:œParseData-lawLyœ,œnameœ:œtextœ,œoutput_typesœ:[œMessageœ]}",
+        "target": "OpenRouterComponent-0mvLJ",
+        "targetHandle": "{œfieldNameœ:œinput_valueœ,œidœ:œOpenRouterComponent-0mvLJœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}"
+      },
+      {
+        "animated": false,
+        "className": "",
+        "data": {
+          "sourceHandle": {
+            "dataType": "ParseData",
+            "id": "ParseData-soZFO",
+            "name": "text",
+            "output_types": [
+              "Message"
+            ]
+          },
+          "targetHandle": {
+            "fieldName": "system_message",
+            "id": "OpenRouterComponent-0mvLJ",
+            "inputTypes": [
+              "Message"
+            ],
+            "type": "str"
+          }
+        },
+        "id": "xy-edge__ParseData-soZFO{œdataTypeœ:œParseDataœ,œidœ:œParseData-soZFOœ,œnameœ:œtextœ,œoutput_typesœ:[œMessageœ]}-OpenRouterComponent-0mvLJ{œfieldNameœ:œsystem_messageœ,œidœ:œOpenRouterComponent-0mvLJœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}",
+        "selected": false,
+        "source": "ParseData-soZFO",
+        "sourceHandle": "{œdataTypeœ:œParseDataœ,œidœ:œParseData-soZFOœ,œnameœ:œtextœ,œoutput_typesœ:[œMessageœ]}",
+        "target": "OpenRouterComponent-0mvLJ",
+        "targetHandle": "{œfieldNameœ:œsystem_messageœ,œidœ:œOpenRouterComponent-0mvLJœ,œinputTypesœ:[œMessageœ],œtypeœ:œstrœ}"
+      }
+    ],
+    "nodes": [
+      {
+        "data": {
+          "description": "Get user text inputs.",
+          "display_name": "Text Input",
+          "id": "TextInput-92Q9p",
+          "node": {
+            "base_classes": [
+              "Message"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Get user text inputs.",
+            "display_name": "Text Input",
+            "documentation": "https://docs.langflow.org/components-io#text-input",
+            "edited": false,
+            "field_order": [
+              "input_value"
+            ],
+            "frozen": false,
+            "icon": "type",
+            "legacy": false,
+            "lf_version": "1.5.0",
+            "metadata": {},
+            "minimized": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Output Text",
+                "group_outputs": false,
+                "method": "text_response",
+                "name": "text",
+                "options": null,
+                "required_inputs": null,
+                "selected": "Message",
+                "tool_mode": true,
+                "types": [
+                  "Message"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "from langflow.base.io.text import TextComponent\nfrom langflow.io import MultilineInput, Output\nfrom langflow.schema.message import Message\n\n\nclass TextInputComponent(TextComponent):\n    display_name = \"Text Input\"\n    description = \"Get user text inputs.\"\n    documentation: str = \"https://docs.langflow.org/components-io#text-input\"\n    icon = \"type\"\n    name = \"TextInput\"\n\n    inputs = [\n        MultilineInput(\n            name=\"input_value\",\n            display_name=\"Text\",\n            info=\"Text to be passed as input.\",\n        ),\n    ]\n    outputs = [\n        Output(display_name=\"Output Text\", name=\"text\", method=\"text_response\"),\n    ]\n\n    def text_response(self) -> Message:\n        return Message(\n            text=self.input_value,\n        )\n"
+              },
+              "input_value": {
+                "_input_type": "MultilineInput",
+                "advanced": false,
+                "copy_field": false,
+                "display_name": "Text",
+                "dynamic": false,
+                "info": "Text to be passed as input.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "multiline": true,
+                "name": "input_value",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "{\n  \"columns_information\": \"datetime: Date and time of the content, format: YYYY-MM-DD HH:MM:SS\\ncontent: Full text content scraped from the website, type: string\\nsummary: Summarized content focusing on crypto influence, type: string\\ncrypto_influence_score: Numerical score (0-10) representing the content's influence on crypto, type: float\\ninfluence_description: Explanation of how the content influences crypto, type: string\",\n  \"given_data\": \"Press Releases\\nContact us\\nADVERTISE\\nBITCOIN\\nALTCOINS\\nTECH\\nINDUSTRY\\nHOW TO\\nEVENTS\\nPLAY GAMES\\nCASINOS\\nSTAKE: 200% BONUS\\nBreaking News: Craig Wright Sentenced To 1 Year In Prison: The Self-Proclaimed Bitcoin Creator Faces Justice\\nBitcoin Price Prediction: BTC Breaks $100K, Is This The Year Of Crypto? New Viral Altcoin Sensation Raises $1M In Record Time\\n by Bitcoinist\\n 2 weeks ago\\nin Press releases\\n\\nDecember has been a good month for most cryptocurrencies, especially Bitcoin. Just a few days to days into December BTC price broke the most anticipated point, breaking the $100,000 mark, for the first time ever. Aside from Bitcoin asserting dominance this month, a new altcoin Yeti Ouro (YETIO) has been going viral after raising over $1 million in its presale.\\n\\nBitcoin Price News – The Journey To $100K\\n\\nFor a very long time, investors and enthusiasts have been looking forward to Bitcoin hitting the $100k mark. It all seemed like it would be achieved right after the last bitcoin halving this year but that was not the case until recently.\\n\\nOn December 3rd BTC price hit $100,000 for the first time and with the momentum still alive Bitcoins ascended past $100K to hit an all-time high of $103,900 2 days later. Despite the momentum, Bitcoin has since then faced a few setbacks dipping to $97,820.66 today. With a market cap of $1.93 trillion, the coin’s dominance remains unmatched.\\n\\nWhat Propelled BTC to $100K?\\n\\nSince the start of the year after the SEC approved bitcoin ETFs including BlackRock Bitcoin ETF, Bitcoin has seen an increased institutional adoption.  Major institutional players continue to view Bitcoin as a hedge against inflation and an alternative store of value.\\n\\nThe recent win by a pro-crypto Government has also boosted the confidence of investors\\n\\n\\nYeti Ouro: The New Viral Altcoin Raises $1M In Record Time\\n\\nEmerging as a utility-driven meme coin, Yeti Ouro has raised an impressive $1,004,241 so far in its presale phase, getting the attention of the crypto community. The project is looking to complete stage 1 of presale having completed about 84% already.\\n\\nWhat Makes Yeti Ouro Special?\\n\\nWith a capped supply of 1 billion tokens, the project is designed to appreciate. 50% of these tokens have been allocated to early investors with the current price of Yeti Ouro standing at $0.012. \\n\\nYeti Ouro is not just a token, it has integrated a Play-to-Earn (P2E) racing game built on Unreal Engine, Yeti Go. This integration offers players the chance to earn and use Yeti Ouro tokens in-game for purchases, race entry fees, and staking.\\n\\nHaving raised over $1 million in presale which launched recently, Yeti Ouro’s success reflects strong community backing and a growing belief in its potential as a 100X meme coin. Early investors have a rare chance to enjoy such RIO. \\n\\nWhile Bitcoin aims for $150K next, Yeti Ouro is looking to launch stage 2 of presale. Yeti Ouro’s strong presale performance demonstrates the appetite for fresh, and with the community growing by the day, gaining by 100x or more is a realistic target for utility-driven projects\\n\\nJoin The Yeti Ouro Community \\n\\nWebsite: https://yetiouro.io/\\n\\nX (Formally Twitter): https://x.com/yetiouro\\n\\nTelegram: https://t.me/yetiouroofficial\\n\\nDiscord: https://discord.gg/YtUsEZ2Zr\\n\\nDisclaimer: This is a paid release. The statements, views and opinions expressed in this column are solely those of the content provider and do not necessarily represent those of Bitcoinist. Bitcoinist does not guarantee the accuracy or timeliness of information available in such content. Do your research and invest at your own risk.\\n\\nSign Up for Our Newsletter!\\n\\nFor updates and exclusive offers enter your email.\\n\\n Sign Up\\n I consent to my submitted data being collected and stored.\\nBitcoinist\\n\\nBitcoinist is the ultimate news and review site for the crypto currency community!\\n\\nRelated Posts\\nBreaking Down Qubetics’ Wallet Secrets, Binance’s Licensing Strategies, and Litecoin’s Network Growth in Today’s Crypto News\\n19 hours ago\\nSolana Price Prediction: 2025 Could be The Year SOL Joins the $1000 Club, But This Must Happen First\\n2 days ago\\nWill Monsta Mash ($MASH) Outpace Tron (TRX) & Solana (SOL) in the next Bull Run?\\n3 days ago\\nDon’t Get Left Behind: New Meme Coins to Invest in for Short Term That Are Making Waves!\\n3 days ago\\nRipple (XRP): Is Another Leg Up Imminent, or Will Investors Be Left Holding Their Bags for Another 7 Years?\\n3 days ago\\nBNB (BNB) Inches Closer To $800, Sui (SUI) Makes New ATH Again—Lunex Network (LNEX) Raises Over $5 Million\\n3 days ago\\nPress Releases\\nBreaking Down Qubetics’ Wallet Secrets, Binance’s...\\n19 hours ago\\nSolana Price Prediction: 2025 Could be The Year SOL Joins...\\n2 days ago\\nWill Monsta Mash ($MASH) Outpace Tron (TRX) & Solana...\\n3 days ago\\nDon’t Get Left Behind: New Meme Coins to Invest in for...\\n3 days ago\\nRipple (XRP): Is Another Leg Up Imminent, or Will Investors...\\n3 days ago\\n\\nBitcoin news portal providing breaking news, guides, price analysis about decentralized digital money & blockchain technology.\\n\\nBITCOIN\\nNews\\nPrice\\nBusinesses\\nAcceptance\\nTechnology\\nInvestment\\nRegulation\\nReviews\\nALTCOINS\\nNews\\nPrice\\nEthereum\\nRipple\\nLitecoin\\nEOS\\nCATEGORIES\\nBlockchain\\nSecurity\\nFinTech\\nTechnology\\nTrending\\nBreaking News\\nPress Releases\\nHow to\\nABOUT US\\nAdvertise\\nContact us\\nEditorial Policy\\nPrivacy Policy\\n© 2024 Bitcoinist.com. All Rights Reserved.\\nBitcoin\\nAltcoins\\nTech\\nIndustry\\nHow to\\nEvents\\nPlay Games\\nCasinos\\nStake: 200% Bonus\\nADVERTISE\\n\\n© 2023 Bitcoinist. All Rights Reserved.\\n\\nThis website uses cookies. By continuing to use this website you are giving consent to cookies being used. Visit our Privacy Center or Cookie Policy. I Agree\"\n}"
+              }
+            },
+            "tool_mode": false
+          },
+          "type": "TextInput"
+        },
+        "dragging": false,
+        "height": 231,
+        "id": "TextInput-92Q9p",
+        "measured": {
+          "height": 231,
+          "width": 320
+        },
+        "position": {
+          "x": -338.26852453127543,
+          "y": 207.385313234112
+        },
+        "positionAbsolute": {
+          "x": -338.26852453127543,
+          "y": 207.385313234112
+        },
+        "selected": false,
+        "type": "genericNode",
+        "width": 320
+      },
+      {
+        "data": {
+          "description": "Convert Data objects into Messages using any {field_name} from input data.",
+          "display_name": "Data to Message",
+          "id": "ParseData-lawLy",
+          "node": {
+            "base_classes": [
+              "Data",
+              "Message"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Convert Data objects into Messages using any {field_name} from input data.",
+            "display_name": "Data to Message",
+            "documentation": "",
+            "edited": false,
+            "field_order": [
+              "data",
+              "template",
+              "sep"
+            ],
+            "frozen": false,
+            "icon": "message-square",
+            "legacy": true,
+            "lf_version": "1.5.0",
+            "metadata": {
+              "legacy_name": "Parse Data"
+            },
+            "minimized": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Message",
+                "group_outputs": false,
+                "method": "parse_data",
+                "name": "text",
+                "options": null,
+                "required_inputs": null,
+                "selected": "Message",
+                "tool_mode": true,
+                "types": [
+                  "Message"
+                ],
+                "value": "__UNDEFINED__"
+              },
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Data List",
+                "group_outputs": false,
+                "hidden": null,
+                "method": "parse_data_as_list",
+                "name": "data_list",
+                "options": null,
+                "required_inputs": null,
+                "tool_mode": true,
+                "types": [
+                  "Data"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "from langflow.custom.custom_component.component import Component\nfrom langflow.helpers.data import data_to_text, data_to_text_list\nfrom langflow.io import DataInput, MultilineInput, Output, StrInput\nfrom langflow.schema.data import Data\nfrom langflow.schema.message import Message\n\n\nclass ParseDataComponent(Component):\n    display_name = \"Data to Message\"\n    description = \"Convert Data objects into Messages using any {field_name} from input data.\"\n    icon = \"message-square\"\n    name = \"ParseData\"\n    legacy = True\n    metadata = {\n        \"legacy_name\": \"Parse Data\",\n    }\n\n    inputs = [\n        DataInput(\n            name=\"data\",\n            display_name=\"Data\",\n            info=\"The data to convert to text.\",\n            is_list=True,\n            required=True,\n        ),\n        MultilineInput(\n            name=\"template\",\n            display_name=\"Template\",\n            info=\"The template to use for formatting the data. \"\n            \"It can contain the keys {text}, {data} or any other key in the Data.\",\n            value=\"{text}\",\n            required=True,\n        ),\n        StrInput(name=\"sep\", display_name=\"Separator\", advanced=True, value=\"\\n\"),\n    ]\n\n    outputs = [\n        Output(\n            display_name=\"Message\",\n            name=\"text\",\n            info=\"Data as a single Message, with each input Data separated by Separator\",\n            method=\"parse_data\",\n        ),\n        Output(\n            display_name=\"Data List\",\n            name=\"data_list\",\n            info=\"Data as a list of new Data, each having `text` formatted by Template\",\n            method=\"parse_data_as_list\",\n        ),\n    ]\n\n    def _clean_args(self) -> tuple[list[Data], str, str]:\n        data = self.data if isinstance(self.data, list) else [self.data]\n        template = self.template\n        sep = self.sep\n        return data, template, sep\n\n    def parse_data(self) -> Message:\n        data, template, sep = self._clean_args()\n        result_string = data_to_text(template, data, sep)\n        self.status = result_string\n        return Message(text=result_string)\n\n    def parse_data_as_list(self) -> list[Data]:\n        data, template, _ = self._clean_args()\n        text_list, data_list = data_to_text_list(template, data)\n        for item, text in zip(data_list, text_list, strict=True):\n            item.set_text(text)\n        self.status = data_list\n        return data_list\n"
+              },
+              "data": {
+                "_input_type": "DataInput",
+                "advanced": false,
+                "display_name": "Data",
+                "dynamic": false,
+                "info": "The data to convert to text.",
+                "input_types": [
+                  "Data"
+                ],
+                "list": true,
+                "list_add_label": "Add More",
+                "name": "data",
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "other",
+                "value": ""
+              },
+              "sep": {
+                "_input_type": "StrInput",
+                "advanced": true,
+                "display_name": "Separator",
+                "dynamic": false,
+                "info": "",
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "sep",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "\n"
+              },
+              "template": {
+                "_input_type": "MultilineInput",
+                "advanced": false,
+                "copy_field": false,
+                "display_name": "Template",
+                "dynamic": false,
+                "info": "The template to use for formatting the data. It can contain the keys {text}, {data} or any other key in the Data.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "multiline": true,
+                "name": "template",
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "Base on columns information, process given data and return response must follow rules:\n- No explanation\n- Response must in JSON format\n- Response must and only have key name in columns information\n- Response is a columns data for a table data (pandas)\n- Response format example:\n{{\n\"column name 1\": data processed,\n...\n}}\n\n## Columns information\n```\n{columns_information}\n```"
+              }
+            },
+            "tool_mode": false
+          },
+          "selected_output": "text",
+          "type": "ParseData"
+        },
+        "dragging": false,
+        "height": 299,
+        "id": "ParseData-lawLy",
+        "measured": {
+          "height": 299,
+          "width": 320
+        },
+        "position": {
+          "x": 810.588704936059,
+          "y": 235.92162028086796
+        },
+        "positionAbsolute": {
+          "x": 917.7620190856803,
+          "y": 537.4201743721101
+        },
+        "selected": false,
+        "type": "genericNode",
+        "width": 320
+      },
+      {
+        "data": {
+          "description": "Convert and extract JSON fields.",
+          "display_name": "Parse JSON",
+          "id": "ParseJSONData-o1WRJ",
+          "node": {
+            "base_classes": [
+              "Data"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Convert and extract JSON fields.",
+            "display_name": "Parse JSON",
+            "documentation": "",
+            "edited": false,
+            "field_order": [
+              "input_value",
+              "query"
+            ],
+            "frozen": false,
+            "icon": "braces",
+            "legacy": true,
+            "lf_version": "1.5.0",
+            "metadata": {},
+            "minimized": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Filtered Data",
+                "group_outputs": false,
+                "method": "filter_data",
+                "name": "filtered_data",
+                "options": null,
+                "required_inputs": null,
+                "selected": "Data",
+                "tool_mode": true,
+                "types": [
+                  "Data"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "import json\nfrom json import JSONDecodeError\n\nimport jq\nfrom json_repair import repair_json\nfrom loguru import logger\n\nfrom langflow.custom.custom_component.component import Component\nfrom langflow.inputs.inputs import HandleInput, MessageTextInput\nfrom langflow.io import Output\nfrom langflow.schema.data import Data\nfrom langflow.schema.message import Message\n\n\nclass ParseJSONDataComponent(Component):\n    display_name = \"Parse JSON\"\n    description = \"Convert and extract JSON fields.\"\n    icon = \"braces\"\n    name = \"ParseJSONData\"\n    legacy: bool = True\n\n    inputs = [\n        HandleInput(\n            name=\"input_value\",\n            display_name=\"Input\",\n            info=\"Data object to filter.\",\n            required=True,\n            input_types=[\"Message\", \"Data\"],\n        ),\n        MessageTextInput(\n            name=\"query\",\n            display_name=\"JQ Query\",\n            info=\"JQ Query to filter the data. The input is always a JSON list.\",\n            required=True,\n        ),\n    ]\n\n    outputs = [\n        Output(display_name=\"Filtered Data\", name=\"filtered_data\", method=\"filter_data\"),\n    ]\n\n    def _parse_data(self, input_value) -> str:\n        if isinstance(input_value, Message) and isinstance(input_value.text, str):\n            return input_value.text\n        if isinstance(input_value, Data):\n            return json.dumps(input_value.data)\n        return str(input_value)\n\n    def filter_data(self) -> list[Data]:\n        to_filter = self.input_value\n        if not to_filter:\n            return []\n        # Check if input is a list\n        if isinstance(to_filter, list):\n            to_filter = [self._parse_data(f) for f in to_filter]\n        else:\n            to_filter = self._parse_data(to_filter)\n\n        # If input is not a list, don't wrap it in a list\n        if not isinstance(to_filter, list):\n            to_filter = repair_json(to_filter)\n            try:\n                to_filter_as_dict = json.loads(to_filter)\n            except JSONDecodeError:\n                try:\n                    to_filter_as_dict = json.loads(repair_json(to_filter))\n                except JSONDecodeError as e:\n                    msg = f\"Invalid JSON: {e}\"\n                    raise ValueError(msg) from e\n        else:\n            to_filter = [repair_json(f) for f in to_filter]\n            to_filter_as_dict = []\n            for f in to_filter:\n                try:\n                    to_filter_as_dict.append(json.loads(f))\n                except JSONDecodeError:\n                    try:\n                        to_filter_as_dict.append(json.loads(repair_json(f)))\n                    except JSONDecodeError as e:\n                        msg = f\"Invalid JSON: {e}\"\n                        raise ValueError(msg) from e\n            to_filter = to_filter_as_dict\n\n        full_filter_str = json.dumps(to_filter_as_dict)\n\n        logger.info(\"to_filter: \", to_filter)\n\n        results = jq.compile(self.query).input_text(full_filter_str).all()\n        logger.info(\"results: \", results)\n        return [Data(data=value) if isinstance(value, dict) else Data(text=str(value)) for value in results]\n"
+              },
+              "input_value": {
+                "_input_type": "HandleInput",
+                "advanced": false,
+                "display_name": "Input",
+                "dynamic": false,
+                "info": "Data object to filter.",
+                "input_types": [
+                  "Message",
+                  "Data"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "input_value",
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "trace_as_metadata": true,
+                "type": "other",
+                "value": ""
+              },
+              "query": {
+                "_input_type": "MessageTextInput",
+                "advanced": false,
+                "display_name": "JQ Query",
+                "dynamic": false,
+                "info": "JQ Query to filter the data. The input is always a JSON list.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "query",
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "."
+              }
+            },
+            "tool_mode": false
+          },
+          "type": "ParseJSONData"
+        },
+        "dragging": false,
+        "height": 280,
+        "id": "ParseJSONData-o1WRJ",
+        "measured": {
+          "height": 280,
+          "width": 320
+        },
+        "position": {
+          "x": 349.2598573544815,
+          "y": 110.8853941035513
+        },
+        "positionAbsolute": {
+          "x": 349.2598573544815,
+          "y": 110.8853941035513
+        },
+        "selected": false,
+        "type": "genericNode",
+        "width": 320
+      },
+      {
+        "data": {
+          "description": "Sends text output via API.",
+          "display_name": "Text Output",
+          "id": "TextOutput-8g1pS",
+          "node": {
+            "base_classes": [
+              "Message"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Sends text output via API.",
+            "display_name": "Text Output",
+            "documentation": "https://docs.langflow.org/components-io#text-output",
+            "edited": false,
+            "field_order": [
+              "input_value"
+            ],
+            "frozen": false,
+            "icon": "type",
+            "legacy": false,
+            "lf_version": "1.5.0",
+            "metadata": {},
+            "minimized": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Output Text",
+                "group_outputs": false,
+                "method": "text_response",
+                "name": "text",
+                "options": null,
+                "required_inputs": null,
+                "selected": "Message",
+                "tool_mode": true,
+                "types": [
+                  "Message"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "from langflow.base.io.text import TextComponent\nfrom langflow.io import MultilineInput, Output\nfrom langflow.schema.message import Message\n\n\nclass TextOutputComponent(TextComponent):\n    display_name = \"Text Output\"\n    description = \"Sends text output via API.\"\n    documentation: str = \"https://docs.langflow.org/components-io#text-output\"\n    icon = \"type\"\n    name = \"TextOutput\"\n\n    inputs = [\n        MultilineInput(\n            name=\"input_value\",\n            display_name=\"Inputs\",\n            info=\"Text to be passed as output.\",\n        ),\n    ]\n    outputs = [\n        Output(display_name=\"Output Text\", name=\"text\", method=\"text_response\"),\n    ]\n\n    def text_response(self) -> Message:\n        message = Message(\n            text=self.input_value,\n        )\n        self.status = self.input_value\n        return message\n"
+              },
+              "input_value": {
+                "_input_type": "MultilineInput",
+                "advanced": false,
+                "copy_field": false,
+                "display_name": "Inputs",
+                "dynamic": false,
+                "info": "Text to be passed as output.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "multiline": true,
+                "name": "input_value",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              }
+            },
+            "tool_mode": false
+          },
+          "type": "TextOutput"
+        },
+        "dragging": false,
+        "height": 231,
+        "id": "TextOutput-8g1pS",
+        "measured": {
+          "height": 231,
+          "width": 320
+        },
+        "position": {
+          "x": 1833.45143973218,
+          "y": 360.50353471429383
+        },
+        "positionAbsolute": {
+          "x": 1833.45143973218,
+          "y": 360.50353471429383
+        },
+        "selected": false,
+        "type": "genericNode",
+        "width": 320
+      },
+      {
+        "data": {
+          "description": "Convert Data objects into Messages using any {field_name} from input data.",
+          "display_name": "Data to Message",
+          "id": "ParseData-soZFO",
+          "node": {
+            "base_classes": [
+              "Data",
+              "Message"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "Convert Data objects into Messages using any {field_name} from input data.",
+            "display_name": "Data to Message",
+            "documentation": "",
+            "edited": false,
+            "field_order": [
+              "data",
+              "template",
+              "sep"
+            ],
+            "frozen": false,
+            "icon": "message-square",
+            "legacy": true,
+            "lf_version": "1.5.0",
+            "metadata": {
+              "legacy_name": "Parse Data"
+            },
+            "minimized": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Message",
+                "group_outputs": false,
+                "method": "parse_data",
+                "name": "text",
+                "options": null,
+                "required_inputs": null,
+                "selected": "Message",
+                "tool_mode": true,
+                "types": [
+                  "Message"
+                ],
+                "value": "__UNDEFINED__"
+              },
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Data List",
+                "group_outputs": false,
+                "hidden": null,
+                "method": "parse_data_as_list",
+                "name": "data_list",
+                "options": null,
+                "required_inputs": null,
+                "tool_mode": true,
+                "types": [
+                  "Data"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "from langflow.custom.custom_component.component import Component\nfrom langflow.helpers.data import data_to_text, data_to_text_list\nfrom langflow.io import DataInput, MultilineInput, Output, StrInput\nfrom langflow.schema.data import Data\nfrom langflow.schema.message import Message\n\n\nclass ParseDataComponent(Component):\n    display_name = \"Data to Message\"\n    description = \"Convert Data objects into Messages using any {field_name} from input data.\"\n    icon = \"message-square\"\n    name = \"ParseData\"\n    legacy = True\n    metadata = {\n        \"legacy_name\": \"Parse Data\",\n    }\n\n    inputs = [\n        DataInput(\n            name=\"data\",\n            display_name=\"Data\",\n            info=\"The data to convert to text.\",\n            is_list=True,\n            required=True,\n        ),\n        MultilineInput(\n            name=\"template\",\n            display_name=\"Template\",\n            info=\"The template to use for formatting the data. \"\n            \"It can contain the keys {text}, {data} or any other key in the Data.\",\n            value=\"{text}\",\n            required=True,\n        ),\n        StrInput(name=\"sep\", display_name=\"Separator\", advanced=True, value=\"\\n\"),\n    ]\n\n    outputs = [\n        Output(\n            display_name=\"Message\",\n            name=\"text\",\n            info=\"Data as a single Message, with each input Data separated by Separator\",\n            method=\"parse_data\",\n        ),\n        Output(\n            display_name=\"Data List\",\n            name=\"data_list\",\n            info=\"Data as a list of new Data, each having `text` formatted by Template\",\n            method=\"parse_data_as_list\",\n        ),\n    ]\n\n    def _clean_args(self) -> tuple[list[Data], str, str]:\n        data = self.data if isinstance(self.data, list) else [self.data]\n        template = self.template\n        sep = self.sep\n        return data, template, sep\n\n    def parse_data(self) -> Message:\n        data, template, sep = self._clean_args()\n        result_string = data_to_text(template, data, sep)\n        self.status = result_string\n        return Message(text=result_string)\n\n    def parse_data_as_list(self) -> list[Data]:\n        data, template, _ = self._clean_args()\n        text_list, data_list = data_to_text_list(template, data)\n        for item, text in zip(data_list, text_list, strict=True):\n            item.set_text(text)\n        self.status = data_list\n        return data_list\n"
+              },
+              "data": {
+                "_input_type": "DataInput",
+                "advanced": false,
+                "display_name": "Data",
+                "dynamic": false,
+                "info": "The data to convert to text.",
+                "input_types": [
+                  "Data"
+                ],
+                "list": true,
+                "list_add_label": "Add More",
+                "name": "data",
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "other",
+                "value": ""
+              },
+              "sep": {
+                "_input_type": "StrInput",
+                "advanced": true,
+                "display_name": "Separator",
+                "dynamic": false,
+                "info": "",
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "sep",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "\n"
+              },
+              "template": {
+                "_input_type": "MultilineInput",
+                "advanced": false,
+                "copy_field": false,
+                "display_name": "Template",
+                "dynamic": false,
+                "info": "The template to use for formatting the data. It can contain the keys {text}, {data} or any other key in the Data.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "multiline": true,
+                "name": "template",
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "## Given data\n```\n{given_data}\n```"
+              }
+            },
+            "tool_mode": false
+          },
+          "selected_output": "text",
+          "type": "ParseData"
+        },
+        "dragging": false,
+        "id": "ParseData-soZFO",
+        "measured": {
+          "height": 264,
+          "width": 320
+        },
+        "position": {
+          "x": 800.6961623320964,
+          "y": 596.9229550050177
+        },
+        "selected": false,
+        "type": "genericNode"
+      },
+      {
+        "data": {
+          "id": "OpenRouterComponent-0mvLJ",
+          "node": {
+            "base_classes": [
+              "LanguageModel",
+              "Message"
+            ],
+            "beta": false,
+            "conditional_paths": [],
+            "custom_fields": {},
+            "description": "OpenRouter provides unified access to multiple AI models from different providers through a single API.",
+            "display_name": "OpenRouter",
+            "documentation": "",
+            "edited": true,
+            "field_order": [
+              "input_value",
+              "system_message",
+              "stream",
+              "api_key",
+              "site_url",
+              "app_name",
+              "provider",
+              "model_name",
+              "temperature",
+              "max_tokens"
+            ],
+            "frozen": false,
+            "icon": "OpenRouter",
+            "last_updated": "2025-07-08T15:41:39.902Z",
+            "legacy": false,
+            "lf_version": "1.5.0",
+            "metadata": {
+              "keywords": [
+                "model",
+                "llm",
+                "language model",
+                "large language model"
+              ]
+            },
+            "minimized": false,
+            "output_types": [],
+            "outputs": [
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Model Response",
+                "group_outputs": false,
+                "hidden": null,
+                "method": "text_response",
+                "name": "text_output",
+                "options": null,
+                "required_inputs": null,
+                "selected": "Message",
+                "tool_mode": true,
+                "types": [
+                  "Message"
+                ],
+                "value": "__UNDEFINED__"
+              },
+              {
+                "allows_loop": false,
+                "cache": true,
+                "display_name": "Language Model",
+                "group_outputs": false,
+                "hidden": null,
+                "method": "build_model",
+                "name": "model_output",
+                "options": null,
+                "required_inputs": null,
+                "selected": "LanguageModel",
+                "tool_mode": true,
+                "types": [
+                  "LanguageModel"
+                ],
+                "value": "__UNDEFINED__"
+              }
+            ],
+            "pinned": false,
+            "template": {
+              "_type": "Component",
+              "api_key": {
+                "_input_type": "SecretStrInput",
+                "advanced": false,
+                "display_name": "OpenRouter API Key",
+                "dynamic": false,
+                "info": "Your OpenRouter API key",
+                "input_types": [],
+                "load_from_db": true,
+                "name": "api_key",
+                "password": true,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "str",
+                "value": ""
+              },
+              "app_name": {
+                "_input_type": "StrInput",
+                "advanced": true,
+                "display_name": "App Name",
+                "dynamic": false,
+                "info": "Your app name for OpenRouter rankings",
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "app_name",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              },
+              "code": {
+                "advanced": true,
+                "dynamic": true,
+                "fileTypes": [],
+                "file_path": "",
+                "info": "",
+                "list": false,
+                "load_from_db": false,
+                "multiline": true,
+                "name": "code",
+                "password": false,
+                "placeholder": "",
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "type": "code",
+                "value": "from collections import defaultdict\nfrom typing import Any\n\nimport httpx\nfrom langchain_openai import ChatOpenAI\nfrom pydantic.v1 import SecretStr\n\nfrom langflow.base.models.model import LCModelComponent\nfrom langflow.field_typing import LanguageModel\nfrom langflow.field_typing.range_spec import RangeSpec\nfrom langflow.inputs.inputs import (\n    DropdownInput,\n    IntInput,\n    SecretStrInput,\n    SliderInput,\n    StrInput,\n)\n\n\nclass OpenRouterComponent(LCModelComponent):\n    \"\"\"OpenRouter API component for language models.\"\"\"\n\n    display_name = \"OpenRouter\"\n    description = (\n        \"OpenRouter provides unified access to multiple AI models from different providers through a single API.\"\n    )\n    icon = \"OpenRouter\"\n\n    inputs = [\n        *LCModelComponent._base_inputs,\n        SecretStrInput(\n            name=\"api_key\", display_name=\"OpenRouter API Key\", required=True, info=\"Your OpenRouter API key\"\n        ),\n        StrInput(\n            name=\"site_url\",\n            display_name=\"Site URL\",\n            info=\"Your site URL for OpenRouter rankings\",\n            advanced=True,\n        ),\n        StrInput(\n            name=\"app_name\",\n            display_name=\"App Name\",\n            info=\"Your app name for OpenRouter rankings\",\n            advanced=True,\n        ),\n        StrInput(\n            name=\"provider\",\n            display_name=\"Provider\",\n            info=\"The AI model provider\",\n            value=\"Loading providers...\",\n            real_time_refresh=True,\n            required=True,\n        ),\n        StrInput(\n            name=\"model_name\",\n            display_name=\"Model\",\n            info=\"The model to use for chat completion\",\n            value=\"Select a provider first\",\n            real_time_refresh=True,\n            required=True,\n        ),\n        SliderInput(\n            name=\"temperature\",\n            display_name=\"Temperature\",\n            value=0.7,\n            range_spec=RangeSpec(min=0, max=2, step=0.01),\n            info=\"Controls randomness. Lower values are more deterministic, higher values are more creative.\",\n            advanced=True,\n        ),\n        IntInput(\n            name=\"max_tokens\",\n            display_name=\"Max Tokens\",\n            info=\"Maximum number of tokens to generate\",\n            advanced=True,\n        ),\n    ]\n\n    def fetch_models(self) -> dict[str, list]:\n        \"\"\"Fetch available models from OpenRouter API and organize them by provider.\"\"\"\n        url = \"https://openrouter.ai/api/v1/models\"\n\n        try:\n            with httpx.Client() as client:\n                response = client.get(url)\n                response.raise_for_status()\n\n                models_data = response.json().get(\"data\", [])\n                provider_models = defaultdict(list)\n\n                for model in models_data:\n                    model_id = model.get(\"id\", \"\")\n                    if \"/\" in model_id:\n                        provider = model_id.split(\"/\")[0].title()\n                        provider_models[provider].append(\n                            {\n                                \"id\": model_id,\n                                \"name\": model.get(\"name\", \"\"),\n                                \"description\": model.get(\"description\", \"\"),\n                                \"context_length\": model.get(\"context_length\", 0),\n                            }\n                        )\n\n                return dict(provider_models)\n\n        except httpx.HTTPError as e:\n            self.log(f\"Error fetching models: {e!s}\")\n            return {\"Error\": [{\"id\": \"error\", \"name\": f\"Error fetching models: {e!s}\"}]}\n\n    def build_model(self) -> LanguageModel:\n        \"\"\"Build and return the OpenRouter language model.\"\"\"\n        model_not_selected = \"Please select a model\"\n        api_key_required = \"API key is required\"\n\n        if not self.model_name or self.model_name == \"Select a provider first\":\n            raise ValueError(model_not_selected)\n\n        if not self.api_key:\n            raise ValueError(api_key_required)\n\n        api_key = SecretStr(self.api_key).get_secret_value()\n\n        # Build base configuration\n        kwargs: dict[str, Any] = {\n            \"model\": self.model_name,\n            \"openai_api_key\": api_key,\n            \"openai_api_base\": \"https://openrouter.ai/api/v1\",\n            \"temperature\": self.temperature if self.temperature is not None else 0.7,\n        }\n\n        # Add optional parameters\n        if self.max_tokens:\n            kwargs[\"max_tokens\"] = self.max_tokens\n\n        headers = {}\n        if self.site_url:\n            headers[\"HTTP-Referer\"] = self.site_url\n        if self.app_name:\n            headers[\"X-Title\"] = self.app_name\n\n        if headers:\n            kwargs[\"default_headers\"] = headers\n\n        try:\n            return ChatOpenAI(**kwargs)\n        except (ValueError, httpx.HTTPError) as err:\n            error_msg = f\"Failed to build model: {err!s}\"\n            self.log(error_msg)\n            raise ValueError(error_msg) from err\n\n    def _get_exception_message(self, e: Exception) -> str | None:\n        \"\"\"Get a message from an OpenRouter exception.\n\n        Args:\n            e (Exception): The exception to get the message from.\n\n        Returns:\n            str | None: The message from the exception, or None if no specific message can be extracted.\n        \"\"\"\n        try:\n            from openai import BadRequestError\n\n            if isinstance(e, BadRequestError):\n                message = e.body.get(\"message\")\n                if message:\n                    return message\n        except ImportError:\n            pass\n        return None\n\n    def update_build_config(self, build_config: dict, field_value: str, field_name: str | None = None) -> dict:\n        \"\"\"Update build configuration based on field updates.\"\"\"\n        try:\n            if field_name is None or field_name == \"provider\":\n                provider_models = self.fetch_models()\n                build_config[\"provider\"][\"options\"] = sorted(provider_models.keys())\n                if build_config[\"provider\"][\"value\"] not in provider_models:\n                    build_config[\"provider\"][\"value\"] = build_config[\"provider\"][\"options\"][0]\n\n            if field_name == \"provider\" and field_value in self.fetch_models():\n                provider_models = self.fetch_models()\n                models = provider_models[field_value]\n\n                build_config[\"model_name\"][\"options\"] = [model[\"id\"] for model in models]\n                if models:\n                    build_config[\"model_name\"][\"value\"] = models[0][\"id\"]\n\n                tooltips = {\n                    model[\"id\"]: (f\"{model['name']}\\nContext Length: {model['context_length']}\\n{model['description']}\")\n                    for model in models\n                }\n                build_config[\"model_name\"][\"tooltips\"] = tooltips\n\n        except httpx.HTTPError as e:\n            self.log(f\"Error updating build config: {e!s}\")\n            build_config[\"provider\"][\"options\"] = [\"Error loading providers\"]\n            build_config[\"provider\"][\"value\"] = \"Error loading providers\"\n            build_config[\"model_name\"][\"options\"] = [\"Error loading models\"]\n            build_config[\"model_name\"][\"value\"] = \"Error loading models\"\n\n        return build_config\n"
+              },
+              "input_value": {
+                "_input_type": "MessageInput",
+                "advanced": false,
+                "display_name": "Input",
+                "dynamic": false,
+                "info": "",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "input_value",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              },
+              "max_tokens": {
+                "_input_type": "IntInput",
+                "advanced": true,
+                "display_name": "Max Tokens",
+                "dynamic": false,
+                "info": "Maximum number of tokens to generate",
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "max_tokens",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "int",
+                "value": ""
+              },
+              "model_name": {
+                "_input_type": "StrInput",
+                "advanced": false,
+                "display_name": "Model",
+                "dynamic": false,
+                "info": "The model to use for chat completion",
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "model_name",
+                "options": [
+                  "google/gemini-2.5-flash-lite-preview-06-17",
+                  "google/gemini-2.5-flash",
+                  "google/gemini-2.5-pro",
+                  "google/gemini-2.5-pro-preview",
+                  "google/gemma-3n-e4b-it:free",
+                  "google/gemma-3n-e4b-it",
+                  "google/gemini-2.5-flash-preview-05-20",
+                  "google/gemini-2.5-flash-preview-05-20:thinking",
+                  "google/gemini-2.5-pro-preview-05-06",
+                  "google/gemini-2.5-flash-preview",
+                  "google/gemini-2.5-flash-preview:thinking",
+                  "google/gemini-2.5-pro-exp-03-25",
+                  "google/gemma-3-4b-it:free",
+                  "google/gemma-3-4b-it",
+                  "google/gemma-3-12b-it:free",
+                  "google/gemma-3-12b-it",
+                  "google/gemma-3-27b-it:free",
+                  "google/gemma-3-27b-it",
+                  "google/gemini-2.0-flash-lite-001",
+                  "google/gemini-2.0-flash-001",
+                  "google/gemini-2.0-flash-exp:free",
+                  "google/gemini-flash-1.5-8b",
+                  "google/gemma-2-27b-it",
+                  "google/gemma-2-9b-it:free",
+                  "google/gemma-2-9b-it",
+                  "google/gemini-flash-1.5",
+                  "google/gemini-pro-1.5"
+                ],
+                "placeholder": "",
+                "real_time_refresh": true,
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "tooltips": {
+                  "google/gemini-2.0-flash-001": "Google: Gemini 2.0 Flash\nContext Length: 1048576\nGemini Flash 2.0 offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5). It introduces notable enhancements in multimodal understanding, coding capabilities, complex instruction following, and function calling. These advancements come together to deliver more seamless and robust agentic experiences.",
+                  "google/gemini-2.0-flash-exp:free": "Google: Gemini 2.0 Flash Experimental (free)\nContext Length: 1048576\nGemini Flash 2.0 offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5). It introduces notable enhancements in multimodal understanding, coding capabilities, complex instruction following, and function calling. These advancements come together to deliver more seamless and robust agentic experiences.",
+                  "google/gemini-2.0-flash-lite-001": "Google: Gemini 2.0 Flash Lite\nContext Length: 1048576\nGemini 2.0 Flash Lite offers a significantly faster time to first token (TTFT) compared to [Gemini Flash 1.5](/google/gemini-flash-1.5), while maintaining quality on par with larger models like [Gemini Pro 1.5](/google/gemini-pro-1.5), all at extremely economical token prices.",
+                  "google/gemini-2.5-flash": "Google: Gemini 2.5 Flash\nContext Length: 1048576\nGemini 2.5 Flash is Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. It includes built-in \"thinking\" capabilities, enabling it to provide responses with greater accuracy and nuanced context handling. \n\nAdditionally, Gemini 2.5 Flash is configurable through the \"max tokens for reasoning\" parameter, as described in the documentation (https://openrouter.ai/docs/use-cases/reasoning-tokens#max-tokens-for-reasoning).",
+                  "google/gemini-2.5-flash-lite-preview-06-17": "Google: Gemini 2.5 Flash Lite Preview 06-17\nContext Length: 1048576\nGemini 2.5 Flash-Lite is a lightweight reasoning model in the Gemini 2.5 family, optimized for ultra-low latency and cost efficiency. It offers improved throughput, faster token generation, and better performance across common benchmarks compared to earlier Flash models. By default, \"thinking\" (i.e. multi-pass reasoning) is disabled to prioritize speed, but developers can enable it via the [Reasoning API parameter](https://openrouter.ai/docs/use-cases/reasoning-tokens) to selectively trade off cost for intelligence. ",
+                  "google/gemini-2.5-flash-preview": "Google: Gemini 2.5 Flash Preview 04-17\nContext Length: 1048576\nGemini 2.5 Flash is Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. It includes built-in \"thinking\" capabilities, enabling it to provide responses with greater accuracy and nuanced context handling. \n\nNote: This model is available in two variants: thinking and non-thinking. The output pricing varies significantly depending on whether the thinking capability is active. If you select the standard variant (without the \":thinking\" suffix), the model will explicitly avoid generating thinking tokens. \n\nTo utilize the thinking capability and receive thinking tokens, you must choose the \":thinking\" variant, which will then incur the higher thinking-output pricing. \n\nAdditionally, Gemini 2.5 Flash is configurable through the \"max tokens for reasoning\" parameter, as described in the documentation (https://openrouter.ai/docs/use-cases/reasoning-tokens#max-tokens-for-reasoning).",
+                  "google/gemini-2.5-flash-preview-05-20": "Google: Gemini 2.5 Flash Preview 05-20\nContext Length: 1048576\nGemini 2.5 Flash May 20th Checkpoint is Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. It includes built-in \"thinking\" capabilities, enabling it to provide responses with greater accuracy and nuanced context handling. \n\nNote: This model is available in two variants: thinking and non-thinking. The output pricing varies significantly depending on whether the thinking capability is active. If you select the standard variant (without the \":thinking\" suffix), the model will explicitly avoid generating thinking tokens. \n\nTo utilize the thinking capability and receive thinking tokens, you must choose the \":thinking\" variant, which will then incur the higher thinking-output pricing. \n\nAdditionally, Gemini 2.5 Flash is configurable through the \"max tokens for reasoning\" parameter, as described in the documentation (https://openrouter.ai/docs/use-cases/reasoning-tokens#max-tokens-for-reasoning).",
+                  "google/gemini-2.5-flash-preview-05-20:thinking": "Google: Gemini 2.5 Flash Preview 05-20 (thinking)\nContext Length: 1048576\nGemini 2.5 Flash May 20th Checkpoint is Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. It includes built-in \"thinking\" capabilities, enabling it to provide responses with greater accuracy and nuanced context handling. \n\nNote: This model is available in two variants: thinking and non-thinking. The output pricing varies significantly depending on whether the thinking capability is active. If you select the standard variant (without the \":thinking\" suffix), the model will explicitly avoid generating thinking tokens. \n\nTo utilize the thinking capability and receive thinking tokens, you must choose the \":thinking\" variant, which will then incur the higher thinking-output pricing. \n\nAdditionally, Gemini 2.5 Flash is configurable through the \"max tokens for reasoning\" parameter, as described in the documentation (https://openrouter.ai/docs/use-cases/reasoning-tokens#max-tokens-for-reasoning).",
+                  "google/gemini-2.5-flash-preview:thinking": "Google: Gemini 2.5 Flash Preview 04-17 (thinking)\nContext Length: 1048576\nGemini 2.5 Flash is Google's state-of-the-art workhorse model, specifically designed for advanced reasoning, coding, mathematics, and scientific tasks. It includes built-in \"thinking\" capabilities, enabling it to provide responses with greater accuracy and nuanced context handling. \n\nNote: This model is available in two variants: thinking and non-thinking. The output pricing varies significantly depending on whether the thinking capability is active. If you select the standard variant (without the \":thinking\" suffix), the model will explicitly avoid generating thinking tokens. \n\nTo utilize the thinking capability and receive thinking tokens, you must choose the \":thinking\" variant, which will then incur the higher thinking-output pricing. \n\nAdditionally, Gemini 2.5 Flash is configurable through the \"max tokens for reasoning\" parameter, as described in the documentation (https://openrouter.ai/docs/use-cases/reasoning-tokens#max-tokens-for-reasoning).",
+                  "google/gemini-2.5-pro": "Google: Gemini 2.5 Pro\nContext Length: 1048576\nGemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy and nuanced context handling. Gemini 2.5 Pro achieves top-tier performance on multiple benchmarks, including first-place positioning on the LMArena leaderboard, reflecting superior human-preference alignment and complex problem-solving abilities.",
+                  "google/gemini-2.5-pro-exp-03-25": "Google: Gemini 2.5 Pro Experimental\nContext Length: 1048576\nThis model has been deprecated by Google in favor of the (paid Preview model)[google/gemini-2.5-pro-preview]\n \nGemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy and nuanced context handling. Gemini 2.5 Pro achieves top-tier performance on multiple benchmarks, including first-place positioning on the LMArena leaderboard, reflecting superior human-preference alignment and complex problem-solving abilities.",
+                  "google/gemini-2.5-pro-preview": "Google: Gemini 2.5 Pro Preview 06-05\nContext Length: 1048576\nGemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy and nuanced context handling. Gemini 2.5 Pro achieves top-tier performance on multiple benchmarks, including first-place positioning on the LMArena leaderboard, reflecting superior human-preference alignment and complex problem-solving abilities.\n",
+                  "google/gemini-2.5-pro-preview-05-06": "Google: Gemini 2.5 Pro Preview 05-06\nContext Length: 1048576\nGemini 2.5 Pro is Google’s state-of-the-art AI model designed for advanced reasoning, coding, mathematics, and scientific tasks. It employs “thinking” capabilities, enabling it to reason through responses with enhanced accuracy and nuanced context handling. Gemini 2.5 Pro achieves top-tier performance on multiple benchmarks, including first-place positioning on the LMArena leaderboard, reflecting superior human-preference alignment and complex problem-solving abilities.",
+                  "google/gemini-flash-1.5": "Google: Gemini 1.5 Flash \nContext Length: 1000000\nGemini 1.5 Flash is a foundation model that performs well at a variety of multimodal tasks such as visual understanding, classification, summarization, and creating content from image, audio and video. It's adept at processing visual and text inputs such as photographs, documents, infographics, and screenshots.\n\nGemini 1.5 Flash is designed for high-volume, high-frequency tasks where cost and latency matter. On most common tasks, Flash achieves comparable quality to other Gemini Pro models at a significantly reduced cost. Flash is well-suited for applications like chat assistants and on-demand content generation where speed and scale matter.\n\nUsage of Gemini is subject to Google's [Gemini Terms of Use](https://ai.google.dev/terms).\n\n#multimodal",
+                  "google/gemini-flash-1.5-8b": "Google: Gemini 1.5 Flash 8B\nContext Length: 1000000\nGemini Flash 1.5 8B is optimized for speed and efficiency, offering enhanced performance in small prompt tasks like chat, transcription, and translation. With reduced latency, it is highly effective for real-time and large-scale operations. This model focuses on cost-effective solutions while maintaining high-quality results.\n\n[Click here to learn more about this model](https://developers.googleblog.com/en/gemini-15-flash-8b-is-now-generally-available-for-use/).\n\nUsage of Gemini is subject to Google's [Gemini Terms of Use](https://ai.google.dev/terms).",
+                  "google/gemini-pro-1.5": "Google: Gemini 1.5 Pro\nContext Length: 2000000\nGoogle's latest multimodal model, supports image and video[0] in text or chat prompts.\n\nOptimized for language tasks including:\n\n- Code generation\n- Text generation\n- Text editing\n- Problem solving\n- Recommendations\n- Information extraction\n- Data extraction or generation\n- AI agents\n\nUsage of Gemini is subject to Google's [Gemini Terms of Use](https://ai.google.dev/terms).\n\n* [0]: Video input is not available through OpenRouter at this time.",
+                  "google/gemma-2-27b-it": "Google: Gemma 2 27B\nContext Length: 8192\nGemma 2 27B by Google is an open model built from the same research and technology used to create the [Gemini models](/models?q=gemini).\n\nGemma models are well-suited for a variety of text generation tasks, including question answering, summarization, and reasoning.\n\nSee the [launch announcement](https://blog.google/technology/developers/google-gemma-2/) for more details. Usage of Gemma is subject to Google's [Gemma Terms of Use](https://ai.google.dev/gemma/terms).",
+                  "google/gemma-2-9b-it": "Google: Gemma 2 9B\nContext Length: 8192\nGemma 2 9B by Google is an advanced, open-source language model that sets a new standard for efficiency and performance in its size class.\n\nDesigned for a wide variety of tasks, it empowers developers and researchers to build innovative applications, while maintaining accessibility, safety, and cost-effectiveness.\n\nSee the [launch announcement](https://blog.google/technology/developers/google-gemma-2/) for more details. Usage of Gemma is subject to Google's [Gemma Terms of Use](https://ai.google.dev/gemma/terms).",
+                  "google/gemma-2-9b-it:free": "Google: Gemma 2 9B (free)\nContext Length: 8192\nGemma 2 9B by Google is an advanced, open-source language model that sets a new standard for efficiency and performance in its size class.\n\nDesigned for a wide variety of tasks, it empowers developers and researchers to build innovative applications, while maintaining accessibility, safety, and cost-effectiveness.\n\nSee the [launch announcement](https://blog.google/technology/developers/google-gemma-2/) for more details. Usage of Gemma is subject to Google's [Gemma Terms of Use](https://ai.google.dev/gemma/terms).",
+                  "google/gemma-3-12b-it": "Google: Gemma 3 12B\nContext Length: 131072\nGemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities, including structured outputs and function calling. Gemma 3 12B is the second largest in the family of Gemma 3 models after [Gemma 3 27B](google/gemma-3-27b-it)",
+                  "google/gemma-3-12b-it:free": "Google: Gemma 3 12B (free)\nContext Length: 96000\nGemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities, including structured outputs and function calling. Gemma 3 12B is the second largest in the family of Gemma 3 models after [Gemma 3 27B](google/gemma-3-27b-it)",
+                  "google/gemma-3-27b-it": "Google: Gemma 3 27B\nContext Length: 131072\nGemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities, including structured outputs and function calling. Gemma 3 27B is Google's latest open source model, successor to [Gemma 2](google/gemma-2-27b-it)",
+                  "google/gemma-3-27b-it:free": "Google: Gemma 3 27B (free)\nContext Length: 96000\nGemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities, including structured outputs and function calling. Gemma 3 27B is Google's latest open source model, successor to [Gemma 2](google/gemma-2-27b-it)",
+                  "google/gemma-3-4b-it": "Google: Gemma 3 4B\nContext Length: 131072\nGemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities, including structured outputs and function calling.",
+                  "google/gemma-3-4b-it:free": "Google: Gemma 3 4B (free)\nContext Length: 32768\nGemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities, including structured outputs and function calling.",
+                  "google/gemma-3n-e4b-it": "Google: Gemma 3n 4B\nContext Length: 32768\nGemma 3n E4B-it is optimized for efficient execution on mobile and low-resource devices, such as phones, laptops, and tablets. It supports multimodal inputs—including text, visual data, and audio—enabling diverse tasks such as text generation, speech recognition, translation, and image analysis. Leveraging innovations like Per-Layer Embedding (PLE) caching and the MatFormer architecture, Gemma 3n dynamically manages memory usage and computational load by selectively activating model parameters, significantly reducing runtime resource requirements.\n\nThis model supports a wide linguistic range (trained in over 140 languages) and features a flexible 32K token context window. Gemma 3n can selectively load parameters, optimizing memory and computational efficiency based on the task or device capabilities, making it well-suited for privacy-focused, offline-capable applications and on-device AI solutions. [Read more in the blog post](https://developers.googleblog.com/en/introducing-gemma-3n/)",
+                  "google/gemma-3n-e4b-it:free": "Google: Gemma 3n 4B (free)\nContext Length: 8192\nGemma 3n E4B-it is optimized for efficient execution on mobile and low-resource devices, such as phones, laptops, and tablets. It supports multimodal inputs—including text, visual data, and audio—enabling diverse tasks such as text generation, speech recognition, translation, and image analysis. Leveraging innovations like Per-Layer Embedding (PLE) caching and the MatFormer architecture, Gemma 3n dynamically manages memory usage and computational load by selectively activating model parameters, significantly reducing runtime resource requirements.\n\nThis model supports a wide linguistic range (trained in over 140 languages) and features a flexible 32K token context window. Gemma 3n can selectively load parameters, optimizing memory and computational efficiency based on the task or device capabilities, making it well-suited for privacy-focused, offline-capable applications and on-device AI solutions. [Read more in the blog post](https://developers.googleblog.com/en/introducing-gemma-3n/)"
+                },
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "google/gemini-2.5-flash-lite-preview-06-17"
+              },
+              "provider": {
+                "_input_type": "StrInput",
+                "advanced": false,
+                "display_name": "Provider",
+                "dynamic": false,
+                "info": "The AI model provider",
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "provider",
+                "options": [
+                  "01-Ai",
+                  "Aetherwiing",
+                  "Agentica-Org",
+                  "Ai21",
+                  "Aion-Labs",
+                  "Alfredpros",
+                  "Alpindale",
+                  "Amazon",
+                  "Anthracite-Org",
+                  "Anthropic",
+                  "Arcee-Ai",
+                  "Arliai",
+                  "Baidu",
+                  "Cognitivecomputations",
+                  "Cohere",
+                  "Deepseek",
+                  "Eleutherai",
+                  "Eva-Unit-01",
+                  "Featherless",
+                  "Google",
+                  "Gryphe",
+                  "Inception",
+                  "Infermatic",
+                  "Inflection",
+                  "Liquid",
+                  "Mancer",
+                  "Meta-Llama",
+                  "Microsoft",
+                  "Minimax",
+                  "Mistralai",
+                  "Moonshotai",
+                  "Morph",
+                  "Neversleep",
+                  "Nothingiisreal",
+                  "Nousresearch",
+                  "Nvidia",
+                  "Openai",
+                  "Opengvlab",
+                  "Openrouter",
+                  "Perplexity",
+                  "Pygmalionai",
+                  "Qwen",
+                  "Raifle",
+                  "Rekaai",
+                  "Sao10K",
+                  "Sarvamai",
+                  "Scb10X",
+                  "Shisa-Ai",
+                  "Sophosympatheia",
+                  "Tencent",
+                  "Thedrummer",
+                  "Thudm",
+                  "Tngtech",
+                  "Undi95",
+                  "X-Ai"
+                ],
+                "placeholder": "",
+                "real_time_refresh": true,
+                "required": true,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": "Google"
+              },
+              "site_url": {
+                "_input_type": "StrInput",
+                "advanced": true,
+                "display_name": "Site URL",
+                "dynamic": false,
+                "info": "Your site URL for OpenRouter rankings",
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "name": "site_url",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              },
+              "stream": {
+                "_input_type": "BoolInput",
+                "advanced": true,
+                "display_name": "Stream",
+                "dynamic": false,
+                "info": "Stream the response from the model. Streaming works only in Chat.",
+                "list": false,
+                "list_add_label": "Add More",
+                "name": "stream",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_metadata": true,
+                "type": "bool",
+                "value": false
+              },
+              "system_message": {
+                "_input_type": "MultilineInput",
+                "advanced": false,
+                "copy_field": false,
+                "display_name": "System Message",
+                "dynamic": false,
+                "info": "System message to pass to the model.",
+                "input_types": [
+                  "Message"
+                ],
+                "list": false,
+                "list_add_label": "Add More",
+                "load_from_db": false,
+                "multiline": true,
+                "name": "system_message",
+                "placeholder": "",
+                "required": false,
+                "show": true,
+                "title_case": false,
+                "tool_mode": false,
+                "trace_as_input": true,
+                "trace_as_metadata": true,
+                "type": "str",
+                "value": ""
+              },
+              "temperature": {
+                "_input_type": "SliderInput",
+                "advanced": true,
+                "display_name": "Temperature",
+                "dynamic": false,
+                "info": "Controls randomness. Lower values are more deterministic, higher values are more creative.",
+                "max_label": "",
+                "max_label_icon": "",
+                "min_label": "",
+                "min_label_icon": "",
+                "name": "temperature",
+                "placeholder": "",
+                "range_spec": {
+                  "max": 2,
+                  "min": 0,
+                  "step": 0.01,
+                  "step_type": "float"
+                },
+                "required": false,
+                "show": true,
+                "slider_buttons": false,
+                "slider_buttons_options": [],
+                "slider_input": false,
+                "title_case": false,
+                "tool_mode": false,
+                "type": "slider",
+                "value": 0.7
+              }
+            },
+            "tool_mode": false
+          },
+          "selected_output": "text_output",
+          "showNode": true,
+          "type": "OpenRouterComponent"
+        },
+        "dragging": false,
+        "id": "OpenRouterComponent-0mvLJ",
+        "measured": {
+          "height": 565,
+          "width": 320
+        },
+        "position": {
+          "x": 1295.7397742666392,
+          "y": 284.0260772336253
+        },
+        "selected": false,
+        "type": "genericNode"
+      }
+    ],
+    "viewport": {
+      "x": -225.91931596640268,
+      "y": -11.694121908475609,
+      "zoom": 0.5075678274406665
+    }
+  },
+  "description": "Empowering Enterprises with Intelligent Interactions.",
+  "endpoint_name": null,
+  "id": "58c6612a-cf38-48b2-9fa7-e091589f4d91",
+  "is_component": false,
+  "last_tested_version": "1.5.0",
+  "name": "SparkLLM",
+  "tags": []
+}

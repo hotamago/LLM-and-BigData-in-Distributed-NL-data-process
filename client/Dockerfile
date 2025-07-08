@@ -1,68 +1,35 @@
-# Use OpenJDK as the base image
-FROM openjdk:11-jdk-slim AS base
+FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
 
-# Set environment variables for non-interactive installation
-ENV DEBIAN_FRONTEND=noninteractive
+# Enable bytecode compilation
+ENV UV_COMPILE_BYTECODE=1
 
-# Install build dependencies and essential tools
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        wget \
-        build-essential \
-        libssl-dev \
-        zlib1g-dev \
-        libncurses5-dev \
-        libncursesw5-dev \
-        libreadline-dev \
-        libsqlite3-dev \
-        libgdbm-dev \
-        libdb5.3-dev \
-        libbz2-dev \
-        libexpat1-dev \
-        liblzma-dev \
-        tk-dev \
-        libffi-dev \
-        curl \
-        git \
-        && rm -rf /var/lib/apt/lists/*
+# Copy from the cache instead of linking since it's a mounted volume
+ENV UV_LINK_MODE=copy
 
-# Set the Python version to install
-ENV PYTHON_VERSION=3.12.0
-
-# Build Python from source
-WORKDIR /usr/src
-RUN wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz && \
-    tar xzf Python-${PYTHON_VERSION}.tgz && \
-    cd Python-${PYTHON_VERSION} && \
-    ./configure --enable-optimizations && \
-    make -j$(nproc) && \
-    make altinstall && \
-    cd .. && \
-    rm -rf Python-${PYTHON_VERSION} Python-${PYTHON_VERSION}.tgz
-
-# Create symlinks for Python and pip
-RUN ln -s /usr/local/bin/python3.12 /usr/bin/python3 && \
-    ln -s /usr/local/bin/pip3.12 /usr/bin/pip && \
-    python3 --version && pip --version
-
-# Upgrade pip
-RUN pip install uv
-RUN uv pip install --no-cache-dir --upgrade pip --system
-
-# Install setuptools
-RUN uv pip install --no-cache-dir setuptools --system
-
-# Copy requirements first (to leverage cache for dependencies)
-COPY requirements.txt .
-RUN uv pip install --no-cache-dir -r requirements.txt --system
+# Install OS dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+    git \
+    postgresql-client \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Create necessary directories
-RUN mkdir -p /app/.cache
-
-# Copy the rest of the application code
+# Then, add the rest of the project source code and install it
+# Installing separately from its dependencies allows optimal layer caching
 COPY . /app
+# Except .venv
+RUN rm -rf .venv
+
+# Install the project's dependencies using pyproject.toml with dev
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=src/pyproject.toml,target=pyproject.toml \
+    uv sync --no-install-project --extra dev
+
+# Env
+ENV PATH="/app/.venv/bin:$PATH"
 
 # Expose the Streamlit port
 EXPOSE 3005
@@ -72,7 +39,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
   CMD curl --fail http://localhost:3005/_stcore/health || exit 1
 
 # Entrypoint
-ENTRYPOINT ["streamlit", "run", "main.py", "--server.port=3005", "--server.address=0.0.0.0"]
-
-# Define volumes
-VOLUME ["/app/.cache"]
+ENTRYPOINT ["uv", "run", "streamlit", "run", "main.py", "--server.port=3005", "--server.address=0.0.0.0"]
