@@ -20,13 +20,14 @@ WORKDIR /app
 # Then, add the rest of the project source code and install it
 # Installing separately from its dependencies allows optimal layer caching
 COPY . /app
+
 # Except .venv
 RUN rm -rf .venv
 
 # Install the project's dependencies using pyproject.toml with dev
 RUN --mount=type=cache,target=/root/.cache/uv \
-    --mount=type=bind,source=src/pyproject.toml,target=pyproject.toml \
-    uv sync --no-install-project --extra dev
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync --no-install-project
 
 # Env
 ENV PATH="/app/.venv/bin:$PATH"

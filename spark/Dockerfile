@@ -18,7 +18,7 @@ RUN uv pip install --system --no-cache-dir --upgrade pip
 RUN uv pip install --system --no-cache-dir httpx
 
 # Install Python dependencies using uv
-RUN uv pip install --system --no-cache-dir -r /tmp/requirements.txt
+RUN uv pip install --system --no-cache-dir -U -r /tmp/requirements.txt
 
 # Set the working directory
 WORKDIR /opt/bitnami/spark

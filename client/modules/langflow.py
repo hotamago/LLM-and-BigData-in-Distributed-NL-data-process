@@ -4,15 +4,21 @@ import requests
 from typing import Optional
 from langflow.load import run_flow_from_json
 
+import uuid
+
+# Generate a unique user ID
+user_id = str(uuid.uuid4())
+
+
 def run_flow(
-        api_url: str,
-        message: str,
-        flow_id: str,
-        output_type: str = "text",
-        input_type: str = "text",
-        tweaks: Optional[dict] = None,
-        api_key: Optional[str] = None
-    ) -> str:
+    api_url: str,
+    message: str,
+    flow_id: str,
+    output_type: str = "text",
+    input_type: str = "text",
+    tweaks: Optional[dict] = None,
+    api_key: Optional[str] = None,
+) -> str:
     """
     Run a flow with a given message and optional tweaks.
 
@@ -38,10 +44,13 @@ def run_flow(
 
     # Check if the request was successful
     if response.status_code != 200:
-        raise Exception(f"Request failed with status code {response.status_code}\n message: {response.text}")
-    
+        raise Exception(
+            f"Request failed with status code {response.status_code}\n message: {response.text}"
+        )
+
     # Return text response
-    return response.json()['outputs'][0]["outputs"][0]["outputs"]["text"]["message"]
+    return response.json()["outputs"][0]["outputs"][0]["outputs"]["text"]["message"]
+
 
 def convert_hotaf_to_tweaks(hotaf: dict) -> dict:
     """
@@ -57,19 +66,20 @@ def convert_hotaf_to_tweaks(hotaf: dict) -> dict:
         tweaks[value["id"]][value["key"]] = value["value"]
     return tweaks
 
-def run_flow_fj(cfg: dict, dict_flowjson: dict, api_key:str, message:str=""):
+
+def run_flow_fj(cfg: dict, dict_flowjson: dict, api_key: str, message: str = ""):
     cfg["tweaks"]["api_key"]["value"] = api_key
     tweaks = convert_hotaf_to_tweaks(cfg["tweaks"])
     try:
         res = run_flow_from_json(
-                                    flow=dict_flowjson,
-                                    input_value=message,
-                                    tweaks=tweaks,
-                                    output_type="text",
-                                    input_type="text",
-                                    session_id="",
-                                    fallback_to_env_vars=True,
-                                )
+            flow=dict_flowjson,
+            input_value=message,
+            tweaks=tweaks,
+            output_type="text",
+            input_type="text",
+            fallback_to_env_vars=True,
+            session_id=user_id,  # Set the user ID here
+        )
     except Exception as e:
         raise Exception(f"Error running flow api: {api_key} \n error: {e}")
     res = res[0].model_dump()

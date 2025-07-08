@@ -1,4 +1,5 @@
 import time
+import traceback
 import streamlit as st
 import json
 from streamlit import session_state as ss
@@ -80,8 +81,11 @@ def render():
                             )
                             break
                         except Exception as e:
-                            st.error(f"Error generating queries: {e}")
+                            st.error(
+                                f"Error generating queries: {e}, traceback: {traceback.format_exc()}"
+                            )
                             time.sleep(1)
+                            break
 
     # Show results - Replace raw JSON display with a more user-friendly format
     if "list_query_engine_search" in ss and ss.list_query_engine_search:
