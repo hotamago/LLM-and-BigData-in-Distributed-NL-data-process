@@ -5,7 +5,7 @@ gemini:
   - AIzaSyB_ksJ_2a2-Dg_rMtOTfa8h2SQwSXN4mbU
 openrouter:
   api_key:
-  - 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
+  - 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
 hdfs_subpath:
   data_processed: /path/to/save/data_processed.parquet
   final_data: /path/to/save/final_data.parquet
@@ -45,18 +45,18 @@ langflow:
           key: google_api_key
           value: ''
     process_data:
-      # name: SparkLLM_v2.json
-      # tweaks:
-      #   api_key:
-      #     id: GoogleGenerativeAIModel-UdtFp
-      #     key: api_key
-      #     value: ''
-      name: SparkLLM.json
+      name: SparkLLM_v2.json
       tweaks:
         api_key:
-          id: GoogleGenerativeAIModel-WF3Qa
-          key: google_api_key
+          id: GoogleGenerativeAIModel-UdtFp
+          key: api_key
           value: ''
+      # name: SparkLLM.json
+      # tweaks:
+      #   api_key:
+      #     id: GoogleGenerativeAIModel-WF3Qa
+      #     key: google_api_key
+      #     value: ''
 run_api_langflow: false
 serper:
   api_key:
