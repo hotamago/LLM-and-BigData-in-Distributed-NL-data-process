@@ -1,11 +1,8 @@
 gemini:
   api_key:
-  # - AIzaSyBtICg_bcc6r24rmFCMmZbYsO3rp5h6RBc
+  - AIzaSyBtICg_bcc6r24rmFCMmZbYsO3rp5h6RBc
   - AIzaSyA-PF1FGGs3eudHXxbmRVk1c1GLa-vegJM
   - AIzaSyB_ksJ_2a2-Dg_rMtOTfa8h2SQwSXN4mbU
-openrouter:
-  api_key:
-  - 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
 hdfs_subpath:
   data_processed: /path/to/save/data_processed.parquet
   final_data: /path/to/save/final_data.parquet
@@ -27,29 +24,29 @@ langflow:
       name: AutoGenPandasProcess.json
       tweaks:
         api_key:
-          id: GoogleGenerativeAIModel-VYuyQ
+          id: GoogleGenerativeAIModel-18OHw
           key: google_api_key
           value: ''
     gen_columns_name:
       name: GenColumnsName.json
       tweaks:
         api_key:
-          id: GoogleGenerativeAIModel-QsO4D
+          id: GoogleGenerativeAIModel-STURG
           key: google_api_key
           value: ''
     gen_query:
       name: AutoGenQuery.json
       tweaks:
         api_key:
-          id: GoogleGenerativeAIModel-Mwrq9
+          id: GoogleGenerativeAIModel-q1QJY
           key: google_api_key
           value: ''
     process_data:
       name: SparkLLM.json
       tweaks:
         api_key:
-          id: OpenRouterComponent-0mvLJ
-          key: api_key
+          id: GoogleGenerativeAIModel-WF3Qa
+          key: google_api_key
           value: ''
 run_api_langflow: false
 serper:
