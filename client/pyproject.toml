@@ -1,0 +1,28 @@
+[project]
+name = "client"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "alembic>=1.16.2",
+    "bcrypt>=4.0.1",
+    "findspark>=2.0.1",
+    "googleapis-common-protos==1.66.0",
+    "grpcio>=1.73.1",
+    "grpcio-status>=1.71.2",
+    "html2text==2025.4.15",
+    "langflow==1.5.0",
+    "numpy>=1.26.4",
+    "pandas>=2.2.3",
+    "psycopg2-binary>=2.9.10",
+    "py4j==0.10.9.7",
+    "pyarrow>=19.0.0",
+    "pyjwt>=2.10.1",
+    "pyspark==3.5.3",
+    "python-dotenv>=1.1.1",
+    "pyyaml>=6.0.2",
+    "sqlalchemy>=2.0.41",
+    "streamlit>=1.46.1",
+    "streamlit-ace==0.1.1",
+]
