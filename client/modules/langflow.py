@@ -10,6 +10,21 @@ import uuid
 user_id = str(uuid.uuid4())
 
 
+def convert_hotaf_to_tweaks(hotaf: dict) -> dict:
+    """
+    Convert the HOTAF tweaks to the format expected by the LangFlow API.
+
+    :param hotaf: The HOTAF tweaks
+    :return: The tweaks in the LangFlow API format
+    """
+    tweaks = {}
+    for value in hotaf.values():
+        if value["id"] not in tweaks:
+            tweaks[value["id"]] = {}
+        tweaks[value["id"]][value["key"]] = value["value"]
+    return tweaks
+
+
 def run_flow(
     api_url: str,
     message: str,
@@ -18,6 +33,7 @@ def run_flow(
     input_type: str = "text",
     tweaks: Optional[dict] = None,
     api_key: Optional[str] = None,
+    cfg: Optional[dict] = None,
 ) -> str:
     """
     Run a flow with a given message and optional tweaks.
@@ -40,6 +56,11 @@ def run_flow(
         payload["tweaks"] = tweaks
     if api_key:
         headers = {"x-api-key": api_key}
+    if cfg:
+        cfg["tweaks"]["api_key"]["value"] = api_key
+        tweaks = convert_hotaf_to_tweaks(cfg["tweaks"])
+        payload["tweaks"] = tweaks
+
     response = requests.post(api_url, json=payload, headers=headers)
 
     # Check if the request was successful
@@ -50,21 +71,6 @@ def run_flow(
 
     # Return text response
     return response.json()["outputs"][0]["outputs"][0]["outputs"]["text"]["message"]
-
-
-def convert_hotaf_to_tweaks(hotaf: dict) -> dict:
-    """
-    Convert the HOTAF tweaks to the format expected by the LangFlow API.
-
-    :param hotaf: The HOTAF tweaks
-    :return: The tweaks in the LangFlow API format
-    """
-    tweaks = {}
-    for value in hotaf.values():
-        if value["id"] not in tweaks:
-            tweaks[value["id"]] = {}
-        tweaks[value["id"]][value["key"]] = value["value"]
-    return tweaks
 
 
 def run_flow_fj(cfg: dict, dict_flowjson: dict, api_key: str, message: str = ""):
