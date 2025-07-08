@@ -163,7 +163,8 @@ def render():
 
                         # Add API key efficiently
                         def get_api_key():
-                            apiKeyMan = ManagerKey(cfg["openrouter"]["api_key"])
+                            # apiKeyMan = ManagerKey(cfg["openrouter"]["api_key"])
+                            apiKeyMan = ManagerKey(cfg["gemini"]["api_key"])
                             return apiKeyMan.getKey()
 
                         api_key = get_api_key()

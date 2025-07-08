@@ -1,6 +1,6 @@
 gemini:
   api_key:
-  - AIzaSyBtICg_bcc6r24rmFCMmZbYsO3rp5h6RBc
+  # - AIzaSyBtICg_bcc6r24rmFCMmZbYsO3rp5h6RBc
   - AIzaSyA-PF1FGGs3eudHXxbmRVk1c1GLa-vegJM
   - AIzaSyB_ksJ_2a2-Dg_rMtOTfa8h2SQwSXN4mbU
 openrouter:
@@ -45,11 +45,17 @@ langflow:
           key: google_api_key
           value: ''
     process_data:
-      name: SparkLLM_v2.json
+      # name: SparkLLM_v2.json
+      # tweaks:
+      #   api_key:
+      #     id: GoogleGenerativeAIModel-UdtFp
+      #     key: api_key
+      #     value: ''
+      name: SparkLLM.json
       tweaks:
         api_key:
-          id: GoogleGenerativeAIModel-UdtFp
-          key: api_key
+          id: GoogleGenerativeAIModel-WF3Qa
+          key: google_api_key
           value: ''
 run_api_langflow: false
 serper:
